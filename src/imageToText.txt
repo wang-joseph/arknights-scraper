@@ -1,0 +1,14 @@
+10
+/arknights/sites/arknights/files/2019-10/0.png E0
+/arknights/sites/arknights/files/2019-10/1.png E1
+/arknights/sites/arknights/files/2019-10/2.png E2
+/arknights/sites/arknights/files/2019-10/3.png E3
+/arknights/sites/arknights/files/2019-10/1_0.png Pot1
+/arknights/sites/arknights/files/2019-10/2_0.png Pot2
+/arknights/sites/arknights/files/2019-10/3_0.png Pot3
+/arknights/sites/arknights/files/2019-10/4.png Pot4
+/arknights/sites/arknights/files/2019-10/5.png Pot5
+/arknights/sites/arknights/files/2019-10/6.png Pot6
+
+format:
+link-to-image     text-equivalent

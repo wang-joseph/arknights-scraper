@@ -23,7 +23,7 @@ See requirements.txt for the versions
   - ~~Add support for talents~~
   - Add support for skills
   - Add support for stats
-  - Add support for base skills
+  - ~~Add support for base skills~~
   - Add support for upgrade information
 - Add stage functionality?
 - Add item descriptions?
@@ -31,4 +31,4 @@ See requirements.txt for the versions
 
 ## Bugs
 
-- Searching "Ethan" will be missing a space
+- Searching "Ethan" - result will be missing a space in the description

@@ -2,6 +2,8 @@ import requests, argparse, sys
 from bs4 import BeautifulSoup
 
 # created 06/06/2020
+# last edited: 06/06/2020
+# version: 1.2
 # author: Joseph Wang (EmeraldEntities)
 
 ### FUNCTIONS ########################
@@ -13,7 +15,7 @@ def readFromFile(file):
 
 def loadImagesToText():
   imagesToText = {}
-  with open("./imageToText.txt", "r") as f:
+  with open("./info/imageToText.txt", "r") as f:
     totalImages = int(f.readline())
     for _ in range(totalImages):
       imageToText = f.readline().rstrip().split(" ")
@@ -50,28 +52,62 @@ def findTalents(soup, imagesDict):
       messages.append(text)
 
   return messages
+
+def findBaseSkills(soup, imagesDict):
+  messages = []
+  messages.append("\n\nBase Skills\n")
+
+  buildingCells = soup.find_all("div", "building-buff-cell")
+  for cell in buildingCells:
+    text = ""
+
+    # The base skills are laid out in top-cell, bottom-cell format
+    # Finding them seperately helps with formatting, even if it's technically a bit slower than
+    # just finding the whole text chunk and parsing with that.
+    topCell = cell.find("div", "top-cell")
+    topText = list(filter(lambda x: x != "\n", topCell.find_all(text=True)))
+
+    bottomCell = cell.find("div", "bottom-cell")
+    bottomText = list(filter(lambda x: x != "\n", bottomCell.find_all(text=True))) 
+    
+    # Potentials don't help with base skills, so this is only for E1, E2, etc.
+    image = imagesDict[topCell.find("img").attrs["src"]]
+
+    # Formatting and saving the text
+    for phrase in topText:
+      text = text + phrase.strip() + "   "
+
+    text += image
+    text += "\n"
+
+    for phrase in bottomText:
+      text = text + phrase.strip() + " "
+
+    messages.append(text)
+
+  return messages
 ######################################
 
 def main():
   # Initialize the arguments for cmd purposes
   parser = argparse.ArgumentParser(description="Find information about any operator in Arknights!")
   parser.add_argument("operator", help="The operator you want information for. For spaces, use a '-' in place of the space. No special characters.")
-  parser.add_argument("-t", "--talent", help="Display the specified operator's talent.", action="store_true")
-  parser.add_argument("-s", "--skills", help="Display the specified operator's skills. In-dev", action="store_true")
-  parser.add_argument("-u", "--upgrades", help="Display the upgrade stages and what this operator needs. In-dev", action="store_true")
-  parser.add_argument("-b", "--base", help="Display the specified operator's base skills. In-dev", action="store_true")
-  parser.add_argument("-i", "--info", help="Display the specified operator's stats. In-dev", action="store_true")
-  parser.add_argument("-a", "--all", help="Displays all the information. In-dev", action="store_true")
+  parser.add_argument("-t", "--talent", help="Displays the specified operator's talent.", action="store_true")
+  parser.add_argument("-s", "--skills", help="Displays the specified operator's skills. In-dev", action="store_true")
+  parser.add_argument("-u", "--upgrades", help="Displays the specified operator's upgrade stages and what this operator needs. In-dev", action="store_true")
+  parser.add_argument("-b", "--base", help="Displays the specified operator's base skills.", action="store_true")
+  parser.add_argument("-i", "--info", help="Displays the specified operator's stats. In-dev", action="store_true")
+  parser.add_argument("-a", "--all", help="Displays all the information about this specified operator.", action="store_true")
   args = parser.parse_args()
 
-  url = readFromFile("url.txt")  # We're always assuming readFromFile returns a valid string
+  url = readFromFile("./info/url.txt")  # We're always assuming readFromFile returns a valid string
   url = url + args.operator
 
   # url = "https://gamepress.gg/arknights/operator/blue-poison"  # debugging URL and operator
   # operator = "blue-poison"
 
   imagesDict = loadImagesToText()
-
+ 
   result = requests.get(url)
   if (result.status_code == 200):
     # 200 for if the page exists
@@ -85,6 +121,9 @@ def main():
     for tag in tags:
       tagString = tagString + tag.a.string.strip() + "     "
 
+    rarityCell = soup.find("div", "rarity-cell")
+    rarity = len(rarityCell.find_all("img"))
+
     desc = soup.find_all("div", "description-box")
     descText = ["".join(desc[item].find_all(text=True)).strip() + "\n" for item in range(3)]
 
@@ -95,11 +134,15 @@ def main():
     # Checking and calling the appropriate functions for optional flags
     if args.talent or args.all:
       optionalMessages = optionalMessages + findTalents(soup, imagesDict)
+
+    if args.base or args.all:
+      optionalMessages = optionalMessages + findBaseSkills(soup, imagesDict)
       
     # TODO: finish the rest of the flags
 
     # Print out the results
-    sys.stdout.write("\n\n" + args.operator.replace("-", " ").title() + "\n")
+    sys.stdout.write("\n\n" + args.operator.replace("-", " ").title() + "   ")
+    sys.stdout.write(("*" * rarity) + "\n")
     sys.stdout.write(tagString + "\n\n")
     for text in descText: 
       sys.stdout.write(text)

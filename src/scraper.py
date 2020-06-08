@@ -1,9 +1,10 @@
 import requests, argparse, sys
+from halo import Halo # extremely important
 from bs4 import BeautifulSoup
 
 # created 06/06/2020
-# last edited: 06/06/2020
-# version: 1.2
+# last edited: 08/06/2020
+# version: 1.2.2
 # author: Joseph Wang (EmeraldEntities)
 
 ### FUNCTIONS ########################
@@ -35,14 +36,21 @@ def findTalents(soup, imagesDict):
 
     for child in allChilds:
       text = ""
+
+      # Converting images to their text equivalent
       images = child.find_all("img")
+      
       imageTexts = []
       for image in images:
         imageTexts.append(imagesDict[image.attrs["src"]])
       imageTexts.append("-")
 
       # Formatting and getting rid of the newlines and whatnot
-      allText = list(filter(lambda x: x != "\n", child.find_all(text=True)))
+      # The lists assist with formatting and proper segmenting of the talents
+      allText = []
+      for string in child.stripped_strings:
+        allText.append(string)
+
       allText[2: 2] = imageTexts
       allText[0] = allText[0].rstrip() + " -"
 
@@ -65,23 +73,19 @@ def findBaseSkills(soup, imagesDict):
     # Finding them seperately helps with formatting, even if it's technically a bit slower than
     # just finding the whole text chunk and parsing with that.
     topCell = cell.find("div", "top-cell")
-    topText = list(filter(lambda x: x != "\n", topCell.find_all(text=True)))
-
     bottomCell = cell.find("div", "bottom-cell")
-    bottomText = list(filter(lambda x: x != "\n", bottomCell.find_all(text=True))) 
     
     # Potentials don't help with base skills, so this is only for E1, E2, etc.
     image = imagesDict[topCell.find("img").attrs["src"]]
 
-    # Formatting and saving the text
-    for phrase in topText:
-      text = text + phrase.strip() + "   "
+    # # Formatting and saving the text
+    for string in topCell.stripped_strings:
+      text = text + string + "  "
 
-    text += image
-    text += "\n"
+    text += image + "\n"
 
-    for phrase in bottomText:
-      text = text + phrase.strip() + " "
+    for string in bottomCell.stripped_strings:
+      text = text + string + " "
 
     messages.append(text)
 
@@ -89,6 +93,7 @@ def findBaseSkills(soup, imagesDict):
 ######################################
 
 def main():
+  spinner = Halo(text="Fetching...", spinner="dots", color="magenta")
   # Initialize the arguments for cmd purposes
   parser = argparse.ArgumentParser(description="Find information about any operator in Arknights!")
   parser.add_argument("operator", help="The operator you want information for. For spaces, use a '-' in place of the space. No special characters.")
@@ -100,6 +105,8 @@ def main():
   parser.add_argument("-a", "--all", help="Displays all the information about this specified operator.", action="store_true")
   args = parser.parse_args()
 
+  spinner.start()
+
   url = readFromFile("./info/url.txt")  # We're always assuming readFromFile returns a valid string
   url = url + args.operator
 
@@ -107,9 +114,11 @@ def main():
   # operator = "blue-poison"
 
   imagesDict = loadImagesToText()
- 
+
   result = requests.get(url)
   if (result.status_code == 200):
+    spinner.text = "Parsing..."
+    spinner.colour = "yellow"
     # 200 for if the page exists
     src = result.content
     soup = BeautifulSoup(src, "lxml")
@@ -125,7 +134,8 @@ def main():
     rarity = len(rarityCell.find_all("img"))
 
     desc = soup.find_all("div", "description-box")
-    descText = ["".join(desc[item].find_all(text=True)).strip() + "\n" for item in range(3)]
+
+    descText = ["".join(desc[item].text).strip() + "\n" for item in range(3)]
 
     # Any optional messages are stored in a list to make printing them at the end easy and so that
     # printing optional messages don't take 50 lines of code.
@@ -140,6 +150,8 @@ def main():
       
     # TODO: finish the rest of the flags
 
+    spinner.succeed("Success!")
+
     # Print out the results
     sys.stdout.write("\n\n" + args.operator.replace("-", " ").title() + "   ")
     sys.stdout.write(("*" * rarity) + "\n")
@@ -151,9 +163,10 @@ def main():
       sys.stdout.write(text + "\n")
 
   else:
+    spinner.fail("Failed.")
     # Page returns a 404 not found
-    sys.stdout.write(args.operator.replace("-", " ").title() + "\n")
-    sys.stdout.write("\n\n" + "Could not find operator! \n")
+    sys.stdout.write("\n\n" + args.operator.replace("-", " ").title() + "\n")
+    sys.stdout.write("\n" + "Could not find operator! \n")
 
   sys.stdout.write("\n\n")
 

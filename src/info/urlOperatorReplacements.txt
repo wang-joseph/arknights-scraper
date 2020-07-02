@@ -1,0 +1,5 @@
+rosa    rosa-poca
+poca    rosa-poca
+
+format:
+operator    url equivalent

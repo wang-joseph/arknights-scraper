@@ -1,0 +1,6 @@
+Rosa      Rosa+(Poca)
+Poca      Rosa+(Poca)
+Rosa+Poca Rosa+(Poca)
+
+format:
+operator    json equivalent

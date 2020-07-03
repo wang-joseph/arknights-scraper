@@ -1,10 +1,11 @@
 import re, json, sys, requests
+from bs4 import Tag
 
 from inputReader import readLineFromFile
 
 # created 01/07/2020
-# last edited: 01/07/2020
-# version: 1.0.0
+# last edited: 02/07/2020
+# version: 1.1.0
 # author: Joseph Wang (EmeraldEntities)
 
 def findTalents(soup, imagesDict):
@@ -142,7 +143,7 @@ def findStats(soup, operator): #TODO:
       "E0 max hp : " + statsJson["max_hpne"] + " hp",
       "E0 res    : " + statsJson["ne_arts"],
       "E0 block  : " + statsJson["ne_block"],
-      "E0 cost   : " + statsJson["ne_cost"] + " dp  \n",
+      "E0 cost   : " + statsJson["ne_cost"] + " dp \n",
     ]
 
     if statsJson["max_atke1"] != "":
@@ -162,7 +163,7 @@ def findStats(soup, operator): #TODO:
         "E2 max hp : " + statsJson["max_hpe2"] + " hp",
         "E2 res    : " + statsJson["e2_arts"],
         "E2 block  : " + statsJson["e2_block"],
-        "E2 cost   : " + statsJson["e2_cost"] + " dp  \n"
+        "E2 cost   : " + statsJson["e2_cost"] + " dp \n"
       ]
     messages += maxStats
   else:
@@ -172,5 +173,100 @@ def findStats(soup, operator): #TODO:
 
   return messages
 
+def findSkills(soup): 
+  # skill-cell is the class name that all skill blocks have, so we need to get them all
+  allSkills = soup.find_all('div', 'skill-cell')
+
+  # If the operator doesn't have any skill blocks, they don't have any skills we can parse
+  if len(allSkills) == 0:
+    return ["\n\nSkills\nNo skills found!"]
+
+  messages = []
+  messages.append("\n\nOperator Skills (Highest Levels)\n")
+
+  for skill in allSkills:
+    # Finding the skill title
+    title = skill.find('div', 'skill-title-cell')
+    messages.append(title.text.strip())
+
+    # Let's be honest, everyone only cares about the top level of this skill...
+    maxUpgradeLevel = 'skill-upgrade-tab-10'
+    maxLevel = skill.find_all('div', maxUpgradeLevel)
+
+    spString = ""
+    # We gotta do this check because some operators can't actually get mastery on their skills
+    if len(maxLevel) == 0:
+      maxUpgradeLevel = 'skill-upgrade-tab-7'
+      maxLevel = skill.find_all('div', maxUpgradeLevel)
+      spString += f"{'Lv7':15}"
+    else:
+      spString += f"{'Lv7 M3':15}"
+
+    for i in range(len(maxLevel)):
+
+      # Since the page uses <br> to split text, we're gonna find the <br>, find the text before and after it,
+      # and use it for ourselves too.
+
+      # Note: this will work for multiple br tags (hopefully), but as far as I can tell they only use one per in desc
+      # oh well, future proofing!
+      brkpoint = maxLevel[i].find_all('br')
+      
+      if brkpoint != []: #TODO: make this code better omg
+        descriptionText = " "
+        prevBrkText = []
+
+        # Previous_siblings gives you the tags in reverse, so you have to reverse it after getting them all
+        # also oh my freaking goodness both isinstance AND break in the same block?? execute this man
+        for sibling in brkpoint[0].previous_siblings:
+          if isinstance(sibling, Tag):
+            if sibling.name == "br":
+              break
+
+            prevBrkText.append(sibling.text.strip())
+          else:
+            prevBrkText.append(sibling)
+        prevBrkText.reverse()
+
+        descriptionText += "".join(prevBrkText) + "\n"
+
+        # We only need to get the previous siblings for the first <br> tag. Then we can just get the
+        # next siblings for every other <br> tag to complete the description.
+        for br in brkpoint:
+          nextBrkText = ""
+
+          for sibling in br.next_siblings:
+            if isinstance(sibling, Tag):
+              if sibling.name == "br":
+                break
+
+              nextBrkText += sibling.text.strip()
+            else:
+              nextBrkText += sibling
+
+          descriptionText += nextBrkText + "\n"
+
+        maxLevel[i] = descriptionText
+      else:
+        maxLevel[i] = maxLevel[i].text.strip()
+
+    # Add some informative text to max level
+    # maxLevel now looks like ['spcost', 'initalsp', 'duration', ...'duration']
+    # We format it accordingly
+    maxLevel[0] = "SP cost: " + maxLevel[0]
+    maxLevel[1] = "Initial SP: " + maxLevel[1]
+    maxLevel[2] = "Duration: " + maxLevel[2]
+    description = maxLevel[3:] # The description will always be whatever is after the first 3 chunks of text
+
+    # Using f-string width formatting, we can get the width of each text to be the same
+    spString += f"{maxLevel[0]:18}{maxLevel[1]:22}{maxLevel[2]}"
+
+    messages.append(spString)
+    # Add a \n to the last item in description for consistent formatting!!!!!
+    messages += description + ["\n"]
+
+  # Get rid of the last \n in all messages for consistent formatting!!!!!!
+  messages[-1] = messages[-1].rstrip()
+  return messages
+
 if __name__ == "__main__":
-  sys.stdout.write("Wrong python file to run!\n\n")
+  sys.stdout.write("Wrong python file to run! The main file to run is `scraper.py`.\n\n")

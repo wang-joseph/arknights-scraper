@@ -4,12 +4,12 @@ import requests, argparse, sys, re
 from halo import Halo # extremely important
 from bs4 import BeautifulSoup
 
-from detailedSearchFunctions import findTalents, findBaseSkills, findStats
+from detailedSearchFunctions import findTalents, findBaseSkills, findStats, findSkills
 from inputReader import readLinesIntoDict, readLineFromFile
 
 # created 06/06/2020
-# last edited: 01/07/2020
-# version: 1.3.2
+# last edited: 02/07/2020
+# version: 1.4.0
 # author: Joseph Wang (EmeraldEntities)
 
 ### FUNCTIONS ########################
@@ -18,7 +18,7 @@ def initializeArguments():
   parser = argparse.ArgumentParser(description="Find information about any operator in Arknights!")
   parser.add_argument("operator", help="The operator you want information for. For spaces, use a '-' in place of the space. No special characters.")
   parser.add_argument("-t", "--talent", help="Displays the specified operator's talent.", action="store_true")
-  parser.add_argument("-s", "--skills", help="Displays the specified operator's skills. In-dev", action="store_true")
+  parser.add_argument("-s", "--skills", help="Displays the specified operator's skills.", action="store_true")
   parser.add_argument("-u", "--upgrades", help="Displays the specified operator's upgrade stages and what this operator needs. In-dev", action="store_true")
   parser.add_argument("-b", "--base", help="Displays the specified operator's base skills.", action="store_true")
   parser.add_argument("-i", "--info", help="Displays the specified operator's stats.", action="store_true")
@@ -88,6 +88,7 @@ def main():
     #TODO: is this even good practice??? I'm trying to adhere to DRY principles but this makes me start to sweat
     conditionals = [
       [args.info  , findStats     , [soup, properName]],
+      [args.skills, findSkills,     [soup]]           ,
       [args.talent, findTalents   , [soup, imagesDict]],
       [args.base  , findBaseSkills, [soup, imagesDict]],
     ]

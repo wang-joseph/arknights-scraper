@@ -1,8 +1,8 @@
-import re
+import re, sys
 
 # created 01/07/2020
 # last edited: 01/07/2020
-# version: 1.0.0
+# version: 1.0.1
 # author: Joseph Wang (EmeraldEntities)
 
 def readLineFromFile(file):
@@ -29,4 +29,4 @@ def readLinesIntoDict(file):
   return newDict
 
 if __name__ == "__main__":
-  sys.stdout.write("Wrong python file to run!\n\n")
+  sys.stdout.write("Wrong python file to run! The main file to run is `scraper.py`.\n\n")

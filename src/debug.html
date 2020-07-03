@@ -1,0 +1,3179 @@
+<bound method Tag.prettify of <!DOCTYPE html>
+<html dir="ltr" lang="en" prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# ">
+<head>
+<meta charset="utf-8"/><script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={licenseKey:"48befe3114",applicationID:"56773492"};window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var i=n[t]={exports:{}};e[t][0].call(i.exports,function(n){var i=e[t][1][n];return r(i||n)},i,i.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<t.length;i++)r(t[i]);return r}({1:[function(e,n,t){function r(){}function i(e,n,t){return function(){return o(e,[u.now()].concat(f(arguments)),n?null:this,t),n?void 0:this}}var o=e("handle"),a=e(4),f=e(5),c=e("ee").get("tracer"),u=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",d=l+"ixn-";a(p,function(e,n){s[n]=i(l+n,!0,"api")}),s.addPageAction=i(l+"addPageAction",!0),s.setCurrentRouteName=i(l+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,i="function"==typeof n;return o(d+"tracer",[u.now(),e,t],r),function(){if(c.emit((i?"":"no-")+"fn-start",[u.now(),r,i],t),i)try{return n.apply(this,arguments)}catch(e){throw c.emit("fn-err",[arguments,this,e],t),e}finally{c.emit("fn-end",[u.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=i(d+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),o("err",[e,u.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){var t=e.getEntries();t.forEach(function(e){"first-paint"===e.name?c("timing",["fp",Math.floor(e.startTime)]):"first-contentful-paint"===e.name&&c("timing",["fcp",Math.floor(e.startTime)])})}function i(e,n){var t=e.getEntries();t.length>0&&c("lcp",[t[t.length-1]])}function o(e){if(e instanceof s&&!l){var n,t=Math.round(e.timeStamp);n=t>1e12?Date.now()-t:u.now()-t,l=!0,c("timing",["fi",t,{type:e.type,fid:n}])}}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var a,f,c=e("handle"),u=e("loader"),s=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){a=new PerformanceObserver(r),f=new PerformanceObserver(i);try{a.observe({entryTypes:["paint"]}),f.observe({entryTypes:["largest-contentful-paint"]})}catch(p){}}if("addEventListener"in document){var l=!1,d=["click","keydown","mousedown","pointerdown","touchstart"];d.forEach(function(e){document.addEventListener(e,o,!1)})}}},{}],3:[function(e,n,t){function r(e,n){if(!i)return!1;if(e!==i)return!1;if(!n)return!0;if(!o)return!1;for(var t=o.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var f=navigator.userAgent,c=f.match(a);c&&f.indexOf("Chrome")===-1&&f.indexOf("Chromium")===-1&&(i="Safari",o=c[1])}n.exports={agent:i,version:o,match:r}},{}],4:[function(e,n,t){function r(e,n){var t=[],r="",o=0;for(r in e)i.call(e,r)&&(t[o]=n(r,e[r]),o+=1);return t}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],5:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,i=t-n||0,o=Array(i<0?0:i);++r<i;)o[r]=e[n+r];return o}n.exports=r},{}],6:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function i(e){function n(e){return e&&e instanceof r?e:e?c(e,f,o):o()}function t(t,r,i,o){if(!l.aborted||o){e&&e(t,r,i);for(var a=n(i),f=v(t),c=f.length,u=0;u<c;u++)f[u].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function d(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||i(t)}function w(e,n){u(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:d,addEventListener:d,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function o(){return new r}function a(){(s.api||s.feature)&&(l.aborted=!0,s=l.backlog={})}var f="nr@context",c=e("gos"),u=e(4),s={},p={},l=n.exports=i();l.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(i.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return e[n]=r,r}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){i.buffer([e],r),i.emit(e,n,t)}var i=e("ee").get("handle");n.exports=r,r.ee=i},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,o,function(){return i++})}var i=1,o="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=E.info=NREUM.info,n=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();u(y,function(n,t){e[n]||(e[n]=t)}),c("mark",["onload",a()+E.offset],null,"api");var t=d.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function i(){"complete"===d.readyState&&o()}function o(){c("mark",["domContent",a()+E.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(f=Math.max((new Date).getTime(),f))-E.offset}var f=(new Date).getTime(),c=e("handle"),u=e(4),s=e("ee"),p=e(3),l=window,d=l.document,m="addEventListener",v="attachEvent",g=l.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:l.setImmediate,CT:clearTimeout,XHR:g,REQ:l.Request,EV:l.Event,PR:l.Promise,MO:l.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1169.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),E=n.exports={offset:f,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),e(2),d[m]?(d[m]("DOMContentLoaded",o,!1),l[m]("load",r,!1)):(d[v]("onreadystatechange",i),l[v]("onload",r)),c("mark",["firstbyte",f],null,"api");var x=0,O=e(6)},{}],"wrap-function":[function(e,n,t){function r(e){return!(e&&e instanceof Function&&e.apply&&!e[a])}var i=e("ee"),o=e(5),a="nr@original",f=Object.prototype.hasOwnProperty,c=!1;n.exports=function(e,n){function t(e,n,t,i){function nrWrapper(){var r,a,f,c;try{a=this,r=o(arguments),f="function"==typeof t?t(r,a):t||{}}catch(u){l([u,"",[r,a,i],f])}s(n+"start",[r,a,i],f);try{return c=e.apply(a,r)}catch(p){throw s(n+"err",[r,a,p],f),p}finally{s(n+"end",[r,a,c],f)}}return r(e)?e:(n||(n=""),nrWrapper[a]=e,p(e,nrWrapper),nrWrapper)}function u(e,n,i,o){i||(i="");var a,f,c,u="-"===i.charAt(0);for(c=0;c<n.length;c++)f=n[c],a=e[f],r(a)||(e[f]=t(a,u?f+i:i,o,f))}function s(t,r,i){if(!c||n){var o=c;c=!0;try{e.emit(t,r,i,n)}catch(a){l([a,t,r,i])}c=o}}function p(e,n){if(Object.defineProperty&&Object.keys)try{var t=Object.keys(e);return t.forEach(function(t){Object.defineProperty(n,t,{get:function(){return e[t]},set:function(n){return e[t]=n,n}})}),n}catch(r){l([r])}for(var i in e)f.call(e,i)&&(n[i]=e[i]);return n}function l(n){try{e.emit("internal-error",n)}catch(t){}}return e||(e=i),t.inPlace=u,t.flag=a,t}},{}]},{},["loader"]);</script>
+<script>(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-78046902-27", {"cookieDomain":"auto"});ga("set", "anonymizeIp", true);ga("set", "dimension1", "NorseFTX");ga("set", "dimension2", "Arknights Wiki - GamePress");ga("set", "dimension3", "1191");ga("set", "dimension4", "156456");ga("set", "dimension5", "2");ga("send", "pageview");</script>
+<meta content="Blue Poison | Arknights Wiki - GamePress" name="title"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Arknights Wiki - GamePress" property="og:site_name"/>
+<meta content="Blue Poison" name="twitter:title"/>
+<meta content="https://gamepress.gg/arknights/operator/blue-poison" property="og:url"/>
+<meta content="Arknights Wiki, Database, News, and Community for the Arknights Player!" name="abstract"/>
+<meta content="Blue Poison" property="og:title"/>
+<meta content="Arknights Wiki, Database, News, and Community for the Arknights Player!" name="keywords"/>
+<link href="https://gamepress.gg/gamepress.jpg" rel="image_src"/>
+<meta content="https://gamepress.gg/arknights/operator/blue-poison" name="twitter:url"/>
+<meta content="Arknights Wiki, Database, News, and Community for the Arknights Player!" property="og:description"/>
+<meta content="https://gamepress.gg/arknights/sites/arknights/files/2019-10/char_129_bluep_1.png" name="twitter:image"/>
+<meta content="https://gamepress.gg/arknights/sites/arknights/files/2019-10/char_129_bluep_1.png" property="og:image"/>
+<meta content="https://gamepress.gg/gamepress.jpg" property="og:image"/>
+<meta content="Drupal 8 (https://www.drupal.org)" name="Generator"/>
+<meta content="width" name="MobileOptimized"/>
+<meta content="true" name="HandheldFriendly"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="/arknights/sites/arknights/files/arknights-favicon.png" rel="shortcut icon" type="image/png"/>
+<link href="https://gamepress.gg/arknights/operator/blue-poison" rel="canonical"/>
+<link href="https://gamepress.gg/arknights/node/1191" rel="shortlink"/>
+<link href="https://gamepress.gg/arknights/operator/blue-poison" rel="revision"/>
+<title>Blue Poison | Arknights Wiki - GamePress</title>
+<link href="/arknights/core/assets/vendor/normalize-css/normalize.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/misc/normalize-fixes.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/stable/css/node/node.module.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/stable/css/system/components/ajax-progress.module.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/stable/css/system/components/align.module.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/stable/css/system/components/autocomplete-loading.module.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/stable/css/system/components/fieldgroup.module.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/stable/css/system/components/container-inline.module.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/stable/css/system/components/clearfix.module.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/stable/css/system/components/details.module.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/stable/css/system/components/hidden.module.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/stable/css/system/components/item-list.module.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/stable/css/system/components/js.module.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/stable/css/system/components/nowrap.module.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/stable/css/system/components/position-container.module.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/stable/css/system/components/progress.module.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/stable/css/system/components/reset-appearance.module.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/stable/css/system/components/resize.module.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/stable/css/system/components/sticky-header.module.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/stable/css/system/components/system-status-counter.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/stable/css/system/components/system-status-report-counters.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/stable/css/system/components/system-status-report-general-info.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/stable/css/system/components/tabledrag.module.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/stable/css/system/components/tablesort.module.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/stable/css/system/components/tree-child.module.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/modules/contrib/poll/css/poll.base.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/modules/contrib/poll/css/poll.theme.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/stable/css/views/views.module.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/assets/vendor/jquery.ui/themes/base/core.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/assets/vendor/jquery.ui/themes/base/menu.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/assets/vendor/jquery.ui/themes/base/autocomplete.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/assets/vendor/jquery.ui/themes/base/theme.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/modules/contrib/search_api_autocomplete/css/search_api_autocomplete.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/themes/main/css/slick.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/themes/main/css/slick-theme.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/themes/main/css/awesomplete.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/themes/main/css/main.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/sites/arknights/themes/gamepressbase/css/gamepressbase.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/classy/css/components/action-links.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/classy/css/components/breadcrumb.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/classy/css/components/button.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/classy/css/components/collapse-processed.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/classy/css/components/container-inline.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/classy/css/components/details.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/classy/css/components/exposed-filters.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/classy/css/components/field.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/classy/css/components/form.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/classy/css/components/icons.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/classy/css/components/inline-form.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/classy/css/components/item-list.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/classy/css/components/link.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/classy/css/components/links.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/classy/css/components/menu.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/classy/css/components/more-link.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/classy/css/components/pager.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/classy/css/components/tabledrag.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/classy/css/components/tableselect.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/classy/css/components/tablesort.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/classy/css/components/tabs.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/classy/css/components/textarea.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/classy/css/components/ui-dialog.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/classy/css/components/messages.css?qbm87w" media="all" rel="stylesheet"/>
+<link href="/arknights/core/themes/classy/css/components/progress.css?qbm87w" media="all" rel="stylesheet"/>
+<!--[if lte IE 8]>
+<script src="/arknights/core/assets/vendor/html5shiv/html5shiv.min.js?v=3.7.3"></script>
+<![endif]-->
+<script src="/arknights/core/assets/vendor/modernizr/modernizr.min.js?v=3.3.1"></script>
+<script src="/arknights/themes/main/js/jquery.min.js?qbm87w"></script>
+<script src="/arknights/themes/main/js/awesomplete.js?qbm87w"></script>
+<link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i" rel="stylesheet"/>
+<script src="https://comment.gamepress.gg/js/count.js"></script>
+</head>
+<body class="one-sidebar sidebar-second site-gamepress path-node node--type-operator">
+<div id="top-page"></div>
+<div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
+<div id="overlay" onclick="closeNav()"></div>
+<script type="text/javascript">
+  (function () {
+  window.aax = window.aax || {}; window.aax.initTime = new Date().getTime(); window.aax.deliverExchangeDemand = function () { };
+  window.aax.pubId = 'AAXDDFXYK';
+  window.aax.ver = 1.2;
+  window.aax.hst = window.location.hostname;
+  var aaxEndpoint = '//c.aaxads.com/aax.js?pub=' + window.aax.pubId + '&hst=' + window.aax.hst + '&ver=' + window.aax.ver;
+  function isSSL() {
+  return ('https:' == document.location.protocol);
+  }
+  function getProtocol() {
+  return isSSL() ? 'https:' : 'http:'
+  }
+  function writeSource(endpoint) {
+  var source = getProtocol() + endpoint;
+  document.write('<scr' + 'ipt type="text/javascript" src="' + source + '"></scr' + 'ipt>');
+  }
+  writeSource(aaxEndpoint);
+  })();
+  </script>
+<script type="text/javascript">
+/* A9 Load Lib */
+!function(a9,a,p,s,t,A,g){if(a[a9])return;function q(c,r){a[a9]._Q.push([c,r])}a[a9]={init:function(){q("i",arguments)},fetchBids:function()
+{q("f",arguments)},setDisplayBids:function(){},_Q:[]};A=p.createElement(s);A.async=!0;A.src=t;g=p.getElementsByTagName(s)[0];g.parentNode.insertBefore(
+A,g)}("apstag",window,document,"script","//c.amazon-adsystem.com/aax2/apstag.js");
+</script>
+<script type="text/javascript">
+    var adsStart = (new Date()).getTime();
+    function detectWidth() {
+        return window.screen.width || window.innerWidth || window.document.documentElement.clientWidth || Math.min(window.innerWidth, window.document.documentElement.clientWidth) || window.innerWidth || window.document.documentElement.clientWidth || window.document.getElementsByTagName('body')[0].clientWidth;
+    }
+
+    var TIMEOUT = 2000;
+
+    /* A9 Init */
+    apstag.init({
+        pubID: 'edf9e12e-6c41-40a2-bcc3-2f7942aec18a',
+        adServer: 'googletag'
+    });
+
+    var googletag = googletag || {};
+    googletag.cmd = googletag.cmd || [];
+    var pbjs = pbjs || {};
+    pbjs.que = pbjs.que || [];
+    var adUnits = adUnits || [];
+    /* A9 Vars */
+    var a9Slots = [];
+    var a9BidsBack = false;
+
+    function initAdServer() {
+        if (pbjs.initAdserverSet) return;
+        (function() {
+            var gads = document.createElement('script');
+            gads.async = true;
+            gads.type = 'text/javascript';
+            var useSSL = 'https:' == document.location.protocol;
+            gads.src = (useSSL ? 'https:' : 'http:') +
+                '//www.googletagservices.com/tag/js/gpt.js';
+            var node = document.getElementsByTagName('script')[0];
+            node.parentNode.insertBefore(gads, node);
+        })();
+        pbjs.initAdserverSet = true;
+    };
+    pbjs.timeout = setTimeout(initAdServer, TIMEOUT);
+    pbjs.timeStart = adsStart;
+
+    var dfpNetwork = '31904509';
+
+    // START: Defining Adunits
+    if(detectWidth() > 980)
+    {
+        // Desktop Adunits
+        adUnits.push({
+                network: dfpNetwork,
+                adunit: 'Arknights_Desktop_Leaderboard_ATF',
+                size: [[728, 90]],
+                code: 'div-ad-Arknights_Desktop_Leaderboard_ATF',
+                assignToVariableName: false // false if not in use
+            }); 
+        adUnits.push({
+                network: dfpNetwork,
+                adunit: 'Arknights_Desktop_Leaderboard_BTF',
+                size: [[728, 90]],
+                code: 'div-ad-Arknights_Desktop_Leaderboard_BTF',
+                assignToVariableName: false // false if not in use
+            }); 
+                adUnits.push({
+                network: dfpNetwork,
+                adunit: 'Arknights_Desktop_RR_A',
+                size: [[300, 250]],
+                code: 'div-ad-Arknights_Desktop_RR_A',
+                assignToVariableName: false // false if not in use
+            });
+        adUnits.push({
+                network: dfpNetwork,
+                adunit: 'Arknights_Desktop_RR_B',
+                size: [[300, 250],[300, 600]],
+                code: 'div-ad-Arknights_Desktop_RR_B',
+                assignToVariableName: false // false if not in use
+            });
+        adUnits.push({
+                network: dfpNetwork,
+                adunit: 'Arknights_Desktop_RR_C',
+                size: [[300, 250],[300, 600]],
+                code: 'div-ad-Arknights_Desktop_RR_C',
+                assignToVariableName: false // false if not in use
+            }); 
+        adUnits.push({
+                network: dfpNetwork,
+                adunit: 'Gamepress_Desktop_728x90_Extra_1',
+                size: [[728, 90]],
+                code: 'div-ad-Gamepress_Desktop_728x90_Extra_1',
+                assignToVariableName: false // false if not in use
+            });
+adUnits.push({
+                network: dfpNetwork,
+                adunit: 'Gamepress_Desktop_728x90_Extra_2',
+                size: [[728, 90]],
+                code: 'div-ad-Gamepress_Desktop_728x90_Extra_2',
+                assignToVariableName: false // false if not in use
+            });
+adUnits.push({
+                network: dfpNetwork,
+                adunit: 'Gamepress_Desktop_728x90_Extra_3',
+                size: [[728, 90]],
+                code: 'div-ad-Gamepress_Desktop_728x90_Extra_3',
+                assignToVariableName: false // false if not in use
+            }); 
+adUnits.push({
+                network: dfpNetwork,
+                adunit: 'Gamepress_Desktop_728x90_Extra_4',
+                size: [[728, 90]],
+                code: 'div-ad-Gamepress_Desktop_728x90_Extra_4',
+                assignToVariableName: false // false if not in use
+            });
+                    console.log("NOT FRONT PAGE or no news module");    } else {
+        // Mobile Adunits
+        adUnits.push({
+                network: dfpNetwork,
+                adunit: 'Arknights_Mobile_300x250_Extra_3',
+                size: [[300, 250]],
+                code: 'div-ad-Arknights_Mobile_300x250_Extra_3',
+                assignToVariableName: false // false if not in use
+            }); 
+        adUnits.push({
+                network: dfpNetwork,
+                adunit: 'Arknights_Mobile_300x250_Extra_4',
+                size: [[300, 250]],
+                code: 'div-ad-Arknights_Mobile_300x250_Extra_4',
+                assignToVariableName: false // false if not in use
+            }); 
+        adUnits.push({
+                network: dfpNetwork,
+                adunit: 'Arknights_Mobile_320x50_Top',
+                size: [[320, 50]],
+                code: 'div-ad-Arknights_Mobile_320x50_Top',
+                assignToVariableName: false // false if not in use
+            }); 
+        adUnits.push({
+                network: dfpNetwork,
+                adunit: 'Arknights_Mobile_320x50_Floating',
+                size: [[320, 50]],
+                code: 'div-ad-Arknights_Mobile_320x50_Floating',
+                assignToVariableName: false // false if not in use
+            });
+        // Mobile Adunits
+        adUnits.push({
+                network: dfpNetwork,
+                adunit: 'Arknights_Mobile_300x250_BTF_1',
+                size: [[300, 250]],
+                code: 'div-ad-Arknights_Mobile_300x250_BTF_1',
+                assignToVariableName: false // false if not in use
+            });  
+        adUnits.push({
+                network: dfpNetwork,
+                adunit: 'Arknights_Mobile_300x250_BTF_2',
+                size: [[300, 250]],
+                code: 'div-ad-Arknights_Mobile_300x250_BTF_2',
+                assignToVariableName: false // false if not in use
+            }); 
+        adUnits.push({
+                network: dfpNetwork,
+                adunit: 'Arknights_Mobile_300x250_Extra_1',
+                size: [[300, 250]],
+                code: 'div-ad-Arknights_Mobile_300x250_Extra_1',
+                assignToVariableName: false // false if not in use
+            }); 
+        adUnits.push({
+                network: dfpNetwork,
+                adunit: 'Arknights_Mobile_300x250_Extra_2',
+                size: [[300, 250]],
+                code: 'div-ad-Arknights_Mobile_300x250_Extra_2',
+                assignToVariableName: false // false if not in use
+            });
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+    }
+    // END: Defining Adunits
+
+    googletag.cmd.push(function() {
+      if(adUnits){
+        var dfpSlots = [];
+        for (var i = 0, len = adUnits.length; i < len; i++) {
+          dfpSlots[i] = googletag.defineSlot('/'+adUnits[i].network+'/'+adUnits[i].adunit, adUnits[i].size, adUnits[i].code).addService(googletag.pubads());
+          if(adUnits[i].assignToVariableName && (adUnits[i].assignToVariableName !== null)) window[adUnits[i].assignToVariableName] = dfpSlots[i];
+        }
+      }
+    });
+
+    /* A9 Slots */
+    if(adUnits){
+        if(apstag){
+          for (var i = 0, len = adUnits.length; i < len; i++) {
+                  a9Slots.push({slotID: adUnits[i].code,slotName: adUnits[i].network+'/'+adUnits[i].adunit,sizes: adUnits[i].size});
+              }
+        }
+    }
+    /* A9 Request Bids */
+    apstag.fetchBids({
+                        slots: a9Slots,
+                        timeout: TIMEOUT
+                    },
+                    function(bids) {
+                        console.log('BDS back',(new Date()).getTime()-adsStart,bids);
+                        a9BidsBack = true;
+                    });
+
+    googletag.cmd.push(function() {
+        /* A9 Set Bids */
+        if(a9BidsBack) apstag.setDisplayBids();
+        // Header Bidding Targeting
+        pbjs.que.push(function() {pbjs.setTargetingForGPTAsync();});
+
+        // Init DFP
+        googletag.pubads().enableSingleRequest();
+        googletag.pubads().collapseEmptyDivs();
+        googletag.enableServices();
+    });
+</script>
+<script async="true" src="https://gamepress.gg/prebid/prebidglobal.js?2020-05-28T08:42:46" type="text/javascript"></script>
+<div class="gamepress-boost-top-banner" style="display:none;">
+<a class="boost-text" href="https://gamepress.gg/boost">Consider Supporting us with GamePress Boost!<span class="read-more-boost">Read more</span></a>
+<i class="fa fa-times boost-close-icon" onclick="hideBoost()"></i>
+</div>
+<script>
+
+$(document).ready(function(){
+	showBoost();
+})
+
+function hideBoost(element){
+	$(".gamepress-boost-top-banner").hide();
+	createCookie("gamepress_hide_boost", true, 365);
+}
+
+function showBoost(){
+	var show = getCookie("gamepress_hide_boost");
+	if(!show){
+		$(".gamepress-boost-top-banner").show();
+	}
+}
+
+function createCookie(name, value, days) {
+    var expires;
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+    }
+    else {
+        expires = "";
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+// from w3schools
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+</script>
+<div class="gamepress-top-branding">
+<div class="outer-wrapper">
+<a class="gamepresslink" href="http://Gamepress.gg"><img src="/GamePressNewLogo.png"/></a>
+<div class="gamepress-sub-menu">
+<div class="outer-wrapper">
+<ul>
+<li><a class="boost-menu-link" href="https://gamepress.gg/boost">Boost</a></li>
+<li><a href="https://community.gamepress.gg">Community</a></li>
+<li><a href="https://discord.gg/yq8D9GX">Discord</a></li>
+<li><a href="https://gamepress.gg/all-games">All Games</a></li>
+</ul>
+</div>
+</div>
+<div class="portal-section">
+<div class="not-loggedin">
+<ul>
+<li><a href="https://gamepress.gg/arknights/cas?returnto=/arknights/operator/blue-poison">Sign In</a></li>
+<li class="register-button"><a href="https://gamepress.gg/user/register">Register</a></li>
+</ul>
+</div>
+</div>
+<script>
+  var baseURL = "https://gamepress.gg";
+
+  function enableDM() {
+    var newNode = {
+      _links: {
+          type: {
+              href: baseURL + '/user/{user}'
+          }
+      },
+      field_dark_mode: {
+          value: 1
+      }
+    };
+    getCsrfToken(function(csrfToken) {
+        postNode(csrfToken, newNode);
+    });
+  }
+
+  function getCsrfToken(callback) {
+    jQuery
+      .get(Drupal.url('session/token'))
+      .done(function (data) {
+        var csrfToken = data;
+        callback(csrfToken);
+      });
+  }
+
+  function patchNode(csrfToken, node) {
+  var urlJSON = baseURL + '/user/' + userID2 + '?_format=hal_json'
+  jQuery.ajax({
+    url: urlJSON,
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/hal+json',
+      'X-CSRF-Token': csrfToken
+    },
+    data: JSON.stringify(node),
+    success: function (node) {
+      window.location.href = baseURL;
+    }
+  });
+}
+
+
+</script> </div>
+</div>
+<div id="menu-close" onclick="closeNav()"><i aria-hidden="true" class="fa fa-times"></i></div>
+<div id="sidenav">
+<div class="sidemenu-icon"><img src="/GamePressNewLogo.png"/></div>
+<div class="menu-c-container">
+<ul class="menu">
+<li class="menu-item menu-item--expanded">
+<span>Featured</span>
+<ul class="menu">
+<li class="menu-item">
+<a data-drupal-link-system-path="node/11701" href="/arknights/tier-list/arknights-operator-tier-list">Operator Tier List</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/11646" href="/arknights/gameplay-basics/arknights-tips-and-advice-guide-new-doctors" title="Tips and Advice to Guide New Doctors">Tips and Advice to Guide New Doctors</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/12901" href="/arknights/core-gameplay/arknights-guide-high-impact-elite-2-promotions" title="Guide To Elite 2 Priorities">Guide To Elite 2 Priorities</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/11341" href="/arknights/tier-list/arknights-reroll-tier-list-and-guide">Reroll Tier List and Guide</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/11651" href="/arknights/core-gameplay/arknights-guide-best-low-rarity-operators" title="Guide to Best Low Rarity Operators">Guide to Best Low Rarity Operators</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/11681" href="/arknights/core-gameplay/arknights-operator-recruitment-guide" title="Operator Recruitment Guide">Operator Recruitment Guide</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/11436" href="/arknights/gameplay-basics/teambuilding-guide" title="Teambuilding Guide">Teambuilding Guide</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/11686" href="/arknights/gameplay-basics/arknights-riic-base-guide" title="RIIC Base Guide">RIIC Base Guide</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/11821" href="/arknights/core-gameplay/arknights-currency-and-shop-guide" title="Currency and Shop Guide">Currency and Shop Guide</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/12116" href="/arknights/gameplay-basics/arknights-guide-operator-trust" title="Guide To Operator Trust">Guide To Operator Trust</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/11871" href="/arknights/combat-operation-guide/arknights-annihilation-chernobog-400-kill-guide" title="Annihilation Chernobog 400 Kill Guide">Annihilation Chernobog 400 Kill Guide</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/12016" href="/arknights/combat-operation-guide/arknights-annihilation-lungmen-outskirts-400-kill-guide" title="Annihilation Lungmen Outskirts 400 Kill Guide">Annihilation Lungmen Outskirts 400 Kill Guide</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/12031" href="/arknights/tools/supplies-chips-farming-availability-weekly-calendar">Supplies &amp; Chips Farming Availability Weekly Calendar</a>
+</li>
+</ul>
+</li>
+<li class="menu-item menu-item--expanded">
+<span>Database</span>
+<ul class="menu">
+<li class="menu-item">
+<a data-drupal-link-system-path="node/7281" href="/arknights/database/banner-list-gacha">Banner List (Gacha)</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/1381" href="/arknights/database/interactive-operator-list">Operator List</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/7261" href="/arknights/database/material-list">Material List</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/11801" href="/arknights/database/daily-mission-list">Mission List</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/7291" href="/arknights/database/facility-list">Facility List</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/4321" href="/arknights/database/furniture-list">Furniture List</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/8861" href="/arknights/database/combat-operation-list">Combat Operation</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/4316" href="/arknights/database/enemy-list">Enemy List</a>
+</li>
+</ul>
+</li>
+<li class="menu-item menu-item--expanded">
+<span>Gameplay</span>
+<ul class="menu">
+<li class="menu-item">
+<a data-drupal-link-system-path="node/12126" href="/arknights/gameplay-basics/arknights-damage-formulas-pocket-reference" title="Damage Formulas">Damage Formulas</a>
+</li>
+</ul>
+</li>
+<li class="menu-item menu-item--expanded">
+<span>Database (Extended)</span>
+<ul class="menu">
+<li class="menu-item">
+<a data-drupal-link-system-path="node/8851" href="/arknights/database/operator-release-dates-and-how-obtain">Operator Release Dates &amp; How to Obtain</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/10011" href="/arknights/database/operator-riic-base-skill-list">Operator RIIC Base Skill List</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/10031" href="/arknights/database/operators-voice-actor-cv">Operators by Voice Actor / CV</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/10041" href="/arknights/database/operators-faction">Operators by Faction</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/10026" href="/arknights/database/operators-race">Operators by Race</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/10046" href="/arknights/database/operators-heightcombat-experience">Operators by Height/Combat Experience</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/12216" href="/arknights/gallery/arknights-operator-e2-art-gallery">Operator E2 Art Gallery</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/12241" href="/arknights/gallery/arknights-skin-art-gallery">Skin Art Gallery</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/11831" href="/arknights/database/skin-list">Skin List</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/10756" href="/arknights/database/furniture-theme-list">Furniture Theme List</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/11671" href="/arknights/database/factory-formula-list">Factory Formula List</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/11666" href="/arknights/database/workshop-formula-list">Workshop Formula List</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/7286" href="/arknights/database/trap-token-list">Trap / Token List</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/7186" href="/arknights/database/skill-list">Skill List</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/7276" href="/arknights/database/talent-list">Talent List</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/7296" href="/arknights/database/attack-ranges">Attack Ranges</a>
+</li>
+</ul>
+</li>
+<li class="menu-item menu-item--expanded">
+<span>Community Links</span>
+<ul class="menu">
+<li class="menu-item">
+<a href="https://discord.gg/6YpDpqy">GamePress Arknights Discord</a>
+</li>
+<li class="menu-item">
+<a href="https://www.reddit.com/r/arknights/">Arknights Reddit</a>
+</li>
+<li class="menu-item">
+<a data-drupal-link-system-path="node/11141" href="/arknights/news/arknights-gamepress-community-discord" title="GamePress Community &amp; Discord">GamePress Community &amp; Discord</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="page" role="document">
+<header class="gamepress-top-menu">
+<div class="gamepress-top-container">
+<div class="outer-wrapper">
+<div id="site-header">
+<div class="top-logo-container">
+<a class="logo-name-container" href="/arknights/" rel="home" title="Home">
+<img alt="Home" class="site-logo" src="/arknights/sites/arknights/files/Arkgnits-main.jpg"/>
+<div class="site-name">Arknights Wiki - GamePress</div>
+</a>
+</div>
+<div class="top-search-menu">
+<div class="block block-views block-views-exposed-filter-blocksite-search-page-1">
+<h2>Search</h2>
+<form accept-charset="UTF-8" action="/arknights/search" class="views-exposed-form" data-drupal-selector="views-exposed-form-site-search-page-1" id="views-exposed-form-site-search-page-1" method="get">
+<div class="form--inline clearfix">
+<div class="js-form-item form-item js-form-type-search-api-autocomplete form-type-search-api-autocomplete js-form-item-query form-item-query form-no-label">
+<input class="form-autocomplete form-text" data-autocomplete-path="/arknights/search_api_autocomplete/site_search?display=page_1&amp;&amp;filter=query" data-drupal-selector="edit-query" data-search-api-autocomplete-search="site_search" id="edit-query" maxlength="128" name="query" placeholder="Search..." size="30" type="text" value=""/>
+</div>
+<div class="form-actions js-form-wrapper form-wrapper" data-drupal-selector="edit-actions" id="edit-actions"><input class="button js-form-submit form-submit" data-drupal-selector="edit-submit-site-search" id="edit-submit-site-search" type="submit" value="Apply"/>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="menu-container">
+<div class="menu--top-menu outer-wrapper">
+<div id="side-menu-button" onclick="openNav()"><div class="menu-bars"><i aria-hidden="true" class="fa fa-bars"></i></div><div class="menu-label">Menu</div></div>
+<div class="top-menu"><ul>
+<li>
+<a href="/arknights/tier-list/arknights-operator-tier-list" style="background-image: url( 
+
+            /arknights/sites/arknights/files/2020-01/trophy.png
+
+  )">Tier List</a>
+</li>
+<li>
+<a href="/arknights/database/interactive-operator-list" style="background-image: url( 
+
+            /arknights/sites/arknights/files/2019-11/Arknights_Life.png
+
+  )">Operators</a>
+</li>
+<li>
+<a href="https://gamepress.gg/arknights/tools/arknights-recruitment-tag-filter" style="background-image: url( 
+
+            /arknights/sites/arknights/files/2020-01/dice.png
+
+  )">Recruit Tool</a>
+</li>
+<li>
+<a href="/arknights/tools/summon-simulator" style="background-image: url( 
+
+            /arknights/sites/arknights/files/2019-11/redgemSmall_0.png
+
+  )">Simulator</a>
+</li>
+<li>
+<a href="/arknights/tools/arknights-operator-planner-beta" style="background-image: url( 
+
+            /arknights/sites/arknights/files/2020-03/LMDSymbol_1.png
+
+  )">Planner</a>
+</li>
+<li>
+<a href="/arknights/other/guides" style="background-image: url( 
+
+            /arknights/sites/arknights/files/2019-06/notebook_0.png
+
+  )">Guides</a>
+</li>
+</ul></div>
+</div>
+</div>
+<div id="top-page-button">
+<i aria-hidden="true" class="fa fa-arrow-up"></i>
+<div class="top-label">Top</div>
+</div>
+<div class="top-mobile-ad">
+<div id="div-ad-Arknights_Mobile_320x50_Top">
+<script>
+if(detectWidth() <= 980) { googletag.cmd.push(function() { googletag.display('div-ad-Arknights_Mobile_320x50_Top'); }); }
+</script>
+</div>
+</div>
+<div id="bottom-sticky-ad">
+<div id="div-ad-Arknights_Mobile_320x50_Floating">
+<script>
+if(detectWidth() <= 980) { googletag.cmd.push(function() { googletag.display('div-ad-Arknights_Mobile_320x50_Floating'); }); }
+</script>
+</div>
+</div>
+<script>
+
+function decodeHtml(html) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+}
+
+function getPathByValue(value){
+    for(var i = 0; i < list.length; i++){
+        if(list[i].toLowerCase() == value.toLowerCase()){
+            return paths[i];
+        }
+    }
+}
+/* Set the width of the side navigation to 250px */
+
+function openNav() {
+  var $slider = document.getElementById('sidenav');
+  $slider.setAttribute("class", "slide-in");
+  document.getElementById("overlay").style.display = "block";
+  document.getElementById("menu-close").style.display = "block";
+  document.getElementById("bottom-sticky-ad").style.display = "none";
+  document.body.style.overflow = "hidden";
+}
+
+function closeNav() {
+  var $slider = document.getElementById('sidenav');
+  $slider.setAttribute("class", "slide-out");
+  document.getElementById("overlay").style.display = "none";
+  document.getElementById("menu-close").style.display = "none";
+  document.getElementById("bottom-sticky-ad").style.display = "block";
+  document.body.style.overflow = "auto";
+}
+
+</script>
+</header>
+<main class="outer-wrapper" role="main">
+<section class="column-2-setup" id="content">
+<div id="content-inner">
+<div id="gamepress-top-content">
+<div class="top-content-brand">GamePress</div>
+<div class="top-ad-desktop">
+<div id="div-ad-Arknights_Desktop_Leaderboard_ATF">
+<script>
+if(detectWidth() > 980) { googletag.cmd.push(function() { googletag.display('div-ad-Arknights_Desktop_Leaderboard_ATF'); }); }
+</script>
+</div>
+</div>
+<div id="page-title">
+<h1>Blue Poison</h1>
+<div class="title-sub">
+<a href="https://gamepress.atlassian.net/servicedesk/customer/portals" target="_blank">Submit Feedback or Error</a>
+</div>
+</div>
+</div>
+<div class="">
+<div class="hidden" data-drupal-messages-fallback=""></div>
+<div class="block block-system block-system-main-block" id="block-gamepressbase-content">
+<article about="/arknights/operator/blue-poison" class="" data-history-node-id="1191" id="node-1191" role="article">
+<ul class="operator-tabs">
+<li><a href="#status">Status</a></li>
+<li><a href="#analysis">Analysis</a></li>
+<li><a href="#profile">Profile</a></li>
+</ul>
+<div class="operator-page-cell">
+<div class="operator-top-cell">
+<div class="left-cell">
+<a href="/arknights/taxonomy/term/146">
+<div class="faction-cell">
+<img src="/arknights/sites/arknights/files/2019-06/logo_rhodes.png"/>
+</div>
+</a>
+<div class="rarity-cell">
+<img src="/sites/arknights/files/2019-10/star.png"/>
+<img src="/sites/arknights/files/2019-10/star.png"/>
+<img src="/sites/arknights/files/2019-10/star.png"/>
+<img src="/sites/arknights/files/2019-10/star.png"/>
+<img src="/sites/arknights/files/2019-10/star.png"/>
+</div>
+<a href="/arknights/taxonomy/term/231">
+<div class="profession-cell">
+<img src="/arknights/sites/arknights/files/2019-10/class_sniper.png"/>
+<div class="profession-title">
+Sniper
+</div>
+</div>
+</a>
+<div class="operator-image current-tab" id="image-tab-1">
+<a href="https://gamepress.gg/arknights/sites/arknights/files/2019-10/char_129_bluep_1.png"><img alt="" height="1024" src="/arknights/sites/arknights/files/2019-10/char_129_bluep_1.png" typeof="foaf:Image" width="1024"/>
+</a>
+<div class="range-outer">
+<div class="operator-range">
+<div class="range-title-cell">Range</div>
+<div class="range-box">
+<div class="range-cell">
+<span class="empty-box margin"></span>
+<span class="fill-box margin"></span>
+<span class="empty-box margin"></span>
+</div>
+<div class="range-cell">
+<span class="empty-box margin"></span>
+<span class="empty-box margin"></span>
+<span class="empty-box margin"></span>
+</div>
+<div class="range-cell">
+<span class="empty-box margin"></span>
+<span class="empty-box margin"></span>
+<span class="empty-box margin"></span>
+</div>
+<div class="range-cell">
+<span class="null-box margin"></span>
+<span class="empty-box margin"></span>
+<span class="null-box margin"></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="operator-image" id="image-tab-2">
+<a href="https://gamepress.gg/arknights/sites/arknights/files/2019-11/char_129_bluep_1.png"><img alt="" height="1024" src="/arknights/sites/arknights/files/2019-11/char_129_bluep_1.png" typeof="foaf:Image" width="1024"/>
+</a>
+<div class="range-outer">
+<div class="operator-range">
+<div class="range-title-cell">Range</div>
+<div class="range-box">
+<div class="range-cell">
+<span class="empty-box margin"></span>
+<span class="fill-box margin"></span>
+<span class="empty-box margin"></span>
+</div>
+<div class="range-cell">
+<span class="empty-box margin"></span>
+<span class="empty-box margin"></span>
+<span class="empty-box margin"></span>
+</div>
+<div class="range-cell">
+<span class="empty-box margin"></span>
+<span class="empty-box margin"></span>
+<span class="empty-box margin"></span>
+</div>
+<div class="range-cell">
+<span class="empty-box margin"></span>
+<span class="empty-box margin"></span>
+<span class="empty-box margin"></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="operator-image" id="image-tab-3">
+<a href="https://gamepress.gg/arknights/sites/arknights/files/2019-11/char_129_bluep_2.png"><img alt="" height="1024" src="/arknights/sites/arknights/files/2019-11/char_129_bluep_2.png" typeof="foaf:Image" width="1024"/>
+</a>
+<div class="range-outer">
+<div class="operator-range">
+<div class="range-title-cell">Range</div>
+<div class="range-box">
+<div class="range-cell">
+<span class="empty-box margin"></span>
+<span class="fill-box margin"></span>
+<span class="empty-box margin"></span>
+</div>
+<div class="range-cell">
+<span class="empty-box margin"></span>
+<span class="empty-box margin"></span>
+<span class="empty-box margin"></span>
+</div>
+<div class="range-cell">
+<span class="empty-box margin"></span>
+<span class="empty-box margin"></span>
+<span class="empty-box margin"></span>
+</div>
+<div class="range-cell">
+<span class="empty-box margin"></span>
+<span class="empty-box margin"></span>
+<span class="empty-box margin"></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="skin-tab">
+<ul class="skin-image-tabs operator-skin image-tab-function" id="three-tabs">
+</ul>
+</div>
+<div class="elite-image-cell-tab">
+<ul class="operator-image-tabs image-tab-function" id="three-tabs">
+<li class="tab-link current-tab" data-tab="image-tab-1"><img src="/sites/arknights/files/2019-10/0.png"/></li>
+<li class="tab-link" data-tab="image-tab-2"><img src="/sites/arknights/files/2019-10/1.png"/></li>
+<li class="tab-link" data-tab="image-tab-3"><img src="/sites/arknights/files/2019-10/2.png"/></li>
+</ul>
+</div>
+</div>
+<div class="right-cell">
+<div class="position-cell">
+<div class="information-cell">
+<div class="title-text-cell">Position</div>
+<div class="text-content-cell">
+<a href="/arknights/taxonomy/term/361" hreflang="en">Ranged</a>
+</div>
+</div>
+</div>
+<div class="traits-cell">
+<div class="information-cell">
+<div class="title-text-cell">Attack Type</div>
+<div class="text-content-cell">
+<a href="/arknights/taxonomy/term/411" hreflang="en">Physical Damage</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<h3 class="sub-title">Tags</h3>
+<div class="tag-cell">
+<div class="tag-title">
+<a href="/arknights/taxonomy/term/321">
+DPS
+</a>
+</div>
+</div>
+<h3 class="sub-title">Archetype</h3>
+<div class="tag-cell">
+<div class="tag-title">
+<a href="/arknights/taxonomy/term/5041">
+Anti-Air Sniper
+</a>
+</div>
+</div>
+<h3 class="sub-title">Traits</h3>
+<div class="description-box">
+Attacks aerial enemies first
+</div>
+<h3 class="sub-title">Operator Description</h3>
+<div class="description-box">
+Blue Poison, Sniper Operator of Rhodes Island, will attack the enemy with her venom.
+</div>
+<h3 class="sub-title">Operator Quote</h3>
+<div class="description-box">
+Hold her hands, and give her confidence.
+</div>
+<div class="desktop-ad">
+<center>
+<div id="div-ad-Gamepress_Desktop_728x90_Extra_1">
+<script>
+if(detectWidth() > 980) { googletag.cmd.push(function() { googletag.display('div-ad-Gamepress_Desktop_728x90_Extra_1'); }); }
+</script>
+</div>
+</center>
+</div>
+<div class="mobile-ad">
+<center>
+<div id="div-ad-Arknights_Mobile_300x250_BTF_1">
+<script>
+if(detectWidth() <= 980) { googletag.cmd.push(function() { googletag.display('div-ad-Arknights_Mobile_300x250_BTF_1'); }); }
+</script>
+</div>
+</center>
+</div>
+<script language="javascript" src="https://live.sekindo.com/live/liveView.php?s=102483&amp;cbuster=%%CACHEBUSTER%%&amp;pubUrl=%%REFERRER_URL_ESC%%&amp;subId=[SUBID_ENCODED]&amp;x=%%WIDTH%%&amp;y=%%HEIGHT%%&amp;vp_content=plembed1a88gmrlpxuh&amp;vp_template=7480" type="text/javascript"></script>
+<h2 class="main-title">Potentials</h2>
+<h3 class="sub-title">Potential Item</h3>
+<div class="potential-item-cell">
+<div class="item-image">
+<a href="https://gamepress.gg/arknights/node/5281">
+<img src="/arknights/sites/arknights/files/game-images/items/p_char_129_bluep.png"/>
+</a>
+</div>
+<div class="title-description">
+<span class="title">
+<a href="https://gamepress.gg/arknights/node/5281">Blue Poison's Token</a>
+</span>
+<span class="description">A shopping card from a high-class clothing shop. Put away the boring uniforms and enjoy dressing up.</span>
+</div>
+</div>
+<div class="potential-trust">
+<div class="parent-pt">
+<div class="sub-title-type-1" style="margin: 0 0 10px 0; text-align: center;">Potentials</div>
+<div class="potential-cell">
+<div class="potential-list">
+<div class="potential-level-icon">
+<img src="/sites/arknights/files/2019-10/1_1.png"/> </div>
+<div class="potential-icon">
+<a href="/arknights/potential/deployment-cost" style="color: white;">
+Deployment Cost
+</a>
+</div>
+<div class="potential-title">
+-1
+</div>
+</div>
+<div class="potential-list">
+<div class="potential-level-icon">
+<img src="/sites/arknights/files/2019-10/2_1.png"/> </div>
+<div class="potential-icon">
+<a href="/arknights/potential/redeployment-cooldown" style="color: white;">
+Redeployment Cooldown
+</a>
+</div>
+<div class="potential-title">
+-4
+</div>
+</div>
+<div class="potential-list">
+<div class="potential-level-icon">
+<img src="/sites/arknights/files/2019-10/3_1.png"/> </div>
+<div class="potential-icon">
+<a href="/arknights/potential/attack-power" style="color: white;">
+Attack Power
+</a>
+</div>
+<div class="potential-title">
++24
+</div>
+</div>
+<div class="potential-list">
+<div class="potential-level-icon">
+<img src="/sites/arknights/files/2019-10/4_0.png"/> </div>
+<div class="potential-icon">
+<a href="/arknights/potential/improves-talent" style="color: white;">
+Improves Talent
+</a>
+</div>
+<div class="potential-title">
+</div>
+</div>
+<div class="potential-list">
+<div class="potential-level-icon">
+<img src="/sites/arknights/files/2019-10/5_0.png"/> </div>
+<div class="potential-icon">
+<a href="/arknights/potential/deployment-cost" style="color: white;">
+Deployment Cost
+</a>
+</div>
+<div class="potential-title">
+-1
+</div>
+</div>
+</div>
+</div>
+<div class="parent-pt">
+<div class="sub-title-type-1" style="margin: 0 0 10px 0; text-align: center;">Trust extra status</div>
+<div class="trust-cell">
+<div class="potential-list trust-title">
+<div class="potential-icon">
+<a href="/arknights/potential/attack-power" style="color: white;">
+Attack Power
+</a>
+</div>
+<div class="potential-title">
++75
+</div>
+</div>
+</div>
+</div>
+</div>
+<h2 class="main-title">Talent</h2>
+<div class="talent-cell">
+<div class="talent-child">
+<div class="talent-title-cell">
+<a href="/arknights/talent/neurotoxin">
+<div class="talent-title">
+Neurotoxin
+</div>
+</a>
+<div class="operator-level">
+Lvl: 1
+</div>
+<div class="elite-level">
+<img src="/arknights/sites/arknights/files/2019-10/1.png"/>
+</div>
+<div class="potential-level">
+<img src="/arknights/sites/arknights/files/2019-10/1_0.png"/>
+</div>
+</div>
+<div class="talent-description">
+Poisons the targets when attacking, dealing 30 Arts Damage to them per second, lasting 3 seconds
+</div>
+</div>
+<div class="talent-child">
+<div class="talent-title-cell">
+<a href="/arknights/talent/neurotoxin">
+<div class="talent-title">
+Neurotoxin
+</div>
+</a>
+<div class="operator-level">
+Lvl: 1
+</div>
+<div class="elite-level">
+<img src="/arknights/sites/arknights/files/2019-10/1.png"/>
+</div>
+<div class="potential-level">
+<img src="/arknights/sites/arknights/files/2019-10/5.png"/>
+</div>
+</div>
+<div class="talent-description">
+Poisons the targets when attacking, dealing 40 <span class="ba-talpu">(+10)</span> Arts Damage to them per second, lasting 3 seconds
+</div>
+</div>
+<div class="talent-child">
+<div class="talent-title-cell">
+<a href="/arknights/talent/neurotoxin">
+<div class="talent-title">
+Neurotoxin
+</div>
+</a>
+<div class="operator-level">
+Lvl: 1
+</div>
+<div class="elite-level">
+<img src="/arknights/sites/arknights/files/2019-10/2.png"/>
+</div>
+<div class="potential-level">
+<img src="/arknights/sites/arknights/files/2019-10/1_0.png"/>
+</div>
+</div>
+<div class="talent-description">
+Poisons the targets when attacking, dealing 75 Arts Damage to them per second, lasting 3 seconds
+</div>
+</div>
+<div class="talent-child">
+<div class="talent-title-cell">
+<a href="/arknights/talent/neurotoxin">
+<div class="talent-title">
+Neurotoxin
+</div>
+</a>
+<div class="operator-level">
+Lvl: 1
+</div>
+<div class="elite-level">
+<img src="/arknights/sites/arknights/files/2019-10/2.png"/>
+</div>
+<div class="potential-level">
+<img src="/arknights/sites/arknights/files/2019-10/5.png"/>
+</div>
+</div>
+<div class="talent-description">
+Poisons the targets when attacking, dealing 85 <span class="ba-talpu">(+10)</span> Arts Damage to them per second, lasting 3 seconds
+</div>
+</div>
+</div>
+<div class="desktop-ad">
+<center>
+<div id="div-ad-Gamepress_Desktop_728x90_Extra_2">
+<script>
+if(detectWidth() > 980) { googletag.cmd.push(function() { googletag.display('div-ad-Gamepress_Desktop_728x90_Extra_2'); }); }
+</script>
+</div>
+</center>
+</div>
+<div class="mobile-ad">
+<center>
+<div id="div-ad-Arknights_Mobile_300x250_BTF_2">
+<script>
+if(detectWidth() <= 980) { googletag.cmd.push(function() { googletag.display('div-ad-Arknights_Mobile_300x250_BTF_2'); }); }
+</script>
+</div>
+</center>
+</div>
+<ul class="operator-tabs-page" id="status">
+<li><a class="selected">Status</a></li>
+<li><a class="not-selected" href="#analysis">Analysis</a></li>
+<li><a class="not-selected" href="#profile">Profile</a></li>
+</ul>
+<h2 class="main-title">Stats</h2>
+<div class="stat-box-cell">
+<div class="rank-select">
+<button class="rank-button current-button" data-rank="ne">Non-Elite</button>
+<button class="rank-button" data-rank="e1">Elite 1</button>
+<button class="rank-button" data-rank="e2">Elite 2</button>
+</div>
+<div class="base-max-select clearfix">
+<button class="bm-button" data-base="Base" onclick="setBM(this)">Base</button>
+<button class="bm-button current-button" data-base="Max" onclick="setBM(this)">Max</button>
+</div>
+<div id="stats-container">
+<div class="header-stats">
+<span class="stat-text">HP
+<span id="stat-hp">1230</span>
+</span>
+<span class="stat-ranking stat-text" id="hp-rank" style="float:right; margin-right:5px;"></span>
+<span class="stat-bar hp-bar" id="hp-bar"></span>
+</div>
+<div class="header-stats">
+<span class="stat-text">ATK
+<span id="stat-atk">535 </span>
+</span>
+<span class="stat-ranking stat-text" id="atk-rank" style="float:right; margin-right:5px;"></span>
+<span class="stat-bar atk-bar" id="atk-bar"></span>
+</div>
+<div class="header-stats">
+<span class="stat-text">DEF
+<span id="stat-def">130 </span>
+</span>
+<span class="stat-ranking stat-text" id="def-rank" style="float:right; margin-right:5px;"></span>
+<span class="stat-bar def-bar" id="def-bar"></span>
+</div>
+</div>
+<div class="other-stat-cell">
+<div class="other-stat-value-cell">
+<div class="effect-title">
+Arts Resist
+</div>
+<div class="effect-description">
+<span id="arts-resist">5</span>
+</div>
+</div>
+<div class="other-stat-value-cell">
+<div class="effect-title">
+Redeploy Time
+</div>
+<div class="effect-description">
+70
+</div>
+</div>
+<div class="other-stat-value-cell">
+<div class="effect-title">
+DP Cost
+</div>
+<div class="effect-description">
+<span id="operator-cost">11</span>
+</div>
+</div>
+<div class="other-stat-value-cell">
+<div class="effect-title">
+Block
+</div>
+<div class="effect-description">
+<span id="operator-block">1</span>
+</div>
+</div>
+<div class="other-stat-value-cell">
+<div class="effect-title">
+Attack Interval
+</div>
+<div class="effect-description">
+1
+</div>
+</div>
+</div>
+</div>
+<h2 class="main-title">Skills</h2>
+<div class="skill-section">
+<div class="skill-tab clearfix">
+<ul class="skill-level-tabs" id="three-button">
+<li class="tab-link current-tab" data-tab="skill-tab-1">Skill 1</li>
+<li class="tab-link" data-tab="skill-tab-2">Skill 2</li>
+</ul>
+</div>
+<div class="skill-upgrade-tab clearfix">
+<ul class="skill-upgrade-tabs" id="upgrade-tabs">
+<li class="skill-upgrade-link current-tab" data-tab="skill-upgrade-tab-1"><img src="/sites/arknights/files/2019-10/1_2.png"/></li>
+<li class="skill-upgrade-link" data-tab="skill-upgrade-tab-2"><img src="/sites/arknights/files/2019-10/2_2.png"/></li>
+<li class="skill-upgrade-link" data-tab="skill-upgrade-tab-3"><img src="/sites/arknights/files/2019-10/3_2.png"/></li>
+<li class="skill-upgrade-link" data-tab="skill-upgrade-tab-4"><img src="/sites/arknights/files/2019-10/4_1.png"/></li>
+<li class="skill-upgrade-link" data-tab="skill-upgrade-tab-5"><img src="/sites/arknights/files/2019-10/5_1.png"/></li>
+<li class="skill-upgrade-link" data-tab="skill-upgrade-tab-6"><img src="/sites/arknights/files/2019-10/6_1.png"/></li>
+<li class="skill-upgrade-link" data-tab="skill-upgrade-tab-7"><img src="/sites/arknights/files/2019-10/7_0.png"/></li>
+<li class="skill-upgrade-link" data-tab="skill-upgrade-tab-8"><img src="/sites/arknights/files/2019-10/7_0.png"/><div class="over-level"><img src="/sites/arknights/files/2019-10/m-1_0.png"/></div></li>
+<li class="skill-upgrade-link" data-tab="skill-upgrade-tab-9"><img src="/sites/arknights/files/2019-10/7_0.png"/><div class="over-level"><img src="/sites/arknights/files/2019-10/m-2_0.png"/></div></li>
+<li class="skill-upgrade-link" data-tab="skill-upgrade-tab-10"><img src="/sites/arknights/files/2019-10/7_0.png"/><div class="over-level"><img src="/sites/arknights/files/2019-10/m-3_0.png"/></div></li>
+</ul>
+</div>
+<div class="skill-cell current-tab" id="skill-tab-1">
+<div class="h3-custom">
+<div class="skill-title-cell">
+<a href="/arknights/skill/twinshot-auto" style="color: #fff;">
+<img src="/arknights/sites/arknights/files/game-images/skills/skill_icon_skchr_bluep_1.png"/>
+</a>
+<a href="/arknights/skill/twinshot-auto" style="color: #fff;">
+Skill 1: Twinshot - Auto
+</a>
+</div>
+</div>
+<div class="sp-cell">
+<div class="sp-cost">
+SP Cost:
+<div class="effect-description skill-upgrade-tab-1 current-tab">4</div>
+<div class="effect-description skill-upgrade-tab-2">4</div>
+<div class="effect-description skill-upgrade-tab-3">4</div>
+<div class="effect-description skill-upgrade-tab-4">3</div>
+<div class="effect-description skill-upgrade-tab-5">3</div>
+<div class="effect-description skill-upgrade-tab-6">3</div>
+<div class="effect-description skill-upgrade-tab-7">3</div>
+<div class="effect-description skill-upgrade-tab-8">3</div>
+<div class="effect-description skill-upgrade-tab-9">3</div>
+<div class="effect-description skill-upgrade-tab-10">2</div>
+</div>
+<div class="initial-sp">
+Initial SP:
+<div class="effect-description skill-upgrade-tab-1 current-tab">0</div>
+<div class="effect-description skill-upgrade-tab-2">0</div>
+<div class="effect-description skill-upgrade-tab-3">0</div>
+<div class="effect-description skill-upgrade-tab-4">0</div>
+<div class="effect-description skill-upgrade-tab-5">0</div>
+<div class="effect-description skill-upgrade-tab-6">0</div>
+<div class="effect-description skill-upgrade-tab-7">0</div>
+<div class="effect-description skill-upgrade-tab-8">0</div>
+<div class="effect-description skill-upgrade-tab-9">0</div>
+<div class="effect-description skill-upgrade-tab-10">0</div>
+</div>
+</div>
+<div class="skill-effect-parent">
+<div class="sp-charge-type skill-effect-title">
+<div class="effect-title">SP Charge Type</div><div class="effect-description">
+<a href="https://gamepress.gg/arknights/taxonomy/term/506" style="color: #00cfe6;">
+Attacking Enemy
+</a>
+</div>
+</div>
+<div class="skill-activation skill-effect-title">
+<div class="effect-title">Skill Activation</div>
+<div class="effect-description">
+<a href="https://gamepress.gg/arknights/taxonomy/term/511" style="color: #00cfe6;">
+Auto Trigger
+</a>
+</div>
+</div>
+<div class="skill-duration skill-effect-title">
+<div class="effect-title">Duration</div>
+<div class="effect-description skill-upgrade-tab-1 current-tab">
+-
+</div>
+<div class="effect-description skill-upgrade-tab-2">
+-
+</div>
+<div class="effect-description skill-upgrade-tab-3">
+-
+</div>
+<div class="effect-description skill-upgrade-tab-4">
+-
+</div>
+<div class="effect-description skill-upgrade-tab-5">
+-
+</div>
+<div class="effect-description skill-upgrade-tab-6">
+-
+</div>
+<div class="effect-description skill-upgrade-tab-7">
+-
+</div>
+<div class="effect-description skill-upgrade-tab-8">
+-
+</div>
+<div class="effect-description skill-upgrade-tab-9">
+-
+</div>
+<div class="effect-description skill-upgrade-tab-10">
+-
+</div>
+</div>
+</div>
+<div class="skill-description">
+<div class="effect-title">Skill Effect</div>
+<div class="effect-description skill-upgrade-tab-1 current-tab">The next attack hits 1 additional target for <span class="skill-description-value">125%</span> of ATK Physical damage</div>
+<div class="effect-description skill-upgrade-tab-2">The next attack hits 1 additional target for <span class="skill-description-value">130%</span> of ATK Physical damage</div>
+<div class="effect-description skill-upgrade-tab-3">The next attack hits 1 additional target for <span class="skill-description-value">135%</span> of ATK Physical damage</div>
+<div class="effect-description skill-upgrade-tab-4">The next attack hits 1 additional target for <span class="skill-description-value">140%</span> of ATK Physical damage</div>
+<div class="effect-description skill-upgrade-tab-5">The next attack hits 1 additional target for <span class="skill-description-value">145%</span> of ATK Physical damage</div>
+<div class="effect-description skill-upgrade-tab-6">The next attack hits 1 additional target for <span class="skill-description-value">150%</span> of ATK Physical damage</div>
+<div class="effect-description skill-upgrade-tab-7">The next attack hits 1 additional target for <span class="skill-description-value">155%</span> of ATK Physical damage</div>
+<div class="effect-description skill-upgrade-tab-8">The next attack hits 1 additional target for <span class="skill-description-value">170%</span> of ATK Physical damage</div>
+<div class="effect-description skill-upgrade-tab-9">The next attack hits 1 additional target for <span class="skill-description-value">185%</span> of ATK Physical damage</div>
+<div class="effect-description skill-upgrade-tab-10">The next attack hits 1 additional target for <span class="skill-description-value">200%</span> of ATK Physical damage</div>
+</div>
+</div>
+<div class="skill-cell" id="skill-tab-2">
+<div class="h3-custom">
+<div class="skill-title-cell">
+<a href="/arknights/skill/venom-spray" style="color: #fff;">
+<img src="/arknights/sites/arknights/files/game-images/skills/skill_icon_skchr_bluep_2.png"/>
+</a>
+<a href="/arknights/skill/venom-spray" style="color: #fff;">
+Skill 2: Venom Spray
+</a>
+</div>
+</div>
+<div class="sp-cell">
+<div class="sp-cost">
+SP Cost:
+<div class="effect-description skill-upgrade-tab-1 current-tab">50</div>
+<div class="effect-description skill-upgrade-tab-2">50</div>
+<div class="effect-description skill-upgrade-tab-3">50</div>
+<div class="effect-description skill-upgrade-tab-4">50</div>
+<div class="effect-description skill-upgrade-tab-5">50</div>
+<div class="effect-description skill-upgrade-tab-6">50</div>
+<div class="effect-description skill-upgrade-tab-7">50</div>
+<div class="effect-description skill-upgrade-tab-8">47</div>
+<div class="effect-description skill-upgrade-tab-9">44</div>
+<div class="effect-description skill-upgrade-tab-10">40</div>
+</div>
+<div class="initial-sp">
+Initial SP:
+<div class="effect-description skill-upgrade-tab-1 current-tab">10</div>
+<div class="effect-description skill-upgrade-tab-2">10</div>
+<div class="effect-description skill-upgrade-tab-3">10</div>
+<div class="effect-description skill-upgrade-tab-4">15</div>
+<div class="effect-description skill-upgrade-tab-5">15</div>
+<div class="effect-description skill-upgrade-tab-6">15</div>
+<div class="effect-description skill-upgrade-tab-7">20</div>
+<div class="effect-description skill-upgrade-tab-8">21</div>
+<div class="effect-description skill-upgrade-tab-9">22</div>
+<div class="effect-description skill-upgrade-tab-10">25</div>
+</div>
+</div>
+<div class="skill-effect-parent">
+<div class="sp-charge-type skill-effect-title">
+<div class="effect-title">SP Charge Type</div><div class="effect-description">
+<a href="https://gamepress.gg/arknights/taxonomy/term/501" style="color: #00cfe6;">
+Per Second
+</a>
+</div>
+</div>
+<div class="skill-activation skill-effect-title">
+<div class="effect-title">Skill Activation</div>
+<div class="effect-description">
+<a href="https://gamepress.gg/arknights/taxonomy/term/516" style="color: #00cfe6;">
+Manual Trigger
+</a>
+</div>
+</div>
+<div class="skill-duration skill-effect-title">
+<div class="effect-title">Duration</div>
+<div class="effect-description skill-upgrade-tab-1 current-tab">
+20 Seconds
+ </div>
+<div class="effect-description skill-upgrade-tab-2">
+21 Seconds
+</div>
+<div class="effect-description skill-upgrade-tab-3">
+22 Seconds
+</div>
+<div class="effect-description skill-upgrade-tab-4">
+23 Seconds
+</div>
+<div class="effect-description skill-upgrade-tab-5">
+24 Seconds
+</div>
+<div class="effect-description skill-upgrade-tab-6">
+25 Seconds
+</div>
+<div class="effect-description skill-upgrade-tab-7">
+26 Seconds
+</div>
+<div class="effect-description skill-upgrade-tab-8">
+27 Seconds
+</div>
+<div class="effect-description skill-upgrade-tab-9">
+28 Seconds
+</div>
+<div class="effect-description skill-upgrade-tab-10">
+30 Seconds
+</div>
+</div>
+</div>
+<div class="skill-description">
+<div class="effect-title">Skill Effect</div>
+<div class="effect-description skill-upgrade-tab-1 current-tab">ATK <span class="skill-description-value">+10%</span>, each attack hits <span class="skill-description-value">2</span> additional targets.</div>
+<div class="effect-description skill-upgrade-tab-2">ATK <span class="skill-description-value">+10%</span>, each attack hits <span class="skill-description-value">2</span> additional targets.</div>
+<div class="effect-description skill-upgrade-tab-3">ATK <span class="skill-description-value">+10%</span>, each attack hits <span class="skill-description-value">2</span> additional targets.</div>
+<div class="effect-description skill-upgrade-tab-4">ATK <span class="skill-description-value">+20%</span>, each attack hits <span class="skill-description-value">2</span> additional targets.</div>
+<div class="effect-description skill-upgrade-tab-5">ATK <span class="skill-description-value">+20%</span>, each attack hits <span class="skill-description-value">2</span> additional targets.</div>
+<div class="effect-description skill-upgrade-tab-6">ATK <span class="skill-description-value">+20%</span>, each attack hits <span class="skill-description-value">2</span> additional targets.</div>
+<div class="effect-description skill-upgrade-tab-7">ATK <span class="skill-description-value">+30%</span>, each attack hits <span class="skill-description-value">2</span> additional targets.</div>
+<div class="effect-description skill-upgrade-tab-8">ATK <span class="skill-description-value">+30%</span>, each attack strikes its primary target an additional <span class="skill-description-value">1 </span>time，and also hits up to <span class="skill-description-value">2</span> additional targets.</div>
+<div class="effect-description skill-upgrade-tab-9">ATK <span class="skill-description-value">+40%</span>, each attack strikes its primary target an additional <span class="skill-description-value">1 </span>time，and also hits up to <span class="skill-description-value">2</span> additional targets.</div>
+<div class="effect-description skill-upgrade-tab-10">ATK <span class="skill-description-value">+50%</span>, each attack strikes its primary target an additional <span class="skill-description-value">1 </span>time，and also hits up to <span class="skill-description-value">2</span> additional targets.</div>
+</div>
+</div>
+</div>
+<h2 class="main-title">RIIC Base Skills</h2>
+<div class="building-buff-cell">
+<div class="top-cell">
+<div class="left-cell">
+<div class="buff-title">
+<span class="title-cell"><a href="/arknights/building-buff/toxicology">Toxicology α</a></span>
+<span class="level-cell"><span class="lvl-title">Lvl: 1</span><img src="/arknights/sites/arknights/files/2019-10/0.png"/></span>
+</div>
+<div class="buff-title-cn">(毒理学·α)</div>
+</div>
+<div class="right-cell">
+<div class="room-buff-type-cell">
+<div class="room-type">Room Type:</div>
+<div class="buff-type-cell">
+<img class="room-type-title" src="/arknights/sites/arknights/files/2019-11/workshop.png"/>Workshop
+</div>
+</div>
+<div class="right-cell-building">
+<img src="/arknights/sites/arknights/files/2020-03/bskill_ws_evolve2.png"/>
+</div>
+</div>
+</div>
+<div class="bottom-cell">
+<div class="build-description-cell">
+When this Operator is assigned to the Workshop to process <span class="cc-kw">elite material</span>, the production rate of byproduct increases by <span class="cc-vup">75%</span>
+</div>
+</div>
+</div>
+<div class="building-buff-cell">
+<div class="top-cell">
+<div class="left-cell">
+<div class="buff-title">
+<span class="title-cell"><a href="/arknights/building-buff/toxicology-b">Toxicology β</a></span>
+<span class="level-cell"><span class="lvl-title">Lvl: 1</span><img src="/arknights/sites/arknights/files/2019-10/2.png"/></span>
+</div>
+<div class="buff-title-cn">(毒理学·β)</div>
+</div>
+<div class="right-cell">
+<div class="room-buff-type-cell">
+<div class="room-type">Room Type:</div>
+<div class="buff-type-cell">
+<img class="room-type-title" src="/arknights/sites/arknights/files/2019-11/workshop.png"/>Workshop
+</div>
+</div>
+<div class="right-cell-building">
+<img src="/arknights/sites/arknights/files/2020-03/bskill_ws_evolve3.png"/>
+</div>
+</div>
+</div>
+<div class="bottom-cell">
+<div class="build-description-cell">
+When this Operator is assigned to the Workshop to process <span class="cc-kw">elite material</span>, the production rate of byproduct increases by <span class="cc-vup">80%</span>
+</div>
+</div>
+</div>
+<ul class="operator-tabs-page" id="analysis">
+<li><a class="not-selected" href="#status">Status</a></li>
+<li><a class="selected">Analysis</a></li>
+<li><a class="not-selected" href="#profile">Profile</a></li>
+</ul>
+<h2 class="main-title">Botzu's Quick Evaluation</h2>
+<div class="quick-evaluation">
+<span style="color:green;">+ Trait: Prioritizes attacking air units<br/>
++ Excellent DPS when you max out her S1<br/>
++ Talent: Passive Arts damage can make her viable vs the enemies with 1k+ DEF<br/>
++ Great option for killing groups with S2<br/></span>
+<span style="color:red;">- Very squishy and needs to be placed in protected positions on certain maps</span>
+</div>
+<h2 class="main-title">Operator Overview</h2>
+<div id="operator-overview">
+<p dir="ltr"><em>“Don't worry, my poison is not contagious.”</em></p>
+<p dir="ltr"><br/>
+Blue Poison (BP) is a lovely girl with a terrifying ability. She was recruited by Rhodes Island due to her natural talent in creating toxins. Now she serves as a <strong>Sniper</strong> operator and attacks enemies with poisoned darts. She’s able to deliver <strong>DPS</strong>, <strong>attack multiple targets</strong> and even <strong>deal Arts damage</strong> with her toxins.<br/><br/>
+BP’s talent <strong>Neurotoxin</strong> allows her to poison her targets, causing them to take Arts damage over time. This is especially useful when combined with BP’s Skills, which allow her to hit multiple enemies at once. Her first Skill, <strong>Twinshot - Auto,</strong> deals additional damage and hits 2 targets. Her aforementioned Talent combined with the Skill's extremely low SP Cost makes it a powerful tool for sustained damage. Blue Poison’s second skill is <strong>Venom Spray</strong>, an active Skill that allows her to hit up to 3 enemies at once, enabling even greater multi-target damage potential.<br/><br/>
+BP's ability to hit multiple enemies and deal Arts damage at the DP cost of an ST sniper makes her a great value pick. However, Blue Poison is not without downsides. She isn’t very flexible in terms of her role, as both of her skills have similar uses. And since she has no burst skill, she might have problems when dealing with stronger waves of enemies. Used in the proper situations, however, Blue Poison will prove herself to be a venomous contributor to the team’s overall DPS.</p>
+</div>
+<h2 class="main-title">Elite Promotion Discussion</h2>
+<div id="operator-weaknesses">
+<p>Blue Poison benefits most greatly from specializing in her Skill 1: Twinshot - Auto. For this reason, Blue Poison is a recommended candidate for Elite 2 promotion, due to E2 being a prerequisite for Skill Mastery / Specialization Training to reach Mastery 3. In the next section, one can see a table of Twinshot- Auto's Average Attack Boost. The difference between Mastery 2 and Mastery 3 is extremely apparent and worth the investment.</p>
+</div>
+<h2 class="main-title">Skill Mastery Suggestions</h2>
+<div id="operator-weaknesses">
+<strong>Skill 1: Effective Attack Boost per Level</strong>
+<table><tr><th colspan="4" style="text-align:center;"></th> <th colspan="2" style="text-align:center;">Average Attack Multiplier</th>
+</tr><tr><th style="text-align:center;">Skill Level</th> <th style="text-align:center;">ATK Multiplier</th> <th style="text-align:center;">SP Cost</th> <th style="text-align:center;"># Attacks</th> <th style="text-align:center;">Single-target</th> <th style="text-align:center;">Dual-target</th> </tr><tr><td align="center">Level 1</td> <td align="center">125%</td> <td align="center">4</td> <td align="center">5</td> <td align="center">105%</td> <td align="center">130%</td> </tr><tr><td align="center">Level 2</td> <td align="center">130%</td> <td align="center">4</td> <td align="center">5</td> <td align="center">106%</td> <td align="center">132%</td> </tr><tr><td align="center">Level 3</td> <td align="center">135%</td> <td align="center">4</td> <td align="center">5</td> <td align="center">107%</td> <td align="center">134%</td> </tr><tr><td align="center">Level 4</td> <td align="center">140%</td> <td align="center">3</td> <td align="center">4</td> <td align="center">110%</td> <td align="center">145%</td> </tr><tr><td align="center">Level 5</td> <td align="center">145%</td> <td align="center">3</td> <td align="center">4</td> <td align="center">111%</td> <td align="center">148%</td> </tr><tr><td align="center">Level 6</td> <td align="center">150%</td> <td align="center">3</td> <td align="center">4</td> <td align="center">113%</td> <td align="center">150%</td> </tr><tr><td align="center">Level 7</td> <td align="center">155%</td> <td align="center">3</td> <td align="center">4</td> <td align="center">114%</td> <td align="center">153%</td> </tr><tr><td align="center">Mastery 1</td> <td align="center">170%</td> <td align="center">3</td> <td align="center">4</td> <td align="center">118%</td> <td align="center">160%</td> </tr><tr><td align="center">Mastery 2</td> <td align="center">185%</td> <td align="center">3</td> <td align="center">4</td> <td align="center">121%</td> <td align="center">168%</td> </tr><tr><td align="center">Mastery 3</td> <td align="center">200%</td> <td align="center">2</td> <td align="center">3</td> <td align="center">133%</td> <td align="center">200%</td> </tr></table>
+</div>
+<h2 class="main-title">Skill Upgrade Costs</h2>
+<div class="upgrade-cost-table">
+<table class="skill-material-cost17 table-1">
+<tr>
+<th class="th-1">Level</th>
+<th class="th-2">Requisites</th>
+<th class="th-3">Materials</th>
+</tr>
+<tr>
+<td style="text-align: center">1 ➝ 2</td>
+<td style="text-align: center;">
+<div class="upgrade-elite-cell">
+Lv1
+<img src="/arknights/sites/arknights/files/2019-10/0.png"/>
+</div>
+</td>
+<td>
+<a href="/arknights/item/skill-summary-1">
+<div class="material-cell" data-item="Skill Summary - 1" data-link="/arknights/item/skill-summary-1" style="background: url(/arknights/sites/arknights/files/2019-11/item-2_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SKILL1.png"/>
+<span class="material-quantity">x4</span>
+</div>
+</a>
+</td>
+</tr>
+<tr>
+<td style="text-align: center">2 ➝ 3</td>
+<td style="text-align: center;">
+<div class="upgrade-elite-cell">
+Lv1
+<img src="/arknights/sites/arknights/files/2019-10/0.png"/>
+</div>
+</td>
+<td>
+<a href="/arknights/item/skill-summary-1">
+<div class="material-cell" data-item="Skill Summary - 1" data-link="/arknights/item/skill-summary-1" style="background: url(/arknights/sites/arknights/files/2019-11/item-2_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SKILL1.png"/>
+<span class="material-quantity">x4</span>
+</div>
+</a>
+<a href="/arknights/item/ester">
+<div class="material-cell" data-item="Ester" data-link="/arknights/item/ester" style="background: url(/arknights/sites/arknights/files/2019-11/item-1_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SL_RUSH1.png"/>
+<span class="material-quantity">x7</span>
+</div>
+</a>
+</td>
+</tr>
+<tr>
+<td style="text-align: center">3 ➝ 4</td>
+<td style="text-align: center;">
+<div class="upgrade-elite-cell">
+Lv1
+<img src="/arknights/sites/arknights/files/2019-10/0.png"/>
+</div>
+</td>
+<td>
+<a href="/arknights/item/skill-summary-2">
+<div class="material-cell" data-item="Skill Summary - 2" data-link="/arknights/item/skill-summary-2" style="background: url(/arknights/sites/arknights/files/2019-11/item-3_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SKILL2.png"/>
+<span class="material-quantity">x6</span>
+</div>
+</a>
+<a href="/arknights/item/oriron">
+<div class="material-cell" data-item="Oriron" data-link="/arknights/item/oriron" style="background: url(/arknights/sites/arknights/files/2019-11/item-2_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SL_IRON2.png"/>
+<span class="material-quantity">x3</span>
+</div>
+</a>
+</td>
+</tr>
+<tr>
+<td style="text-align: center">4 ➝ 5</td>
+<td style="text-align: center;">
+<div class="upgrade-elite-cell">
+Lv1
+<img src="/arknights/sites/arknights/files/2019-10/1.png"/>
+</div>
+</td>
+<td>
+<a href="/arknights/item/skill-summary-2">
+<div class="material-cell" data-item="Skill Summary - 2" data-link="/arknights/item/skill-summary-2" style="background: url(/arknights/sites/arknights/files/2019-11/item-3_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SKILL2.png"/>
+<span class="material-quantity">x6</span>
+</div>
+</a>
+<a href="/arknights/item/polyketon">
+<div class="material-cell" data-item="Polyketon" data-link="/arknights/item/polyketon" style="background: url(/arknights/sites/arknights/files/2019-11/item-2_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SL_KETONE2.png"/>
+<span class="material-quantity">x4</span>
+</div>
+</a>
+</td>
+</tr>
+<tr>
+<td style="text-align: center">5 ➝ 6</td>
+<td style="text-align: center;">
+<div class="upgrade-elite-cell">
+Lv1
+<img src="/arknights/sites/arknights/files/2019-10/1.png"/>
+</div>
+</td>
+<td>
+<a href="/arknights/item/skill-summary-2">
+<div class="material-cell" data-item="Skill Summary - 2" data-link="/arknights/item/skill-summary-2" style="background: url(/arknights/sites/arknights/files/2019-11/item-3_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SKILL2.png"/>
+<span class="material-quantity">x6</span>
+</div>
+</a>
+<a href="/arknights/item/sugar-pack">
+<div class="material-cell" data-item="Sugar Pack" data-link="/arknights/item/sugar-pack" style="background: url(/arknights/sites/arknights/files/2019-11/item-3_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SL_STRG3.png"/>
+<span class="material-quantity">x5</span>
+</div>
+</a>
+</td>
+</tr>
+<tr>
+<td style="text-align: center">6 ➝ 7</td>
+<td style="text-align: center;">
+<div class="upgrade-elite-cell">
+Lv1
+<img src="/arknights/sites/arknights/files/2019-10/1.png"/>
+</div>
+</td>
+<td>
+<a href="/arknights/item/skill-summary-3">
+<div class="material-cell" data-item="Skill Summary - 3" data-link="/arknights/item/skill-summary-3" style="background: url(/arknights/sites/arknights/files/2019-11/item-4_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SKILL3.png"/>
+<span class="material-quantity">x6</span>
+</div>
+</a>
+<a href="/arknights/item/polyester-pack">
+<div class="material-cell" data-item="Polyester Pack" data-link="/arknights/item/polyester-pack" style="background: url(/arknights/sites/arknights/files/2019-11/item-3_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SL_RUSH3.png"/>
+<span class="material-quantity">x3</span>
+</div>
+</a>
+<a href="/arknights/item/manganese-ore">
+<div class="material-cell" data-item="Manganese Ore" data-link="/arknights/item/manganese-ore" style="background: url(/arknights/sites/arknights/files/2019-11/item-3_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SL_MANGANESE1.png"/>
+<span class="material-quantity">x3</span>
+</div>
+</a>
+</td>
+</tr>
+</table>
+<table class="skill-material-cost810 table-2">
+<tr>
+<th class="th-1">Skill</th>
+<th class="th-2">Level</th>
+<th class="th-3">Requisites</th>
+<th class="th-4">Materials</th>
+</tr>
+<tr>
+<td rowspan="3" style="text-align: center;">1</td>
+<td style="text-align: center;">
+<img src="/arknights/sites/arknights/files/2019-10/m-1_0.png" style="vertical-align: middle; width: 40px;"/>
+</td>
+<td>
+<div class="requisites-cell">
+<span class="level-cell">Lv1</span>
+<span class="time-cell"><i aria-hidden="true" class="fa fa-clock-o"></i>8h</span>
+<span class="level-image-cell"><img src="/arknights/sites/arknights/files/2019-10/2.png" style="vertical-align: middle; width: 25px;"/></span>
+</div>
+</td>
+<td>
+<a href="/arknights/item/skill-summary-3">
+<div class="material-cell" data-item="Skill Summary - 3" data-link="/arknights/item/skill-summary-3" style="background: url(/arknights/sites/arknights/files/2019-11/item-4_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SKILL3.png"/>
+<span class="material-quantity">x5</span>
+</div>
+</a>
+<a href="/arknights/item/oriron-block">
+<div class="material-cell" data-item="Oriron Block" data-link="/arknights/item/oriron-block" style="background: url(/arknights/sites/arknights/files/2019-11/item-4_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SL_IRON4.png"/>
+<span class="material-quantity">x3</span>
+</div>
+</a>
+<a href="/arknights/item/sugar-pack">
+<div class="material-cell" data-item="Sugar Pack" data-link="/arknights/item/sugar-pack" style="background: url(/arknights/sites/arknights/files/2019-11/item-3_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SL_STRG3.png"/>
+<span class="material-quantity">x1</span>
+</div>
+</a>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+<img src="/arknights/sites/arknights/files/2019-10/m-2_0.png" style="vertical-align: middle; width: 40px;"/>
+</td>
+<td>
+<div class="requisites-cell">
+<span class="level-cell">Lv1</span>
+<span class="time-cell"><i aria-hidden="true" class="fa fa-clock-o"></i>16h</span>
+<span class="level-image-cell"><img src="/arknights/sites/arknights/files/2019-10/2.png" style="vertical-align: middle; width: 25px;"/></span>
+</div>
+</td>
+<td>
+<a href="/arknights/item/skill-summary-3">
+<div class="material-cell" data-item="Skill Summary - 3" data-link="/arknights/item/skill-summary-3" style="background: url(/arknights/sites/arknights/files/2019-11/item-4_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SKILL3.png"/>
+<span class="material-quantity">x6</span>
+</div>
+</a>
+<a href="/arknights/item/optimized-device">
+<div class="material-cell" data-item="Optimized Device" data-link="/arknights/item/optimized-device" style="background: url(/arknights/sites/arknights/files/2019-11/item-4_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SL_BOSS4.png"/>
+<span class="material-quantity">x2</span>
+</div>
+</a>
+<a href="/arknights/item/oriron-block">
+<div class="material-cell" data-item="Oriron Block" data-link="/arknights/item/oriron-block" style="background: url(/arknights/sites/arknights/files/2019-11/item-4_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SL_IRON4.png"/>
+<span class="material-quantity">x5</span>
+</div>
+</a>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+<img src="/arknights/sites/arknights/files/2019-10/m-3_0.png" style="vertical-align: middle; width: 40px;"/>
+</td>
+<td>
+<div class="requisites-cell">
+<span class="level-cell">Lv1</span>
+<span class="time-cell"><i aria-hidden="true" class="fa fa-clock-o"></i>24h</span>
+<span class="level-image-cell"><img src="/arknights/sites/arknights/files/2019-10/2.png" style="vertical-align: middle; width: 25px;"/></span>
+</div>
+</td>
+<td>
+<a href="/arknights/item/skill-summary-3">
+<div class="material-cell" data-item="Skill Summary - 3" data-link="/arknights/item/skill-summary-3" style="background: url(/arknights/sites/arknights/files/2019-11/item-4_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SKILL3.png"/>
+<span class="material-quantity">x10</span>
+</div>
+</a>
+<a href="/arknights/item/d32-steel">
+<div class="material-cell" data-item="D32 Steel" data-link="/arknights/item/d32-steel" style="background: url(/arknights/sites/arknights/files/2019-11/item-5_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SL_DS.png"/>
+<span class="material-quantity">x4</span>
+</div>
+</a>
+<a href="/arknights/item/white-horse-kohl">
+<div class="material-cell" data-item="White Horse Kohl" data-link="/arknights/item/white-horse-kohl" style="background: url(/arknights/sites/arknights/files/2019-11/item-4_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SL_ALCOHOL2.png"/>
+<span class="material-quantity">x5</span>
+</div>
+</a>
+</td>
+</tr>
+<tr>
+<td rowspan="3" style="text-align: center;">2</td>
+<td style="text-align: center;">
+<img src="/arknights/sites/arknights/files/2019-10/m-1_0.png" style="vertical-align: middle; width: 40px;"/>
+</td>
+<td>
+<div class="requisites-cell">
+<span class="level-cell">Lv1</span>
+<span class="time-cell"><i aria-hidden="true" class="fa fa-clock-o"></i>8h</span>
+<span class="level-image-cell"><img src="/arknights/sites/arknights/files/2019-10/2.png" style="vertical-align: middle; width: 25px;"/></span>
+</div>
+</td>
+<td>
+<a href="/arknights/item/skill-summary-3">
+<div class="material-cell" data-item="Skill Summary - 3" data-link="/arknights/item/skill-summary-3" style="background: url(/arknights/sites/arknights/files/2019-11/item-4_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SKILL3.png"/>
+<span class="material-quantity">x5</span>
+</div>
+</a>
+<a href="/arknights/item/keton-colloid">
+<div class="material-cell" data-item="Keton Colloid" data-link="/arknights/item/keton-colloid" style="background: url(/arknights/sites/arknights/files/2019-11/item-4_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SL_KETONE4.png"/>
+<span class="material-quantity">x3</span>
+</div>
+</a>
+<a href="/arknights/item/polyester-pack">
+<div class="material-cell" data-item="Polyester Pack" data-link="/arknights/item/polyester-pack" style="background: url(/arknights/sites/arknights/files/2019-11/item-3_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SL_RUSH3.png"/>
+<span class="material-quantity">x3</span>
+</div>
+</a>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+<img src="/arknights/sites/arknights/files/2019-10/m-2_0.png" style="vertical-align: middle; width: 40px;"/>
+</td>
+<td>
+<div class="requisites-cell">
+<span class="level-cell">Lv1</span>
+<span class="time-cell"><i aria-hidden="true" class="fa fa-clock-o"></i>16h</span>
+<span class="level-image-cell"><img src="/arknights/sites/arknights/files/2019-10/2.png" style="vertical-align: middle; width: 25px;"/></span>
+</div>
+</td>
+<td>
+<a href="/arknights/item/skill-summary-3">
+<div class="material-cell" data-item="Skill Summary - 3" data-link="/arknights/item/skill-summary-3" style="background: url(/arknights/sites/arknights/files/2019-11/item-4_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SKILL3.png"/>
+<span class="material-quantity">x6</span>
+</div>
+</a>
+<a href="/arknights/item/white-horse-kohl">
+<div class="material-cell" data-item="White Horse Kohl" data-link="/arknights/item/white-horse-kohl" style="background: url(/arknights/sites/arknights/files/2019-11/item-4_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SL_ALCOHOL2.png"/>
+<span class="material-quantity">x3</span>
+</div>
+</a>
+<a href="/arknights/item/keton-colloid">
+<div class="material-cell" data-item="Keton Colloid" data-link="/arknights/item/keton-colloid" style="background: url(/arknights/sites/arknights/files/2019-11/item-4_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SL_KETONE4.png"/>
+<span class="material-quantity">x5</span>
+</div>
+</a>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">
+<img src="/arknights/sites/arknights/files/2019-10/m-3_0.png" style="vertical-align: middle; width: 40px;"/>
+</td>
+<td>
+<div class="requisites-cell">
+<span class="level-cell">Lv1</span>
+<span class="time-cell"><i aria-hidden="true" class="fa fa-clock-o"></i>24h</span>
+<span class="level-image-cell"><img src="/arknights/sites/arknights/files/2019-10/2.png" style="vertical-align: middle; width: 25px;"/></span>
+</div>
+</td>
+<td>
+<a href="/arknights/item/skill-summary-3">
+<div class="material-cell" data-item="Skill Summary - 3" data-link="/arknights/item/skill-summary-3" style="background: url(/arknights/sites/arknights/files/2019-11/item-4_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SKILL3.png"/>
+<span class="material-quantity">x10</span>
+</div>
+</a>
+<a href="/arknights/item/polymerization-preparation">
+<div class="material-cell" data-item="Polymerization Preparation" data-link="/arknights/item/polymerization-preparation" style="background: url(/arknights/sites/arknights/files/2019-11/item-5_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SL_PP.png"/>
+<span class="material-quantity">x4</span>
+</div>
+</a>
+<a href="/arknights/item/rma70-24">
+<div class="material-cell" data-item="RMA70-24" data-link="/arknights/item/rma70-24" style="background: url(/arknights/sites/arknights/files/2019-11/item-4_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SL_RMA7024.png"/>
+<span class="material-quantity">x4</span>
+</div>
+</a>
+</td>
+</tr>
+</table>
+<h3 class="sub-title">Overall Skill Cost</h3>
+<table>
+<tr>
+<td class="over-all-cost" id="overall-skill-cost" style="padding: 7px 4px;">
+</td>
+</tr>
+</table>
+</div>
+<div class="desktop-ad">
+<center>
+<div id="div-ad-Gamepress_Desktop_728x90_Extra_3">
+<script>
+if(detectWidth() > 980) { googletag.cmd.push(function() { googletag.display('div-ad-Gamepress_Desktop_728x90_Extra_3'); }); }
+</script>
+</div>
+</center>
+</div>
+<div class="mobile-ad">
+<center>
+<div id="div-ad-Arknights_Mobile_300x250_Extra_1">
+<script>
+if(detectWidth() <= 980) { googletag.cmd.push(function() { googletag.display('div-ad-Arknights_Mobile_300x250_Extra_1'); }); }
+</script>
+</div>
+</center>
+</div>
+<h2 class="main-title">Elite Upgrade Costs</h2>
+<div class="upgrade-cost-table">
+<table class="table-3">
+<tr>
+<th class="th-1">Level</th>
+<th class="th-2">Materials</th>
+</tr>
+<tr>
+<td>
+<div class="elite-level-cell"><img src="/sites/arknights/files/2019-10/0.png" style="vertical-align: middle; width: 30px;"/> ➝ <img src="/sites/arknights/files/2019-10/1.png" style="vertical-align: middle; width: 30px;"/></div>
+</td>
+<td class="e1-material-cost">
+<a href="/arknights/item/lmd">
+<div class="material-cell" data-item="LMD" data-link="/arknights/item/lmd" style="background: url(/arknights/sites/arknights/files/2019-11/item-4_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/GOLD.png"/>
+<span class="material-quantity">x20000</span>
+</div>
+</a>
+<a href="/arknights/item/sniper-chip">
+<div class="material-cell" data-item="Sniper Chip" data-link="/arknights/item/sniper-chip" style="background: url(/arknights/sites/arknights/files/2019-11/item-3_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_ASC_SNP1.png"/>
+<span class="material-quantity">x4</span>
+</div>
+</a>
+<a href="/arknights/item/polyester">
+<div class="material-cell" data-item="Polyester" data-link="/arknights/item/polyester" style="background: url(/arknights/sites/arknights/files/2019-11/item-2_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SL_RUSH2.png"/>
+<span class="material-quantity">x5</span>
+</div>
+</a>
+<a href="/arknights/item/orirock-cube">
+<div class="material-cell" data-item="Orirock Cube" data-link="/arknights/item/orirock-cube" style="background: url(/arknights/sites/arknights/files/2019-11/item-2_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SL_G2.png"/>
+<span class="material-quantity">x4</span>
+</div>
+</a>
+</td>
+</tr>
+<tr>
+<td>
+<div class="elite-level-cell"><img src="/sites/arknights/files/2019-10/1.png" style="vertical-align: middle; width: 30px;"/> ➝ <img src="/sites/arknights/files/2019-10/2.png" style="vertical-align: middle; width: 30px;"/></div>
+</td>
+<td class="e2-material-cost">
+<a href="/arknights/item/lmd">
+<div class="material-cell" data-item="LMD" data-link="/arknights/item/lmd" style="background: url(/arknights/sites/arknights/files/2019-11/item-4_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/GOLD.png"/>
+<span class="material-quantity">x120000</span>
+</div>
+</a>
+<a href="/arknights/item/sniper-dualchip">
+<div class="material-cell" data-item="Sniper Dualchip" data-link="/arknights/item/sniper-dualchip" style="background: url(/arknights/sites/arknights/files/2019-11/item-5_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_ASC_SNP3.png"/>
+<span class="material-quantity">x3</span>
+</div>
+</a>
+<a href="/arknights/item/manganese-trihydrate">
+<div class="material-cell" data-item="Manganese Trihydrate" data-link="/arknights/item/manganese-trihydrate" style="background: url(/arknights/sites/arknights/files/2019-11/item-4_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SL_MANGANESE2.png"/>
+<span class="material-quantity">x8</span>
+</div>
+</a>
+<a href="/arknights/item/integrated-device">
+<div class="material-cell" data-item="Integrated Device" data-link="/arknights/item/integrated-device" style="background: url(/arknights/sites/arknights/files/2019-11/item-3_0.png)">
+<img class="item-image" src="/arknights/sites/arknights/files/game-images/items/MTL_SL_BOSS3.png"/>
+<span class="material-quantity">x8</span>
+</div>
+</a>
+</td>
+</tr>
+</table>
+<h3 class="sub-title">Overall Elite Cost</h3>
+<table>
+<tr>
+<td class="over-all-cost" id="overall-elite-cost" style="padding: 7px 4px;"></td>
+</tr>
+</table>
+</div>
+<h2 class="main-title">Total Cost</h2>
+<div class="upgrade-cost-table">
+<table>
+<tr>
+<td class="over-all-cost" id="overall-cost" style="padding: 7px 4px;"></td>
+</tr>
+</table>
+</div>
+<div class="desktop-ad">
+<center>
+<div id="div-ad-Gamepress_Desktop_728x90_Extra_4">
+<script>
+if(detectWidth() > 980) { googletag.cmd.push(function() { googletag.display('div-ad-Gamepress_Desktop_728x90_Extra_4'); }); }
+</script>
+</div>
+</center>
+</div>
+<div class="mobile-ad">
+<center>
+<div id="div-ad-Arknights_Mobile_300x250_Extra_2">
+<script>
+if(detectWidth() <= 980) { googletag.cmd.push(function() { googletag.display('div-ad-Arknights_Mobile_300x250_Extra_2'); }); }
+</script>
+</div>
+</center>
+</div>
+<ul class="operator-tabs-page" id="profile">
+<li><a class="not-selected" href="#status">Status</a></li>
+<li><a class="not-selected" href="#analysis">Analysis</a></li>
+<li><a class="selected">Profile</a></li>
+</ul>
+<h2 class="main-title">Operator Profile</h2>
+<div class="profile-cell">
+<div class="profile-info-table upgrade-cost-table">
+<table>
+<tr>
+<th><img src="https://gamepress.gg/arknights/sites/arknights/files/2019-11/artist.png" style="height: 18px !important; vertical-align: middle; margin-right: 5px;"/>Artist</th>
+<td style="text-align: center;"><a href="/arknights/taxonomy/term/3841" hreflang="en">LLC</a></td>
+</tr>
+<tr>
+<th><img src="https://gamepress.gg/arknights/sites/arknights/files/2019-11/CV.png" style="height: 18px !important; vertical-align: middle; margin-right: 5px;"/>CV</th>
+<td style="text-align: center;"><a href="/arknights/taxonomy/term/4271" hreflang="en">Atsumi Tanezaki</a></td>
+</tr>
+</table>
+<table>
+<tr>
+<th>Gender</th>
+<td style="text-align: center"><a href="/arknights/taxonomy/term/601" hreflang="en">Female</a></td>
+</tr>
+<tr>
+<th>Place of Birth</th>
+<td style="text-align: center">Unknown</td>
+</tr>
+<tr>
+<th>Birthday</th>
+<td style="text-align: center">Jan. 18</td>
+</tr>
+<tr>
+<th>Race</th>
+<td style="text-align: center"><a href="/arknights/taxonomy/term/4476" hreflang="en">Anura</a></td>
+</tr>
+<tr>
+<th>Height</th>
+<td style="text-align: center">157cm</td>
+</tr>
+<tr>
+<th>Combat Experience</th>
+<td style="text-align: center">
+None </td>
+</tr>
+</table>
+<table>
+<tr>
+<th>Physical Strength</th>
+<td style="text-align: center">Normal</td>
+</tr>
+<tr>
+<th>Mobility</th>
+<td style="text-align: center">Standard</td>
+</tr>
+<tr>
+<th>Physiological Endurance</th>
+<td style="text-align: center">Normal</td>
+</tr>
+<tr>
+<th>Tactical Planning</th>
+<td style="text-align: center">Normal</td>
+</tr>
+<tr>
+<th>Combat Skill</th>
+<td style="text-align: center">Excellent</td>
+</tr>
+<tr>
+<th>Originium Adaptability</th>
+<td style="text-align: center">Normal</td>
+</tr>
+</table>
+</div>
+<div class="profile-entries-cell">
+<h3 class="sub-title">Profile</h3>
+<em></em>
+<div class="profile-description">Blue Poison's real identity remains unknown and her background a mystery. She is highly skilled at neutralizing targets using toxins. <br/>Now a sniper with Rhodes Island, she regularly contributes her expertise in toxicology research.</div>
+<h3 class="sub-title">Clinical Analysis</h3>
+<em>Increase Trust to 25.</em>
+<div class="profile-description" style="margin-top: 10px;">Imaging test for this operator showed clear outline of internal organs without unusual dark spots. No abnormal traces of Originium particles present in her system. No signs of infection, confirming her as uninfected. <br/><br/>[Cell-Originium Assimilation] 0% <br/>Operator Blue Poison shows no symptoms of Oripathy. <br/><br/>[Blood Originium-Crystal Density] 0.1u/L <br/>Operator Blue Poison rarely comes into contact with Originium.</div>
+<h3 class="sub-title">Archive File 1</h3>
+<em>Increase Trust to 50.</em>
+<div class="profile-description" style="margin-top: 10px;">Although her personality is quite lovely, Blue Poison's abilities are in fact as terrifying as the rumors say, which has undoubtedly become a hindrance for her when communicating with other operators. But when she finishes her combat work and quietly undertakes the medical task of curing poison, the sincere, peaceful girl behind her deadly abilities shows through. <br/>The small crossbow she uses has proven to be a powerful long-range weapon, and the tips coated with her toxic serum make a hit even more lethal. Still, Blue Poison never lets an enemy die in agony, deeming that far too cruel.</div>
+<h3 class="sub-title">Archive File 2</h3>
+<em>Increase Trust to 100.</em>
+<div class="profile-description" style="margin-top: 10px;">According to Blue Poison's personal account, she realized the truth behind "poison" when she was little, i.e., any creature, living or not, has weaknesses that can be magnified and exploited to a fatal end. <br/>The toxin produced by her venomous abilities is monitored and sampled daily by Dr. Kal'tsit personally. Blue Poison feels better about Rhodes Island's diversity, and the group's open-mindedness to her abilities such that she she can use them to her full potential. <br/>She is more defensive on the issue of describing herself as "toxic." The question was if would she accept her poisonous nature if the other operators accepted her and no longer kept their distance? Blue Poison didn't give a straight answer, politely deflecting the question as usual. <br/>Does she still hate her powers? Or has she accepted them while still feeling about her relationship with other people? It's something only the Doctor can figure out with Blue Poison.</div>
+<h3 class="sub-title">Archive File 3</h3>
+<em>Increase Trust to 150.</em>
+<div class="profile-description" style="margin-top: 10px;">What is certain is that Blue Poison's toxic reputation has grown due to her unique combat techniques, which will no doubt impact her daily life. <br/>As for her so-called "poison" power, the Medic Operators have never revealed any of their test results publicly. But it has been determined that normal physical contact with her will not contract the poison. In fact, her "poison power" manifests mostly in her skill with and knowledge of poison. <br/>In her spare time, Blue Poison is interested in much more mundane variety things, such as baking. Operator Gummy, currently assigned to kitchen duty in Logistics, has claimed that Blue Poison's desserts are so good, they could "convert someone who hates sweets!" Another unnamed Operator who has also tasted her treats echoed the sentiment that Blue Poison is proficient enough to start a bakery--if she made better choices in visual presentation. <br/>Aside from dessert making, Blue Poison has a keen sense of and passion for fashion, having already made several suggestions about her costume to Logistics and Trade.</div>
+<h3 class="sub-title">Archive File 4</h3>
+<em>Increase Trust to 200.</em>
+<div class="profile-description" style="margin-top: 10px;">According to a report leaked from certain secret sources, Blue Poison has been spotted in several battles against gigantic creatures. There are no images or any concrete evidence to corroborate these accounts, however. <br/>Blue Poison has indicated no signs of involvement in such battles, nor has she mentioned them. <br/>[CLASSIFIED] <br/>According to eyewitness accounts, Operator Blue Poison greeted Operator Specter by name when she saw her for the first time. But since Blue Poison is polite to every operator, it was dismissed as insignificant. All similar reports must be scrutinized to avoid unwanted speculations about specific operators.</div>
+</div>
+</div>
+<h2 class="main-title">Voice Lines</h2>
+<table class="voice-lines-table">
+<tr>
+<th>Appointed as Assistant</th>
+<td>Hey, Doctor. You're glowing today. To see you so well... that's all I could ever hope for.</td>
+</tr>
+<tr>
+<th>Talk 1</th>
+<td>I prepared an antidote that could nullify the effects of any common poison. I'd like you to take one dose before every battle. Is that okay with you?</td>
+</tr>
+<tr>
+<th>Talk 2</th>
+<td>Actually, the toxin in my body is an ingredient for some high-quality medicine... that's why Dr. Kal'tsit needs me at her lab a lot.</td>
+</tr>
+<tr>
+<th>Talk 3</th>
+<td>Hm, why do you keep staring at me? Oh, because my eye color is so rare? Is that a compliment, Doctor?</td>
+</tr>
+<tr>
+<th>Talk after Promotion 1</th>
+<td>I'm the one the enemies fear the most. After all, anyone would much rather kill me before I could torture them to death with my poison, right? What really worries me is if my allies might think the same and consider killing me too...</td>
+</tr>
+<tr>
+<th>Talk after Promotion 2</th>
+<td>Why am I staring at this cake, you ask? Actually... I baked it for everyone, but no one wanted it... Would you like to try it, Doctor?</td>
+</tr>
+<tr>
+<th>Talk after Trust Increase 1</th>
+<td>Doctor, you're always wearing the same outfit. How about I choose some new clothes for you? I pride myself on having pretty good taste! Oh... it's a uniform? So you can't change it? Okay...</td>
+</tr>
+<tr>
+<th>Talk after Trust Increase 2</th>
+<td>I'm "toxic"... so people prefer to stay away from me. But now I have you, Doctor. I'm really happy! Really!</td>
+</tr>
+<tr>
+<th>Talk after Trust Increase 3</th>
+<td>I'm not really that different from everyone else. I may be "toxic," but nothing bad will happen if you touch me. If you could prove this to everyone by touching me yourself, then... maybe everyone will be nicer to me? Doctor, can you... touch my hand in front of everyone else?</td>
+</tr>
+<tr>
+<th>Idle</th>
+<td>Doctor? Oh, are you sleeping? Gotta find a blanket, don't want Doctor to catch a cold...</td>
+</tr>
+<tr>
+<th>Onboard</th>
+<td>Nice to meet you, I'm Blue Poison. I'm sure Dr. Kal'tsit must have told you about me. As for how you'd like to use my powers, it's up to you to decide.</td>
+</tr>
+<tr>
+<th>Watching Battle Record</th>
+<td>I think I hear the sound of poisonous liquid boiling. How very exciting.</td>
+</tr>
+<tr>
+<th>Promotion 1</th>
+<td>Thank you so much... I'm so glad that I get to contribute in all these battles. It's like a dream come true.</td>
+</tr>
+<tr>
+<th>Promotion 2</th>
+<td>Instead of holding back, trying to hide my "toxic" identity... it's much better to accept myself for what I am and try to change my fate myself. This may be just an insignificant thing... but you're the one who helped me understand that... so, thank you, thank you so much.</td>
+</tr>
+<tr>
+<th>Added to Squad</th>
+<td>Great. I'm good at assisting in attacks.</td>
+</tr>
+<tr>
+<th>Appointed as Squad Leader</th>
+<td>I'd be much better off as support staff. Or else the poisonous liquid inside me might harm you, Doctor...</td>
+</tr>
+<tr>
+<th>Depart</th>
+<td>Everyone, there's no need to stand so far from me...</td>
+</tr>
+<tr>
+<th>Begin Operation</th>
+<td>I prepared a "gift" for y'all. Like it?</td>
+</tr>
+<tr>
+<th>Selecting Operator 1</th>
+<td>Awaiting your orders.</td>
+</tr>
+<tr>
+<th>Selecting Operator 2</th>
+<td>Please don't be scared of me.</td>
+</tr>
+<tr>
+<th>Deployment 1</th>
+<td>Don't worry, my poison is not contagious.</td>
+</tr>
+<tr>
+<th>Deployment 2</th>
+<td>My poison is ready.</td>
+</tr>
+<tr>
+<th>In Battle 1</th>
+<td>My toxins will gradually burn your veins away...</td>
+</tr>
+<tr>
+<th>In Battle 2</th>
+<td>Did you see an illusion?</td>
+</tr>
+<tr>
+<th>In Battle 3</th>
+<td>Honey to me, poison to you.</td>
+</tr>
+<tr>
+<th>In Battle 4</th>
+<td>Poison kiss.</td>
+</tr>
+<tr>
+<th>4-star Result</th>
+<td>Wiping out conspiracies and evil guys with "poison"... doesn't that seem ironic to you?</td>
+</tr>
+<tr>
+<th>3-star Result</th>
+<td>I've got a way to melt away all these remains in an instant. Want me to show you?</td>
+</tr>
+<tr>
+<th>Sub 3-star Result</th>
+<td>Good, finished before my clothes got dirty.</td>
+</tr>
+<tr>
+<th>Operation Failure</th>
+<td>How laughable. Felt like I killed myself with my own poison...</td>
+</tr>
+<tr>
+<th>Assigned to Facility</th>
+<td>Resting when rest is due is helpful for focusing on your work.</td>
+</tr>
+<tr>
+<th>Tap</th>
+<td>Huh?</td>
+</tr>
+<tr>
+<th>Trust Tap</th>
+<td>D-did you just touch me? C-can you do that again? Please?</td>
+</tr>
+<tr>
+<th>Title</th>
+<td>Arknights.</td>
+</tr>
+<tr>
+<th>Greeting</th>
+<td>Hello, Doctor.</td>
+</tr>
+</table>
+</div>
+<script>
+	function toggleUpgrades(id){
+		var upgrades = document.getElementById(id);
+		if(upgrades.style.display == "none"){
+		  upgrades.style.display = "";
+		}
+		else{
+		  upgrades.style.display = "none";
+		}
+	  }
+	var statData = [];
+	var myStats = {
+		"ne": {
+			"arts": "5",
+			"cost": "11",
+			"Base": {
+				"HP": "536",
+				"ATK": "178",
+				"DEF": "45",
+				"block": "1"
+			},
+			"Max": {
+				"HP": "767",
+				"ATK": "297",
+				"DEF": "76",
+				"block": "1"
+			}
+		},
+		"e1": {
+			"arts": "5",
+			"cost": "13",
+			"Base": {
+				"HP": "767",
+				"ATK": "297",
+				"DEF": "76",
+				"block": "1"
+			},
+			"Max": {
+				"HP": "984",
+				"ATK": "438",
+				"DEF": "109",
+				"block": "1"
+			}
+		},
+		"e2": {
+			"arts": "5",
+			"cost": "13",
+			"Base": {
+				"HP": "984",
+				"ATK": "438",
+				"DEF": "109",
+				"block": "1"
+			},
+			"Max": {
+				"HP": "1230",
+				"ATK": "535",
+				"DEF": "130",
+				"block": "1"
+			}
+		}
+	}
+	$(document).ready(function(){
+		$.getJSON("/arknights/stat-rankings?_format=json", function(data){
+			statData = data;
+			setStatBars();
+		});
+
+		$(".rank-button").click(function(){
+			$(".rank-button.current-button").removeClass("current-button");
+			$(this).addClass("current-button");
+			setStatBars();
+			setCost();
+			setArts();
+		});
+
+		$(".bm-button").click(function(){
+			$(".bm-button.current-button").removeClass("current-button");
+			$(this).addClass("current-button");
+			setStatBars();
+		})
+	});
+
+	function setCost(){
+		var currentRank = $(".rank-button.current-button").data("rank");
+		var cost = myStats[currentRank]["cost"];
+		$("#operator-cost").html(cost)
+	}
+
+	function setArts(){
+		var currentRank = $(".rank-button.current-button").data("rank");
+		var arts = myStats[currentRank]["arts"];
+		$("#arts-resist").html(arts)
+	}
+
+	function showProfile(ev){
+		$("#profile-modal-container").show();
+		ev.stopPropagation();
+	}
+
+	function closeProfile(){
+		$("#profile-modal-container").hide();
+	}
+
+	$("#profile-modal").click(function(e){
+		e.stopPropagation();
+	})
+	$('body').click(function (e) {
+		$("#profile-modal-container").hide();
+	});
+
+	function setStatBars(){
+		var currentRank = $(".rank-button.current-button").data("rank");
+		var currentBase = $(".bm-button.current-button").data("base");
+
+		var currentStats = myStats[currentRank][currentBase];
+
+		$("#stat-hp").html(currentStats.HP);
+		$("#stat-atk").html(currentStats.ATK);
+		$("#stat-def").html(currentStats.DEF);
+		$("#operator-block").html(currentStats.block);
+
+		// for ranks and bars, we always use the MAX stats for that rank
+		// and hope there aren't any growth curves, or that no one cares how a unit ranks at lvl 1 lol
+		var maxStats = myStats[currentRank]["Max"];
+		setStatRank(maxStats.HP, "hp", currentRank);
+		setStatRank(maxStats.ATK, "atk", currentRank);
+		setStatRank(maxStats.DEF, "def", currentRank);
+	}
+  function setStatRank(value, stat_name, rank){
+    var statText = document.getElementById(stat_name + "-rank");
+    var stat_field = "max_" + stat_name + rank;
+    var stat = value;
+    var sortedArray = sortJSONByField(statData, stat_field);
+    var data = getInfo(sortedArray, stat_field)
+    var count = data[0];
+    var highest = data[1];
+    var rank = getRank(count, stat);
+    statText.innerHTML = "Rank: " + rank + " / " + count.length;
+    var width = parseInt(stat) / parseInt(highest);
+    width = width * 100;
+    document.getElementById(stat_name + "-bar").style.width = width + "%";
+  }
+	
+//count the number of unique values in the array, as well as the highest value
+function getInfo(array, field){
+    var uniques = [];
+    var highest = -1;
+    for(var i = 0; i < array.length; i++){
+      var currVal = array[i][field];
+      var currValInt = parseInt(currVal);
+      if(currValInt > highest){
+        highest = currValInt;
+      }
+      if(currVal){
+        uniques.push(currVal);
+      }
+    }
+    return [uniques, highest];
+  }
+
+function sortJSONByField(json, field){
+  return json.concat().sort(function(a, b){
+  	if(!(b[field])){
+  		return -1;
+  	}
+  	if(!(a[field])){
+  		return 1;
+  	}
+    return parseInt(b[field]) - parseInt(a[field]);
+  });
+}
+
+function getRank(array, stat){
+    var rank = -1;
+    var count = 0;
+    for(var i = 0; i < array.length; i++){
+      if(array[i] == stat){
+        rank = i+1;
+        return rank;
+      }
+    }
+  }
+
+  //aggregating skill/elite upgrade costs
+  var skillCost = {};
+  var eliteCost = {};
+  var totalCost = {};
+  $(document).ready(function(){
+  	$(".skill-material-cost17 .material-cell").each(function(){
+  		handleMaterial(this, skillCost, 1);
+  		handleMaterial(this, totalCost, 1);
+  	});
+  	$(".skill-material-cost810 .material-cell").each(function(){
+  		handleMaterial(this, skillCost, 1);
+  		handleMaterial(this, totalCost, 1);
+  	});
+
+  	var skillMatContainer = document.getElementById("overall-skill-cost");
+  	populateMats(skillCost, skillMatContainer);
+
+  	$(".e1-material-cost .material-cell").each(function(){
+  		handleMaterial(this, eliteCost, 1);
+  		handleMaterial(this, totalCost, 1);
+  	});
+  	$(".e2-material-cost .material-cell").each(function(){
+  		handleMaterial(this, eliteCost, 1);
+  		handleMaterial(this, totalCost, 1);
+  	});
+  	
+	var eliteContainer = document.getElementById("overall-elite-cost");
+	populateMats(eliteCost, eliteContainer);
+
+	var totalContainer = document.getElementById("overall-cost");
+	populateMats(totalCost, totalContainer);
+  });
+
+
+function populateMats(matsArr, container){
+	for(key in matsArr){
+  		var curr = matsArr[key];
+  		var item_link = document.createElement("a");
+  		item_link.href = curr.link;
+  		container.appendChild(item_link);
+
+  		var item = document.createElement("div");
+  		item_link.appendChild(item);
+  		item.className = "material-cell";
+  		item.style.background = curr.bg;
+
+  		var image = curr.image.cloneNode(true);
+  		item.appendChild(image);
+
+  		var itemSpanParent = document.createElement("span");
+  		itemSpanParent.className = "item-qty";
+  		itemSpanParent.innerHTML = "x"
+
+  		var itemSpan = document.createElement("span");
+  		itemSpan.innerHTML = curr.amt;
+  		itemSpanParent.appendChild(itemSpan);
+
+  		item.appendChild(itemSpanParent);
+  	}
+}
+function handleMaterial(item, array, mult){
+	var amount = $(item).find(".material-quantity").html();
+	amount = amount.replace('x', '');
+	amount = parseInt(amount);
+	if(!isNaN(amount)){
+		amount *= mult;
+		var item_name = $(item).data("item");
+		var bg = $(item).css("background");
+		var image = $(item).find(".item-image")[0];
+		var item_link = $(item).data("link");
+			if(array[item_name]){
+				array[item_name].amt = array[item_name].amt + amount;
+			}
+		else{
+			array[item_name] = {
+				"amt": amount,
+				"bg": bg,
+				"image": image,
+				"link": item_link
+			}
+		}
+	}
+}
+
+
+
+
+</script>
+</article>
+</div>
+</div>
+</div>
+<div class="latest-content-main">
+<h2 class="top-content-brand">Latest Content</h2>
+<div class="latest-content-container">
+<p></p>
+<div class="views-element-container"><div class="field--name-field-featured-content-list view view-latest-featured-content view-id-latest_featured_content view-display-id-block_1 js-view-dom-id-551b0faf581d024a2766abecf5f910d9e6e7236d7aa6eaa9faaaea6af1341b18">
+<div class="view-header">
+<h3>Community Links</h3>
+<p>Want to talk about Arknights? Need help completing any Combat Operations? Consider joining our <a href="https://discord.gg/yq8D9GX">Discord Server</a>!<br/>
+Also consider following our content creator Emma on the <a href="https://discord.gg/6YpDpqy">GP Emma Server</a>.</p>
+<h3>Latest Featured Content</h3>
+</div>
+<div class="view-content">
+<div class="views-row"><div class="views-field views-field-view-node"><span class="field-content"><a href="/arknights/news/arknights-cn-new-operator-announcement-absinthe-skills-talent-art-gifs">
+<div class="field__item">
+<div class="featured-content-list-main">
+<div class="featured-list-image">
+<img alt="" class="image-style-featured-content-list" height="52" src="/arknights/sites/arknights/files/styles/featured_content_list/public/2020-06/ArtAbsintheE2Feature.png?itok=BJEUnlFb" typeof="Image" width="100"/>
+</div>
+<div class="featured-list-link">
+Arknights CN: New Operator Announcement - Absinthe: Skills, Talent, Art, GIFs.
+</div>
+</div>
+</div>
+</a></span></div></div>
+<div class="views-row"><div class="views-field views-field-view-node"><span class="field-content"><a href="/arknights/event-combat-operation-guide/arknights-guide-cb-ex8-challenge-and-normal-mode">
+<div class="field__item">
+<div class="featured-content-list-main">
+<div class="featured-list-image">
+<img alt="" class="image-style-featured-content-list" height="53" src="/arknights/sites/arknights/files/styles/featured_content_list/public/2020-06/ArknightsBannerCNCodeOfBrawlCBEX8CM.png?itok=mJxTg_JA" typeof="Image" width="100"/>
+</div>
+<div class="featured-list-link">
+Arknights: Guide to CB-EX8 Challenge and Normal Mode
+</div>
+</div>
+</div>
+</a></span></div></div>
+<div class="views-row"><div class="views-field views-field-view-node"><span class="field-content"><a href="/arknights/news/arknights-siege-skin-announced-contingency-contract-will-soon-be-upon-us">
+<div class="field__item">
+<div class="featured-content-list-main">
+<div class="featured-list-image">
+<img alt="" class="image-style-featured-content-list" height="53" src="/arknights/sites/arknights/files/styles/featured_content_list/public/2020-06/ArknightsSiegeSkinFullFeature.png?itok=4yReUAsm" typeof="Image" width="100"/>
+</div>
+<div class="featured-list-link">
+Arknights: Siege Skin Announced! The Contingency Contract Will Soon Be Upon Us!
+</div>
+</div>
+</div>
+</a></span></div></div>
+<div class="views-row"><div class="views-field views-field-view-node"><span class="field-content"><a href="/arknights/event-combat-operation-guide/arknights-guide-cb-ex7-challenge-mission-and-normal-mode">
+<div class="field__item">
+<div class="featured-content-list-main">
+<div class="featured-list-image">
+<img alt="" class="image-style-featured-content-list" height="53" src="/arknights/sites/arknights/files/styles/featured_content_list/public/2020-06/ArknightsBannerCNCodeOfBrawlCBEX7CM.png?itok=SXTmdIDI" typeof="Image" width="100"/>
+</div>
+<div class="featured-list-link">
+Arknights: Guide to CB-EX7 Challenge, Mission, and Normal Mode
+</div>
+</div>
+</div>
+</a></span></div></div>
+<div class="views-row"><div class="views-field views-field-view-node"><span class="field-content"><a href="/arknights/event-combat-operation-guide/arknights-guide-cb-ex6-challenge-and-normal-mode">
+<div class="field__item">
+<div class="featured-content-list-main">
+<div class="featured-list-image">
+<img alt="" class="image-style-featured-content-list" height="53" src="/arknights/sites/arknights/files/styles/featured_content_list/public/2020-06/ArknightsBannerCNCodeOfBrawlCBEX6CM_0.png?itok=yKBp4i1n" typeof="Image" width="100"/>
+</div>
+<div class="featured-list-link">
+Arknights: Guide to CB-EX6 Challenge And Normal Mode
+</div>
+</div>
+</div>
+</a></span></div></div>
+<div class="views-row"><div class="views-field views-field-view-node"><span class="field-content"><a href="/arknights/news/arknights-cn-new-beehunter-skin-art-and-gifs">
+<div class="field__item">
+<div class="featured-content-list-main">
+<div class="featured-list-image">
+<img alt="" class="image-style-featured-content-list" height="53" src="/arknights/sites/arknights/files/styles/featured_content_list/public/2020-06/ArtBeehunterSkinKitchenFullFeature.png?itok=nx9Dt4Cx" typeof="Image" width="100"/>
+</div>
+<div class="featured-list-link">
+Arknights CN: New Beehunter Skin Art and GIFs
+</div>
+</div>
+</div>
+</a></span></div></div>
+<div class="views-row"><div class="views-field views-field-view-node"><span class="field-content"><a href="/arknights/event-combat-operation-guide/arknights-guide-cb-ex5-challenge-mode">
+<div class="field__item">
+<div class="featured-content-list-main">
+<div class="featured-list-image">
+<img alt="" class="image-style-featured-content-list" height="53" src="/arknights/sites/arknights/files/styles/featured_content_list/public/2020-06/ArknightsBannerCNCodeOfBrawlCBEX5CM.png?itok=H1Zf5PRh" typeof="Image" width="100"/>
+</div>
+<div class="featured-list-link">
+Arknights: Guide to CB-EX5 Challenge Mode
+</div>
+</div>
+</div>
+</a></span></div></div>
+<div class="views-row"><div class="views-field views-field-view-node"><span class="field-content"><a href="/arknights/event-combat-operation-guide/arknights-guide-cb-ex5-normal-mode-event-mission">
+<div class="field__item">
+<div class="featured-content-list-main">
+<div class="featured-list-image">
+<img alt="" class="image-style-featured-content-list" height="53" src="/arknights/sites/arknights/files/styles/featured_content_list/public/2020-06/ArknightsBannerCNCodeOfBrawlCBEX5NormalMission.png?itok=Jhl0NZRk" typeof="Image" width="100"/>
+</div>
+<div class="featured-list-link">
+Arknights: Guide to CB-EX5 Normal Mode For Event Mission
+</div>
+</div>
+</div>
+</a></span></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="hide-desktop">
+<div class="bottom-ads-mobile-1">
+<div id="div-ad-Arknights_Mobile_300x250_Extra_3">
+<script>
+if(detectWidth() <= 980) { googletag.cmd.push(function() { googletag.display('div-ad-Arknights_Mobile_300x250_Extra_3'); }); }
+</script>
+</div></div>
+</div>
+</section>
+<aside class="sidebar" id="sidebar-second" role="complementary">
+<div id="mc_embed_signup">
+<h2>Newsletter</h2>
+<div class="newsletter-explanation">Email updates for <b>Arknights</b>. Sign-up for other newsletters <a href="http://eepurl.com/guXugL" target="_blank">here</a>.</div>
+<form action="https://gamepress.us3.list-manage.com/subscribe/post?u=9f1343c259a097bdc976ae488&amp;id=eb29e6cef7" class="validate" id="mc-embedded-subscribe-form" method="post" name="mc-embedded-subscribe-form" novalidate="" target="_blank">
+<div id="mc_embed_signup_scroll">
+<div class="mc-field-group">
+<input class="required email" id="mce-EMAIL" name="EMAIL" placeholder="Email Address" type="email" value=""/>
+</div>
+<div class="mc-field-group input-group" style="display:none">
+<strong>Games </strong>
+<ul>
+<li><input checked="" id="mce-group[23193]-23193-9" name="group[23193][512]" type="checkbox" value="512"/><label for="mce-group[23193]-23193-9">Arknights</label></li>
+</ul>
+</div>
+<div class="clear" id="mce-responses">
+<div class="response" id="mce-error-response" style="display:none"></div>
+<div class="response" id="mce-success-response" style="display:none"></div>
+</div>
+<div aria-hidden="true" style="position: absolute; left: -5000px;"><input name="b_9f1343c259a097bdc976ae488_eb29e6cef7" tabindex="-1" type="text" value=""/></div>
+<div class="clear newsletter-sub-button"><input class="featured-button" id="mc-embedded-subscribe" name="subscribe" type="submit" value="Subscribe"/></div>
+</div>
+</form>
+</div>
+<div class="sidebar-1-ad-desktop">
+<div id="div-ad-Arknights_Desktop_RR_A" style="margin:10px 0px;">
+<script>
+if(detectWidth() > 980) { googletag.cmd.push(function() { googletag.display('div-ad-Arknights_Desktop_RR_A'); }); }
+</script>
+</div>
+</div>
+<div class="block block-gamepress-ga-counter block-gamepress-popular-pages-block" id="block-popularpagesshort">
+<div>
+<div class="popular-pages-block popular-block" style="display:block;">
+<h2>Popular Pages Today</h2>
+<ul>
+<li>
+<a href="/arknights/tier-list/arknights-operator-tier-list">
+<span class="pages-ranking-number ranking-number-1">1</span>
+<span class="pages-ranking-image">
+<img src="/arknights/sites/arknights/files/styles/80x40/public/2020-03/Feature%20Image%20Tier%20List.png?itok=Ou2M0qH6"/>
+</span>
+<span class="pages-ranking-title">
+Arknights Operator Tier List
+</span>
+</a>
+</li>
+<li>
+<a href="/arknights/tools/arknights-recruitment-tag-filter">
+<span class="pages-ranking-number ranking-number-2">2</span>
+<span class="pages-ranking-image">
+<img src="/arknights/sites/arknights/files/styles/80x40/public/2020-02/Arknights%20Tag%20Filter%20Banner_0.png?itok=t0HFI-7d"/>
+</span>
+<span class="pages-ranking-title">
+Arknights Recruitment Tag Filter
+</span>
+</a>
+</li>
+<li>
+<a href="/arknights/event-banner-hub/contingency-contract-event-page">
+<span class="pages-ranking-number ranking-number-3">3</span>
+<span class="pages-ranking-image">
+<img src="/arknights/sites/arknights/files/styles/80x40/public/2020-04/ArknightsBannerCNContingencyContractEventPageFeature.png?itok=NMUrA-ZH"/>
+</span>
+<span class="pages-ranking-title">
+Contingency Contract - Event Page
+</span>
+</a>
+</li>
+<li>
+<a href="/arknights/news/arknights-cn-new-operator-announcement-absinthe-skills-talent-art-gifs">
+<span class="pages-ranking-number ranking-number-4">4</span>
+<span class="pages-ranking-image">
+<img src="/arknights/sites/arknights/files/styles/80x40/public/2020-06/ArtAbsintheE2Feature.png?itok=ea3JJZ1e"/>
+</span>
+<span class="pages-ranking-title">
+Arknights CN: New Operator Announcement - Abs...
+</span>
+</a>
+</li>
+<li>
+<a href="/arknights/tools/summon-simulator">
+<span class="pages-ranking-number ranking-number-5">5</span>
+<span class="pages-ranking-image">
+<img src="/arknights/sites/arknights/files/styles/80x40/public/2019-11/SummonSim.png?itok=52L1SfHV"/>
+</span>
+<span class="pages-ranking-title">
+Summon Simulator
+</span>
+</a>
+</li>
+<li>
+<a href="/arknights/database/banner-list-gacha">
+<span class="pages-ranking-number ranking-number-6">6</span>
+<span class="pages-ranking-image">
+<img src="/arknights/sites/arknights/files/styles/80x40/public/2019-11/BannerList_4.png?itok=j7qXZKon"/>
+</span>
+<span class="pages-ranking-title">
+Banner List (Gacha)
+</span>
+</a>
+</li>
+<li>
+<a href="/arknights/database/interactive-operator-list">
+<span class="pages-ranking-number ranking-number-7">7</span>
+<span class="pages-ranking-image">
+<img src="/arknights/sites/arknights/files/styles/80x40/public/2020-03/Feature%20Image%20Operator%20List.jpg?itok=H8_Gci8U"/>
+</span>
+<span class="pages-ranking-title">
+Interactive Operator List
+</span>
+</a>
+</li>
+<li>
+<a href="/arknights/news/arknights-siege-skin-announced-contingency-contract-will-soon-be-upon-us">
+<span class="pages-ranking-number ranking-number-8">8</span>
+<span class="pages-ranking-image">
+<img src="/arknights/sites/arknights/files/styles/80x40/public/2020-06/ArknightsSiegeSkinFullFeature.png?itok=eZYho4ad"/>
+</span>
+<span class="pages-ranking-title">
+Arknights: Siege Skin Announced! The Conting...
+</span>
+</a>
+</li>
+<li>
+<a href="/arknights/core-gameplay/arknights-cn-contingency-contract-cc-explained">
+<span class="pages-ranking-number ranking-number-9">9</span>
+<span class="pages-ranking-image">
+<img src="/arknights/sites/arknights/files/styles/80x40/public/2020-05/ArknightsBannerCNContingencyContractExplained.png?itok=RburqyzU"/>
+</span>
+<span class="pages-ranking-title">
+Arknights CN: Contingency Contract (CC) Expla...
+</span>
+</a>
+</li>
+<li>
+<a href="/arknights/event-banner-guide-subpage-miscellaneous/contingency-contract-exchange-store">
+<span class="pages-ranking-number ranking-number-10">10</span>
+<span class="pages-ranking-image">
+<img src="/arknights/sites/arknights/files/styles/80x40/public/2020-05/ArknightsBannerCNContingencyContractExchangeStoreFeature.png?itok=7Cni1npF"/>
+</span>
+<span class="pages-ranking-title">
+Contingency Contract - Exchange Store
+</span>
+</a>
+</li>
+</ul>
+<div class="view-footer">
+<a href="https://gamepress.gg/arknights/popular-all">See All</a>
+</div>
+</div>
+</div>
+</div>
+<div class="hide-desktop">
+<div class="bottom-ads-mobile-2">
+<div id="div-ad-Arknights_Mobile_300x250_Extra_4">
+<script>
+if(detectWidth() <= 980) { googletag.cmd.push(function() { googletag.display('div-ad-Arknights_Mobile_300x250_Extra_4'); }); }
+</script>
+</div>
+</div>
+</div>
+<div class="sidebar-2-ad-desktop">
+<div id="div-ad-Arknights_Desktop_RR_B" style="margin-bottom:10px;">
+<script>
+if(detectWidth() > 980) { googletag.cmd.push(function() { googletag.display('div-ad-Arknights_Desktop_RR_B'); }); }
+</script>
+</div></div>
+<div class="block block-gamepress-ga-counter block-gamepress-popular-items-block" id="block-popularitemsshort">
+<div>
+<div class="popular-items-block popular-block">
+<h2>Popular Operators Today</h2>
+<ul>
+<li>
+<a href="/arknights/operator/mostima">
+<span class="pages-ranking-number ranking-number-1">1</span>
+<span class="pages-ranking-image">
+<img src="/arknights/sites/arknights/files/styles/thumbnail/public/2019-11/char_213_mostma_1_1.png?itok=cLx9HGjN"/>
+</span>
+<span class="pages-ranking-title">
+Mostima
+</span>
+</a>
+</li>
+<li>
+<a href="/arknights/operator/exusiai">
+<span class="pages-ranking-number ranking-number-2">2</span>
+<span class="pages-ranking-image">
+<img src="/arknights/sites/arknights/files/styles/thumbnail/public/game-images/avatars/char_103_angel_1.png?itok=KIgDHQtO"/>
+</span>
+<span class="pages-ranking-title">
+Exusiai
+</span>
+</a>
+</li>
+<li>
+<a href="/arknights/operator/blaze">
+<span class="pages-ranking-number ranking-number-3">3</span>
+<span class="pages-ranking-image">
+<img src="/arknights/sites/arknights/files/styles/thumbnail/public/2019-12/char_017_huang_1.png?itok=IyBxH_5p"/>
+</span>
+<span class="pages-ranking-title">
+Blaze
+</span>
+</a>
+</li>
+<li>
+<a href="/arknights/operator/nian">
+<span class="pages-ranking-number ranking-number-4">4</span>
+<span class="pages-ranking-image">
+<img src="/arknights/sites/arknights/files/styles/thumbnail/public/2020-01/char_2014_nian_1.png?itok=CObk4TaT"/>
+</span>
+<span class="pages-ranking-title">
+Nian
+</span>
+</a>
+</li>
+<li>
+<a href="/arknights/operator/siege">
+<span class="pages-ranking-number ranking-number-5">5</span>
+<span class="pages-ranking-image">
+<img src="/arknights/sites/arknights/files/styles/thumbnail/public/game-images/avatars/char_112_siege_1.png?itok=ZoFn0ZVS"/>
+</span>
+<span class="pages-ranking-title">
+Siege
+</span>
+</a>
+</li>
+<li>
+<a href="/arknights/operator/silverash">
+<span class="pages-ranking-number ranking-number-6">6</span>
+<span class="pages-ranking-image">
+<img src="/arknights/sites/arknights/files/styles/thumbnail/public/game-images/avatars/char_172_svrash_1.png?itok=Y5olBAaF"/>
+</span>
+<span class="pages-ranking-title">
+SilverAsh
+</span>
+</a>
+</li>
+<li>
+<a href="/arknights/operator/lappland">
+<span class="pages-ranking-number ranking-number-7">7</span>
+<span class="pages-ranking-image">
+<img src="/arknights/sites/arknights/files/styles/thumbnail/public/game-images/avatars/char_140_whitew_1.png?itok=SbP8g2Nn"/>
+</span>
+<span class="pages-ranking-title">
+Lappland
+</span>
+</a>
+</li>
+<li>
+<a href="/arknights/operator/chen">
+<span class="pages-ranking-number ranking-number-8">8</span>
+<span class="pages-ranking-image">
+<img src="/arknights/sites/arknights/files/styles/thumbnail/public/2019-10/char_010_chen_1.png?itok=ZPrXLizV"/>
+</span>
+<span class="pages-ranking-title">
+Ch'en
+</span>
+</a>
+</li>
+<li>
+<a href="/arknights/operator/angelina">
+<span class="pages-ranking-number ranking-number-9">9</span>
+<span class="pages-ranking-image">
+<img src="/arknights/sites/arknights/files/styles/thumbnail/public/game-images/avatars/char_291_aglina_1.png?itok=sllwXpUb"/>
+</span>
+<span class="pages-ranking-title">
+Angelina
+</span>
+</a>
+</li>
+<li>
+<a href="/arknights/operator/hoshiguma">
+<span class="pages-ranking-number ranking-number-10">10</span>
+<span class="pages-ranking-image">
+<img src="/arknights/sites/arknights/files/styles/thumbnail/public/game-images/avatars/char_136_hsguma_1.png?itok=q7BpO4ZI"/>
+</span>
+<span class="pages-ranking-title">
+Hoshiguma
+</span>
+</a>
+</li>
+</ul>
+<div class="view-footer">
+<a href="https://gamepress.gg/arknights/popular-operators-all">See All</a>
+</div>
+</div>
+</div>
+</div>
+<div class="sidebar-3-ad-desktop">
+<div id="div-ad-Arknights_Desktop_RR_C">
+<script>
+if(detectWidth() > 980) { googletag.cmd.push(function() { googletag.display('div-ad-Arknights_Desktop_RR_C'); }); }
+</script>
+</div></div>
+<div class="hide-desktop">
+<div class="block block-block-content block-block-content081f8477-8b6e-4476-9f53-76dc42fdca87" id="block-latestposts">
+<h2>Latest Posts</h2>
+<div class="field field--name-field-rss-feed field--type-rss-feed-field field--label-hidden field__item"><div class="discourse-feed-posts">
+<div class="d-feed-date"><em>06/07/2020 - 18:22</em></div>
+<div class="d-feed-title"><strong><a href="https://community.gamepress.gg/t/ummm-20-more-tries-i-guess/77520">Ummm, 20 more tries I guess</a></strong></div>
+<div class="d-feed-description">
+Screenshot_20200607-195556(1)1280×720 704 KB
+Anybody else struggling vs Splinter?
+…</div>
+</div><div class="discourse-feed-posts">
+<div class="d-feed-date"><em>06/07/2020 - 18:12</em></div>
+<div class="d-feed-title"><strong><a href="https://community.gamepress.gg/t/our-4-star-top-10/77517">Our 4 Star Top 10</a></strong></div>
+<div class="d-feed-description">
+Here’s how the polls ended up.
+image1212×646 98.3 KB
+Jessica’s a big surprise,…</div>
+</div><div class="discourse-feed-posts">
+<div class="d-feed-date"><em>06/07/2020 - 05:13</em></div>
+<div class="d-feed-title"><strong><a href="https://community.gamepress.gg/t/the-artknights-aka-the-arknights-fanart-thread/77463">The Artknights AKA the arknights fanart thread</a></strong></div>
+<div class="d-feed-description">
+artist: u/Chierru
+…</div>
+</div><div class="discourse-feed-posts">
+<div class="d-feed-date"><em>06/07/2020 - 04:19</em></div>
+<div class="d-feed-title"><strong><a href="https://community.gamepress.gg/t/event-reruns/77459">Event Reruns?</a></strong></div>
+<div class="d-feed-description">
+Do events in this game get reruns? I got into the game a little over a week and a half…</div>
+</div><div class="discourse-feed-posts">
+<div class="d-feed-date"><em>06/06/2020 - 16:25</em></div>
+<div class="d-feed-title"><strong><a href="https://community.gamepress.gg/t/rat-king-arigato-saria-support/77387">Rat King Arigato Saria(Support)</a></strong></div>
+<div class="d-feed-description">
+Thanks for my friends who borrowed me a “Saria” E2 Lv&gt;20. The “rat king” would be…</div>
+</div></div>
+<div class="field field--name-field-read-more field--type-link field--label-hidden field__item"><a class="button" href="https://community.gamepress.gg/c/arknights">Read More</a></div>
+</div>
+</div>
+</aside>
+</main>
+<span class="gp-tier-modal">
+<div class="modal" id="gp-tier-modal">
+<div class="modal-content-gp-tier" id="modal-cont-gp-tier">
+<span class="remove" onclick="closeModalGP()"><i aria-hidden="true" class="fa fa-times-circle"></i></span>
+<div id="unit-expl-gp"></div>
+</div>
+</div>
+</span>
+<script>
+  var gpLoaded = false;
+    $(document).ready(function() {
+          bindButtons();
+      });
+
+    function bindButtons(){
+      var showButtons = document.getElementsByClassName("show-expl");
+          for(var i = 0; i < showButtons.length; i++){
+            showButtons[i].onclick = showModalGP;
+          }
+    }
+
+    function showModalGP(e){
+      document.getElementById("site-header").style.zIndex = "0";
+      var modal = document.getElementById('gp-tier-modal');
+      if(!modal){
+        return;
+      }
+      var content = $(e.target).data('content');
+      var title = $(e.target).data('title');
+      var titleID = title.replace(":", "");
+      var explDiv = document.getElementById(titleID + "-expl-container");
+      var text = decodeHtml(explDiv.innerHTML);
+      title = "<div class='expl-title'>" + title + "<\/div>"
+      var modal2 = document.getElementById("unit-expl-gp");
+      modal2.innerHTML = title + text;
+      modal.style.display = "block";
+      gpLoaded = false;
+    }
+
+    function closeModalGP(){
+      var modal = document.getElementById('gp-tier-modal');
+      if(!modal){
+        return;
+      }
+      modal.style.display = "none";
+      gpLoaded = true;
+      document.getElementById("site-header").style.zIndex = "";
+    }
+    $('body').click(function (e) {
+        if(typeof(isDBL) == 'undefined'){
+          var id = e.target.id;
+        var parents = document.getElementById("modal-cont-gp-tier");
+        var modal = document.getElementById("gp-tier-modal");
+        if(!modal){
+          return;
+        }
+        if(modal.style.display == "block" && gpLoaded && !(parents.contains(e.target))){
+          modal.style.display = "none";
+          document.getElementById("site-header").style.zIndex = "";
+          gpLoaded = false;
+        }
+        else{
+          gpLoaded = true;
+        }
+      }
+      function decodeHtml(html) {
+        var txt = document.createElement("textarea");
+        txt.innerHTML = html;
+        return txt.value;
+    }
+
+  });
+</script>
+<footer id="site-footer">
+<div class="outer-wrapper">
+<section class="footer-top">
+<div id="div-ad-Arknights_Desktop_Leaderboard_BTF">
+<script>
+if(detectWidth() > 980) { googletag.cmd.push(function() { googletag.display('div-ad-Arknights_Desktop_Leaderboard_BTF'); }); }
+</script>
+</div>
+</section>
+<section class="footer-bottom">
+<a class="footer-logo" href="https://gamepress.gg" target="_blank"><img src="https://gamepress.gg/GamePressNewLogo.png"/></a>
+<div class="footer-links">
+<ul>
+<li><a href="https://gamepress.gg/disclaimer" target="_blank">Disclaimer</a></li>
+<li><a href="https://gamepress.gg/privacy-policy" target="_blank">Privacy Policy</a></li>
+<li><a href="https://gamepress.gg/terms-of-use" target="_blank">Terms of Use</a></li>
+</ul>
+</div>
+<div class="footer-dots">
+<i aria-hidden="true" class="fa fa-circle"></i>
+<i aria-hidden="true" class="fa fa-circle"></i>
+<i aria-hidden="true" class="fa fa-circle"></i>
+</div>
+<div class="footer-copyright">
+<p>Copyright (C) GamePress All Rights Reserved.</p>
+</div>
+<div class="footer-copyright">
+<p></p>
+</div>
+</section>
+</div>
+</footer>
+</div>
+</div>
+<script data-drupal-selector="drupal-settings-json" type="application/json">{"path":{"baseUrl":"\/arknights\/","scriptPath":null,"pathPrefix":"","currentPath":"node\/1191","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"en"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"ajaxPageState":{"libraries":"classy\/base,classy\/messages,core\/drupal.collapse,core\/html5shiv,core\/normalize,gamepressbase\/global-scripts,gamepressbase\/global-styling,google_analytics\/google_analytics,main\/global-scripts,main\/global-styling,main\/js-header,node\/drupal.node,poll\/drupal.poll-links,search_api_autocomplete\/search_api_autocomplete,system\/base,views\/views.module","theme":"gamepressbase","theme_token":null},"ajaxTrustedUrl":{"\/arknights\/search":true},"google_analytics":{"trackOutbound":true,"trackMailto":true,"trackDownload":true,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip","trackColorbox":true},"search_api_autocomplete":{"site_search":{"auto_submit":true}},"user":{"uid":0,"permissionsHash":"8f488557baa2bebe2dfb65d9134bc6d975b190326b092eab940331db1b93b0a5"}}</script>
+<script src="/arknights/core/assets/vendor/jquery/jquery.min.js?v=3.4.1"></script>
+<script src="/arknights/core/assets/vendor/jquery-once/jquery.once.min.js?v=2.2.0"></script>
+<script src="/arknights/core/misc/drupalSettingsLoader.js?v=8.8.4"></script>
+<script src="/arknights/core/misc/drupal.js?v=8.8.4"></script>
+<script src="/arknights/core/misc/drupal.init.js?v=8.8.4"></script>
+<script src="/arknights/core/assets/vendor/jquery.ui/ui/data-min.js?v=1.12.1"></script>
+<script src="/arknights/core/assets/vendor/jquery.ui/ui/disable-selection-min.js?v=1.12.1"></script>
+<script src="/arknights/core/assets/vendor/jquery.ui/ui/form-min.js?v=1.12.1"></script>
+<script src="/arknights/core/assets/vendor/jquery.ui/ui/labels-min.js?v=1.12.1"></script>
+<script src="/arknights/core/assets/vendor/jquery.ui/ui/jquery-1-7-min.js?v=1.12.1"></script>
+<script src="/arknights/core/assets/vendor/jquery.ui/ui/scroll-parent-min.js?v=1.12.1"></script>
+<script src="/arknights/core/assets/vendor/jquery.ui/ui/tabbable-min.js?v=1.12.1"></script>
+<script src="/arknights/core/assets/vendor/jquery.ui/ui/unique-id-min.js?v=1.12.1"></script>
+<script src="/arknights/core/assets/vendor/jquery.ui/ui/version-min.js?v=1.12.1"></script>
+<script src="/arknights/core/assets/vendor/jquery.ui/ui/escape-selector-min.js?v=1.12.1"></script>
+<script src="/arknights/core/assets/vendor/jquery.ui/ui/focusable-min.js?v=1.12.1"></script>
+<script src="/arknights/core/assets/vendor/jquery.ui/ui/ie-min.js?v=1.12.1"></script>
+<script src="/arknights/core/assets/vendor/jquery.ui/ui/keycode-min.js?v=1.12.1"></script>
+<script src="/arknights/core/assets/vendor/jquery.ui/ui/plugin-min.js?v=1.12.1"></script>
+<script src="/arknights/core/assets/vendor/jquery.ui/ui/safe-active-element-min.js?v=1.12.1"></script>
+<script src="/arknights/core/assets/vendor/jquery.ui/ui/safe-blur-min.js?v=1.12.1"></script>
+<script src="/arknights/core/assets/vendor/jquery.ui/ui/widget-min.js?v=1.12.1"></script>
+<script src="/arknights/core/misc/autocomplete.js?v=androidfix"></script>
+<script src="/arknights/modules/contrib/google_analytics/js/google_analytics.js?v=8.8.4"></script>
+<script src="/arknights/themes/main/js/jquery.easy-autocomplete.js?v=8.8.4"></script>
+<script src="/arknights/themes/main/js/jquery.tablesorter.min.js?v=8.8.4"></script>
+<script src="/arknights/themes/main/js/tipso.min.js?v=8.8.4"></script>
+<script src="/arknights/themes/main/js/list.min.js?v=8.8.4"></script>
+<script src="/arknights/themes/main/js/illbeback.min.js?v=8.8.4"></script>
+<script src="/arknights/themes/main/js/jquery.easyPaginate.js?v=8.8.4"></script>
+<script src="/arknights/themes/main/js/slick.min.js?v=8.8.4"></script>
+<script src="/arknights/themes/main/js/jquery.sticky-kit.min.js?v=8.8.4"></script>
+<script src="/arknights/themes/main/js/scripts.js?v=8.8.4"></script>
+<script src="/arknights/sites/arknights/themes/gamepressbase/js/scripts.js?v=8.8.4"></script>
+<script src="/arknights/core/misc/debounce.js?v=8.8.4"></script>
+<script src="/arknights/core/assets/vendor/jquery.cookie/jquery.cookie.min.js?v=1.4.1"></script>
+<script src="/arknights/core/misc/form.js?v=8.8.4"></script>
+<script src="/arknights/core/misc/entity-form.js?v=8.8.4"></script>
+<script src="/arknights/core/modules/node/node.js?v=8.8.4"></script>
+<script src="/arknights/core/misc/details-aria.js?v=8.8.4"></script>
+<script src="/arknights/core/misc/collapse.js?v=8.8.4"></script>
+<script src="/arknights/core/misc/progress.js?v=8.8.4"></script>
+<script src="/arknights/core/misc/ajax.js?v=8.8.4"></script>
+<script src="/arknights/core/themes/stable/js/ajax.js?v=8.8.4"></script>
+<script src="/arknights/core/assets/vendor/jquery.ui/ui/position-min.js?v=1.12.1"></script>
+<script src="/arknights/core/assets/vendor/jquery.ui/ui/widgets/menu-min.js?v=1.12.1"></script>
+<script src="/arknights/core/assets/vendor/jquery.ui/ui/widgets/autocomplete-min.js?v=1.12.1"></script>
+<script src="/arknights/modules/contrib/search_api_autocomplete/js/search_api_autocomplete.js?qbm87w"></script>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"48befe3114","applicationID":"56773492","transactionName":"MQdVN0FSWRVSAhIKWghNdgBHWlgIHBEHBFA5AVYAW1Y=","queueTime":0,"applicationTime":27,"atts":"HUBWQQlIShs=","errorBeacon":"bam.nr-data.net","agent":""}</script></body>
+</html>
+>

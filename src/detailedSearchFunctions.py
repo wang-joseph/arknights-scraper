@@ -1,6 +1,7 @@
 import re, json, sys, requests
 from bs4 import Tag
 
+from scraperFunctions import scrapeWebsite
 from inputReader import readLineFromFile
 
 # created 01/07/2020
@@ -85,13 +86,17 @@ def findBaseSkills(soup, imagesDict):
 
   return messages
 
-def findStats(soup, operator): #TODO: 
-  #Load in the json file
+def findStats(soup, operator):
+  # Load in the json file
   statsUrl = readLineFromFile("./info/url.txt") + "/stat-rankings?_format=json"
-  
-  statsInfo = requests.get(statsUrl)
+  statsInfo = scrapeWebsite(statsUrl)
+
   # with open("debug.json", 'r') as f: # debugging
   #   statsInfo = json.load(f)
+
+  # Just to check and make sure the website isn't down
+  if statsInfo == None:
+    return ["\n\nOperator Stats\nThe stats JSON appears to be down! Try again later."]
 
   messages = []
   messages.append("\n\nOperator Stats\n")
@@ -224,7 +229,7 @@ def findSkills(soup):
 
             prevBrkText.append(sibling.text.strip())
           else:
-            prevBrkText.append(sibling)
+            prevBrkText.append(str(sibling))
         prevBrkText.reverse()
 
         descriptionText += "".join(prevBrkText) + "\n"
@@ -241,7 +246,7 @@ def findSkills(soup):
 
               nextBrkText += sibling.text.strip()
             else:
-              nextBrkText += sibling
+              nextBrkText += str(sibling)
 
           descriptionText += nextBrkText + "\n"
 

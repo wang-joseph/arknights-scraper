@@ -19,7 +19,7 @@ See requirements.txt for the versions of each library.
 
 ## To-Do
 
-- [x] ~~Add basic operator information~~ Now available in [release v1.0](putreleasehere)
+- [x] ~~Add basic operator information~~
   - [x] ~~Add basic information~~
   - [x] ~~Add support for talents~~
   - [x] ~~Add support for skills~~

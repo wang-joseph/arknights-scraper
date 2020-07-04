@@ -33,7 +33,3 @@ See requirements.txt for the versions of each library.
 - [ ] Add stage functionality?
 - [ ] Add item descriptions?
 - [ ] Add idk other functionality when needed
-
-## Bugs
-
-- Searching "Ethan" - result will be missing a space in the description

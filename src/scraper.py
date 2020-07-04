@@ -5,13 +5,14 @@ from halo import Halo # extremely important
 from bs4 import BeautifulSoup
 
 from operatorClasses.Operator import Operator
-from detailedSearchFunctions import findTalents, findBaseSkills, createStatsJSON, parseStats, findSkills
+from detailedSearchFunctions import (
+  findTalents, findBaseSkills, createStatsJSON, parseStats, findSiblingsOfBreakpoint, findSkills)
 from inputReader import readLinesIntoDict, readLineFromFile
 from scraperFunctions import scrapeForOperator
 
 # created 06/06/2020
 # last edited: 03/07/2020
-# version: 1.5.0
+# version: 1.5.1
 # author: Joseph Wang (EmeraldEntities)
 
 ### FUNCTIONS ########################
@@ -53,18 +54,16 @@ def parseOperatorData(src, args):
 
   descText = (["No proper description."] 
               if (len(desc) < 3) 
-              else ["".join(desc[item].text).strip() + "\n" for item in range(3)])
+              else ["".join(findSiblingsOfBreakpoint(desc[item])).strip() + '\n' for item in range(3)])
   
   formattedName = args.operator.replace("-", " ").title()
   # Since the JSON I use to find stats may have another name for an operator, I have to 
-  # convert any name to a good one
+  # convert any name to a proper one
   properName = (formattedName
                 if formattedName not in jsonReplacementNames.keys()
                 else jsonReplacementNames[formattedName])
 
-  stats = createStatsJSON(soup, properName)
-
-  operator = Operator(properName, rarity, professionText, stats, descText, tags)
+  operator = Operator(properName, rarity, professionText, descText, tags)
   # Any optional messages/properties are stored in operator.properties for convenience
   # and also to make sure that printing properties doesn't take 50 lines of code.
   # Also, we can reuse the properties this way as it is stored in a compact location.
@@ -72,15 +71,21 @@ def parseOperatorData(src, args):
   # Checking and calling the appropriate functions for optional flags
   # Taking advantage of python's functional programming paradigms to adhere to DRY principles
   #TODO: is this even good practice??? I'm trying to adhere to DRY principles but this makes me start to sweat
+
+  # Also note: we don't actually guarantee each opoerator will have every property for timing sake.
+  # We just make sure that the operator object has what it needs
   conditionals = [
-    ['skills'     , args.skills, findSkills,     [soup]]           ,
-    ['talent'     , args.talent, findTalents   , [soup, imagesDict]],
-    ['base skills', args.base  , findBaseSkills, [soup, imagesDict]],
+    ['skills'     , args.skills, findSkills     , [soup]]            ,
+    ['talent'     , args.talent, findTalents    , [soup, imagesDict]],
+    ['base skills', args.base  , findBaseSkills , [soup, imagesDict]],
   ]
 
   for prop, flag, findInfoFunction, arguments in conditionals:
     if flag or args.all:
       operator.setProperty(prop, findInfoFunction(*arguments))
+
+  if args.info or args.all:
+    operator.setStats(createStatsJSON(soup, properName))
 
   return operator
 
@@ -102,7 +107,9 @@ def main():
 
     # Print out the results
     allProperties = [operator.getProperty(prop) for prop in operator.getAllProperties()]
-    allMessages = [ parseStats(operator.getAllStats()) ] + allProperties
+    allMessages = ([parseStats(operator.getAllStats())] + allProperties
+                    if (operator.hasStats())
+                    else allProperties)
 
     sys.stdout.write("\n\n" + operator.name + "   ")
     sys.stdout.write("*" * operator.rarity + "   ") # Star rarity
@@ -113,7 +120,6 @@ def main():
     for descText in operator.description: 
       sys.stdout.write(descText)
 
-    
     for prop in allMessages:
       for text in prop:
         sys.stdout.write(text + '\n') 

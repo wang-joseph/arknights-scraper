@@ -1,6 +1,6 @@
 # created 06/06/2020
 # last edited: 03/07/2020
-# version: 1.1.0
+# version: 1.1.1
 # author: Joseph Wang (EmeraldEntities)
 # description: A basic operator object that can be created for parsing/testing
 
@@ -30,14 +30,13 @@ class Operator:
 
   """
 
-  def __init__(self, name, rarity, profession, stats={}, description=["No description available!"], tags=["No tags available!"]):
+  def __init__(self, name, rarity, profession, description=["No description available!"], tags=["No tags available!"]):
     """Initializes an Operator object.
 
     Keyword arguments:
     name -- string, the name of the operator
     rarity -- int, the rarity of the operator as a number (5 star = 5, etc.)
     profession -- string, what class the operator is
-    stats -- dictionary, the stats of this operator (default {})
     description -- list, a list containing the description strings of an operator (default ["No description available!"])
     tags -- list, a list containing the tags of this operator (default: ["No tags available!"])
     """
@@ -47,8 +46,7 @@ class Operator:
     self.description = description
     self.tags = tags
 
-    self._stats = {} if stats == None else stats
-
+    self._stats = {} 
     self._properties = {}
 
   def setProperty(self, prop, value):
@@ -85,5 +83,14 @@ class Operator:
 
     return tagString
 
+  # I don't like this, but this is so that we don't need to load in
+  # stats for the operator every single time we want them...
+  # TODO: Maybe I could merge stats into properties?
   def getAllStats(self):
     return self._stats
+
+  def setStats(self, stats):
+    self._stats = stats
+
+  def hasStats(self):
+    return (not (self._stats == {}))

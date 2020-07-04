@@ -126,3 +126,7 @@ dmypy.json
 
 # vscode config
 .vscode/
+
+# additional files, not related to the code
+assets/
+output/

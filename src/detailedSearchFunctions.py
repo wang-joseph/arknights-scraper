@@ -45,6 +45,7 @@ def findTalents(soup, imagesDict):
       for phrase in allText:
         text = text + phrase + " " 
 
+      text = text.rstrip() # get rid of any placed newlines
       messages.append(text + "\n") # extra newline to make reading a bit easier on the eyes
 
   return messages
@@ -220,6 +221,53 @@ def parseStats(statsJson):
 
   return messages
 
+def findSiblingsOfBreakpoint(soupObj):
+  """Gets all the text from the sibling of a breakpoint and return as list of strings.
+  
+  Sometimes, a description could be formatted with a br, which bs4 doesn't work well with when doing o.text.strip().
+  To solve that, we find the <br>'s sibling text and format the text ourselves, adding a `\\n` wherever needed.
+
+  If a <br> tag isn't found, just return the object's text, stripped.
+  """
+  brkpoint = soupObj.find_all('br')
+      
+  if brkpoint != []: #TODO: make this code better omg (like, those two for loops are so similar omg)
+    descriptionList = []
+    prevBrkText = []
+    # Previous_siblings gives you the tags in reverse, so you have to reverse it after getting them all
+    # also oh my freaking goodness both isinstance AND break in the same block?? execute this man
+    for sibling in brkpoint[0].previous_siblings:
+      if isinstance(sibling, Tag):
+        if sibling.name == "br":
+          break
+
+        prevBrkText.append(sibling.text.strip())
+      else:
+        prevBrkText.append(str(sibling))
+    prevBrkText.reverse()
+    prevBrkText[-1] += "\n"
+    descriptionList += prevBrkText
+
+    # We only need to get the previous siblings for the first <br> tag. Then we can just get the
+    # next siblings for every other <br> tag to complete the description.
+    for br in brkpoint:
+      nextBrkText = []
+
+      for sibling in br.next_siblings:
+        if isinstance(sibling, Tag):
+          if sibling.name == "br":
+            break
+
+          nextBrkText.append(sibling.text.strip())
+        else:
+          nextBrkText.append(str(sibling))
+      nextBrkText[-1] += '\n'
+      descriptionList += nextBrkText
+
+    return descriptionList
+  else:
+    return soupObj.text.strip()
+
 def findSkills(soup): 
   # skill-cell is the class name that all skill blocks have, so we need to get them all
   allSkills = soup.find_all('div', 'skill-cell')
@@ -256,45 +304,7 @@ def findSkills(soup):
 
       # Note: this will work for multiple br tags (hopefully), but as far as I can tell they only use one per in desc
       # oh well, future proofing!
-      brkpoint = maxLevel[i].find_all('br')
-      
-      if brkpoint != []: #TODO: make this code better omg
-        descriptionText = " "
-        prevBrkText = []
-
-        # Previous_siblings gives you the tags in reverse, so you have to reverse it after getting them all
-        # also oh my freaking goodness both isinstance AND break in the same block?? execute this man
-        for sibling in brkpoint[0].previous_siblings:
-          if isinstance(sibling, Tag):
-            if sibling.name == "br":
-              break
-
-            prevBrkText.append(sibling.text.strip())
-          else:
-            prevBrkText.append(str(sibling))
-        prevBrkText.reverse()
-
-        descriptionText += "".join(prevBrkText) + "\n"
-
-        # We only need to get the previous siblings for the first <br> tag. Then we can just get the
-        # next siblings for every other <br> tag to complete the description.
-        for br in brkpoint:
-          nextBrkText = ""
-
-          for sibling in br.next_siblings:
-            if isinstance(sibling, Tag):
-              if sibling.name == "br":
-                break
-
-              nextBrkText += sibling.text.strip()
-            else:
-              nextBrkText += str(sibling)
-
-          descriptionText += nextBrkText + "\n"
-
-        maxLevel[i] = descriptionText
-      else:
-        maxLevel[i] = maxLevel[i].text.strip()
+      maxLevel[i] = "".join(findSiblingsOfBreakpoint(maxLevel[i]))
 
     # Add some informative text to max level
     # maxLevel now looks like ['spcost', 'initalsp', 'duration', ...'duration']
@@ -310,6 +320,7 @@ def findSkills(soup):
     messages.append(spString)
     
     # Filter out any "" that might be appended and any extra \n
+    description[0] = ' ' + description[0] # Adding a space before every description for good readability
     description = list(map(lambda x: x.rstrip(), description))
     description = list(filter(lambda x: x != "", description))
 

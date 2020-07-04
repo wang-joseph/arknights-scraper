@@ -19,14 +19,16 @@ See requirements.txt for the versions of each library.
 
 ## To-Do
 
-- [ ] Add operator information
+- [x] ~~Add basic operator information~~ Now available in [release v1.0](putreleasehere)
   - [x] ~~Add basic information~~
   - [x] ~~Add support for talents~~
   - [x] ~~Add support for skills~~
   - [x] ~~Add support for stats~~
   - [x] ~~Add support for base skills~~
+- [ ] Add quality of life updates
+  - [ ] Add different skill levels, not just max?
   - [ ] Add support for upgrade information
-- [ ] Add different skill levels, not just max?
+  - [ ] Perhaps add support for calculating stages, etc?
 - [ ] Add operator comparison?
 - [ ] Add stage functionality?
 - [ ] Add item descriptions?

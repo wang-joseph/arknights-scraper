@@ -5,13 +5,13 @@ from halo import Halo # extremely important
 from bs4 import BeautifulSoup
 
 from operatorClasses.Operator import Operator
-from detailedSearchFunctions import findTalents, findBaseSkills, findStats, findSkills
+from detailedSearchFunctions import findTalents, findBaseSkills, createStatsJSON, parseStats, findSkills
 from inputReader import readLinesIntoDict, readLineFromFile
 from scraperFunctions import scrapeForOperator
 
 # created 06/06/2020
-# last edited: 02/07/2020
-# version: 1.4.0
+# last edited: 03/07/2020
+# version: 1.5.0
 # author: Joseph Wang (EmeraldEntities)
 
 ### FUNCTIONS ########################
@@ -20,19 +20,16 @@ def initializeArguments():
   # Using the argparse library, initializes cmd arguments
   parser = argparse.ArgumentParser(description="Find information about any operator in Arknights!")
   parser.add_argument("operator", help="The operator you want information for. For spaces, use a '-' in place of the space. No special characters.")
-  parser.add_argument("-t", "--talent", help="Displays the specified operator's talent.", action="store_true")
-  parser.add_argument("-s", "--skills", help="Displays the specified operator's skills.", action="store_true")
-  parser.add_argument("-u", "--upgrades", help="Displays the specified operator's upgrade stages and what this operator needs. In-dev", action="store_true")
-  parser.add_argument("-b", "--base", help="Displays the specified operator's base skills.", action="store_true")
   parser.add_argument("-i", "--info", help="Displays the specified operator's stats.", action="store_true")
+  parser.add_argument("-s", "--skills", help="Displays the specified operator's skills.", action="store_true")
+  parser.add_argument("-t", "--talent", help="Displays the specified operator's talent.", action="store_true")
+  parser.add_argument("-b", "--base", help="Displays the specified operator's base skills.", action="store_true")
+  # parser.add_argument("-u", "--upgrades", help="Displays the specified operator's upgrade stages and what this operator needs. In-dev", action="store_true")
+  
   parser.add_argument("-a", "--all", help="Displays all the information about this specified operator.", action="store_true")
   args = parser.parse_args()
 
   return args
-
-def getTextAndStrip(soupItem):
-  """Grabs the text of the provided soup item, strips it, and returns it."""
-  return soupItem.text.strip()
 
 def parseOperatorData(src, args):
   imagesDict = readLinesIntoDict("./info/imageToText.txt")
@@ -43,7 +40,7 @@ def parseOperatorData(src, args):
     
   # Finding the default information that should be displayed for every operator
   # (eg. tags, description, etc.)
-  tags = list(map(getTextAndStrip, soup.find_all("div", "tag-title")))
+  tags = list(map(lambda souptxt: souptxt.text.strip(), soup.find_all("div", "tag-title")))
 
   # We can find the rarity of an operator by finding the div named rarity-cell and counting how
   # many images of stars are in it
@@ -65,7 +62,9 @@ def parseOperatorData(src, args):
                 if formattedName not in jsonReplacementNames.keys()
                 else jsonReplacementNames[formattedName])
 
-  operator = Operator(properName, rarity, professionText, descText, tags)
+  stats = createStatsJSON(soup, properName)
+
+  operator = Operator(properName, rarity, professionText, stats, descText, tags)
   # Any optional messages/properties are stored in operator.properties for convenience
   # and also to make sure that printing properties doesn't take 50 lines of code.
   # Also, we can reuse the properties this way as it is stored in a compact location.
@@ -74,7 +73,6 @@ def parseOperatorData(src, args):
   # Taking advantage of python's functional programming paradigms to adhere to DRY principles
   #TODO: is this even good practice??? I'm trying to adhere to DRY principles but this makes me start to sweat
   conditionals = [
-    ['info'       , args.info  , findStats     , [soup, properName]],
     ['skills'     , args.skills, findSkills,     [soup]]           ,
     ['talent'     , args.talent, findTalents   , [soup, imagesDict]],
     ['base skills', args.base  , findBaseSkills, [soup, imagesDict]],
@@ -95,6 +93,7 @@ def main():
   spinner.start()
 
   response = scrapeForOperator(args.operator) 
+
   if response != None:
     spinner.text = "Parsing..."
     spinner.colour = "yellow"
@@ -102,16 +101,21 @@ def main():
     spinner.succeed("Success!")
 
     # Print out the results
+    allProperties = [operator.getProperty(prop) for prop in operator.getAllProperties()]
+    allMessages = [ parseStats(operator.getAllStats()) ] + allProperties
+
     sys.stdout.write("\n\n" + operator.name + "   ")
     sys.stdout.write("*" * operator.rarity + "   ") # Star rarity
     sys.stdout.write(operator.profession + "\n")
 
     sys.stdout.write(operator.getFormattedTags() + "\n\n")
+
     for descText in operator.description: 
       sys.stdout.write(descText)
 
-    for prop in operator.getAllProperties():
-      for text in operator.getProperty(prop):
+    
+    for prop in allMessages:
+      for text in prop:
         sys.stdout.write(text + '\n') 
 
   else:

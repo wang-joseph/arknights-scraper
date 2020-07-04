@@ -5,8 +5,8 @@ from scraperFunctions import scrapeWebsite
 from inputReader import readLineFromFile
 
 # created 01/07/2020
-# last edited: 02/07/2020
-# version: 1.1.0
+# last edited: 03/07/2020
+# version: 1.2.1
 # author: Joseph Wang (EmeraldEntities)
 
 def findTalents(soup, imagesDict):
@@ -86,20 +86,31 @@ def findBaseSkills(soup, imagesDict):
 
   return messages
 
-def findStats(soup, operator):
-  # Load in the json file
+def createStatsJSON(soup, operator):
+  """Creates the JSON file (dictionary) containing all the operator's stats, and returns it.
+
+  This dictionary MUST have the basic operator stats (ie. atk, def, hp) and will return `None` if these 
+  stats are not found (if the JSON file I use for these stats is down, or the operator cannot be found.)
+
+  This function will first look and load the basic stats (ATK, DEF, HP) for each stage.
+  Then it will attempt to load (Block, Cost, Res) from the operator website under the variable myStats.
+  Finally, it will attempt to load (Redeploy Time, Attack Interval) from the operator website
+  from a different section.
+  Therefore, this function will look 3 times for the specified attributes.
+
+  If any of these searches fails (except for the first one, which is essential), this function will simply set
+  that attribute's value as `"-1"`, indicating failure to retrieve.
+  """
+  # Load in the json file for all operators
+  # TODO: should I make a response obj to hold any possible errors?
+
+  # Do this seperately because if I did it every time that would be a waste of time
+  # for requests that don't need this info.
   statsUrl = readLineFromFile("./info/url.txt") + "/stat-rankings?_format=json"
   statsInfo = scrapeWebsite(statsUrl)
 
-  # with open("debug.json", 'r') as f: # debugging
-  #   statsInfo = json.load(f)
-
-  # Just to check and make sure the website isn't down
   if statsInfo == None:
-    return ["\n\nOperator Stats\nThe stats JSON appears to be down! Try again later."]
-
-  messages = []
-  messages.append("\n\nOperator Stats\n")
+    return None # Request failed
   
   statsJson = None
   for jsonFile in statsInfo.json():
@@ -109,10 +120,12 @@ def findStats(soup, operator):
       break # whoa a bad break
 
   if statsJson == None: 
-    return ["\n\nOperator Stats\nNo stats found!"]
+    return None # No operator found in the big JSON file
+
 
 
   # Find myStats from the operator's site
+  # This is so we can find res, cost, and block
   goodScripts = soup.find_all('script', '')
   for script in goodScripts:
     if re.search(r"myStats =", str(script)):
@@ -120,9 +133,9 @@ def findStats(soup, operator):
       break # oh no another bad break
 
   levels = ["ne", "e1", "e2"]
-  attributes = ["arts", "cost", "block"]
+  wantedAttributes = ["arts", "cost", "block"]
 
-  for attr in attributes:
+  for attr in wantedAttributes:
     allStats = (re.findall(fr'"{attr}": "(.*)"', str(myStatsScript)))
 
     # Since 'block' has both a base and max (which doesn't matter),
@@ -137,44 +150,73 @@ def findStats(soup, operator):
         statsJson[levels[stat] + "_" + attr] = allStats[stat]
     else:
       # just to make sure we don't break the program later if there's a bad parse somewhere
-      messages.append("Something went wrong while grabbing res, block, and cost. Please report this!")
-      return messages
+      for stat in range(len(allStats)):
+        statsJson[levels[stat] + "_" + attr] = '-1' # -1 to symbolize failure
 
-  #TODO: make this less stupid 
-  if statsJson["max_atkne"] != "":
-    maxStats = [
-      "E0 max atk: " + statsJson["max_atkne"] + " atk",
-      "E0 max def: " + statsJson["max_defne"] + " def",
-      "E0 max hp : " + statsJson["max_hpne"] + " hp",
-      "E0 res    : " + statsJson["ne_arts"],
-      "E0 block  : " + statsJson["ne_block"],
-      "E0 cost   : " + statsJson["ne_cost"] + " dp \n",
-    ]
 
-    if statsJson["max_atke1"] != "":
+
+  # otherStats will provide us with the atk speed and redeploy time stats.
+  otherStats = soup.find_all('div', 'other-stat-value-cell')
+  
+  if len(otherStats) > 0:
+    # Convert every object into their stripped strings counterpart
+    for stat in range(len(otherStats)):
+      curStatsList = []
+      for string in otherStats[stat].stripped_strings:
+        curStatsList.append(string)
+
+      if "Attack Interval" in curStatsList:
+        statsJson['atk_int'] = curStatsList[-1]
+      
+      elif "Redeploy Time" in curStatsList:
+        statsJson['deploy_time'] = curStatsList[-1]
+  
+  # Failsafes, in case
+  if 'atk_int' not in statsJson.keys():
+    statsJson['atk_int'] = -1
+  if 'deploy_time' not in statsJson.keys():
+    statsJson['deploy_time'] = -1
+
+
+
+  return statsJson
+
+def parseStats(statsJson):
+  messages = []
+  messages.append("\n\nOperator Stats\n")
+
+  if statsJson == {}:
+    return ["\n\nOperator Stats\nEither the stats JSON is down, or we couldn't find your operator!"]
+
+  levels = ["ne", "e1", "e2"]
+  formattedLevels = ["E0", "E1", "E2"]
+  maxStats = []
+
+  # Fetch the basic stats for each level (if it exists)
+  # We check the max atk stat for each, and if it's not a "" then we know that operator has that lvl
+  for lvl in range(len(formattedLevels)):
+    if statsJson["max_atk" + levels[lvl]] != "":
       maxStats += [
-        "E1 max atk: " + statsJson["max_atke1"] + " atk",
-        "E1 max def: " + statsJson["max_defe1"] + " def",
-        "E1 max hp : " + statsJson["max_hpe1"] + " hp",
-        "E1 res    : " + statsJson["e1_arts"],
-        "E1 block  : " + statsJson["e1_block"],
-        "E1 cost   : " + statsJson["e1_cost"] + " dp \n",
+        formattedLevels[lvl],
+        "Max atk: " + statsJson[f"max_atk{levels[lvl]}"] + " atk",
+        "Max def: " + statsJson[f"max_def{levels[lvl]}"] + " def",
+        "Max hp : " + statsJson[f"max_hp{levels[lvl]}"] + " hp",
+        "Res    : " + statsJson[f"{levels[lvl]}_arts"],
+        "Block  : " + statsJson[f"{levels[lvl]}_block"],
+        "Cost   : " + statsJson[f"{levels[lvl]}_cost"] + " dp \n"
       ]
-
-      if statsJson["max_atke2"] != "":
-        maxStats += [
-        "E2 max atk: " + statsJson["max_atke2"] + " atk",
-        "E2 max def: " + statsJson["max_defe2"] + " def",
-        "E2 max hp : " + statsJson["max_hpe2"] + " hp",
-        "E2 res    : " + statsJson["e2_arts"],
-        "E2 block  : " + statsJson["e2_block"],
-        "E2 cost   : " + statsJson["e2_cost"] + " dp \n"
-      ]
-    messages += maxStats
-  else:
+  
+  if len(maxStats) == 0:
     # Very minor formatting issue but this is to get rid of the new line inserted by the final formatter
     # by simply adding it to the first element of the list and not a seperate list element
     messages[0] += "No stats found!"
+
+  messages += maxStats
+
+  # Retrieve the attack interval and redeploy time
+  # By adding an empty space at the end, we fool the parser into inserting only 1 newline
+  messages += ["Attack Interval:  " + statsJson['atk_int']]
+  messages += ["Deployment Time:  " + statsJson['deploy_time']] + [""]
 
   return messages
 
@@ -261,11 +303,16 @@ def findSkills(soup):
     maxLevel[1] = "Initial SP: " + maxLevel[1]
     maxLevel[2] = "Duration: " + maxLevel[2]
     description = maxLevel[3:] # The description will always be whatever is after the first 3 chunks of text
-
+    
     # Using f-string width formatting, we can get the width of each text to be the same
     spString += f"{maxLevel[0]:18}{maxLevel[1]:22}{maxLevel[2]}"
 
     messages.append(spString)
+    
+    # Filter out any "" that might be appended and any extra \n
+    description = list(map(lambda x: x.rstrip(), description))
+    description = list(filter(lambda x: x != "", description))
+
     # Add a \n to the last item in description for consistent formatting!!!!!
     messages += description + ["\n"]
 

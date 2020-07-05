@@ -29,13 +29,13 @@ Taken from the argparse -h command:
 `operator` The operator you want information about. For spaces, use a '-' in place of the space. No special characters.
 
 **Optional Arguments:**
-`-h, --help` show this help message and exit
-`-s, --skills` Displays the max tier of each of the specified operator's skills.
-`-v, --vskills` Stands for 'verbose skills'. Displays the 1st tier, 7th tier, and M3 (if possible) tier of each of the specified operator's skills.
-`-i, --info` Displays the specified operator's stats.
-`-t, --talent` Displays the specified operator's talent.
-`-b, --base` Displays the specified operator's base skills.
-`-a, --all` Displays all the information about this specified operator. Unless paired with the -v tag, this will only show the max tier of each skill this operator has.
+- `-h, --help` show this help message and exit
+- `-s, --skills` Displays the max tier of each of the specified operator's skills.
+- `-v, --vskills` Stands for 'verbose skills'. Displays the 1st tier, 7th tier, and M3 (if possible) tier of each of the specified operator's skills.
+- `-i, --info` Displays the specified operator's stats.
+- `-t, --talent` Displays the specified operator's talent.
+- `-b, --base` Displays the specified operator's base skills.
+- `-a, --all` Displays all the information about this specified operator. Unless paired with the -v tag, this will only show the max tier of each skill this operator has.
 
 ## To-Do
 

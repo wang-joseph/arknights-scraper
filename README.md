@@ -26,7 +26,7 @@ Taken from the argparse -h command:
 `python scraper.py [-h] [-s | -v] [-i] [-t] [-b] [-a] operator`
 
 **Positional Arguments:**
-`operator` The operator you want information about. For spaces, use a '-' in place of the space. No special characters.
+- `operator` The operator you want information about. For spaces, use a '-' in place of the space. No special characters.
 
 **Optional Arguments:**
 - `-h, --help` show this help message and exit

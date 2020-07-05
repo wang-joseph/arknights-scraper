@@ -130,3 +130,7 @@ dmypy.json
 # additional files, not related to the code
 assets/
 output/
+
+# debugging files
+src/*.html
+src/*.json

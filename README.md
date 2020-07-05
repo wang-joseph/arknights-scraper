@@ -17,6 +17,26 @@ Thanks, [gamepress.gg](https://gamepress.gg/)! :)
 
 See requirements.txt for the versions of each library.
 
+## Details
+
+The only important file (and main file) is `scraper.py`. Everything other file contains functions or classes that are used by this program to format, retrieve data, etc.
+
+Taken from the argparse -h command:
+
+`python scraper.py [-h] [-s | -v] [-i] [-t] [-b] [-a] operator`
+
+**Positional Arguments:**
+`operator` The operator you want information about. For spaces, use a '-' in place of the space. No special characters.
+
+**Optional Arguments:**
+`-h, --help` show this help message and exit
+`-s, --skills` Displays the max tier of each of the specified operator's skills.
+`-v, --vskills` Stands for 'verbose skills'. Displays the 1st tier, 7th tier, and M3 (if possible) tier of each of the specified operator's skills.
+`-i, --info` Displays the specified operator's stats.
+`-t, --talent` Displays the specified operator's talent.
+`-b, --base` Displays the specified operator's base skills.
+`-a, --all` Displays all the information about this specified operator. Unless paired with the -v tag, this will only show the max tier of each skill this operator has.
+
 ## To-Do
 
 - [x] ~~Add basic operator information~~
@@ -26,10 +46,11 @@ See requirements.txt for the versions of each library.
   - [x] ~~Add support for stats~~
   - [x] ~~Add support for base skills~~
 - [ ] Add quality of life updates
-  - [ ] Add different skill levels, not just max?
+  - [x] Add different skill levels, not just max?
   - [ ] Add support for upgrade information
   - [ ] Perhaps add support for calculating stages, etc?
 - [ ] Add operator comparison?
 - [ ] Add stage functionality?
 - [ ] Add item descriptions?
+- [ ] Add recruitment tag functionality?
 - [ ] Add idk other functionality when needed

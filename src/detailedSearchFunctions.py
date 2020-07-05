@@ -167,10 +167,10 @@ def createStatsJSON(soup, operator):
         curStatsList.append(string)
 
       if "Attack Interval" in curStatsList:
-        statsJson['atk_int'] = curStatsList[-1]
+        statsJson['atk_int'] = curStatsList[-1] + " s"
       
       elif "Redeploy Time" in curStatsList:
-        statsJson['deploy_time'] = curStatsList[-1]
+        statsJson['deploy_time'] = curStatsList[-1] + " s"
   
   # Failsafes, in case
   if 'atk_int' not in statsJson.keys():
@@ -268,7 +268,7 @@ def findSiblingsOfBreakpoint(soupObj):
   else:
     return soupObj.text.strip()
 
-def findSkills(soup): 
+def findSkills(soup, tiersToCheck): 
   # skill-cell is the class name that all skill blocks have, so we need to get them all
   allSkills = soup.find_all('div', 'skill-cell')
 
@@ -277,58 +277,62 @@ def findSkills(soup):
     return ["\n\nSkills\nNo skills found!"]
 
   messages = []
-  messages.append("\n\nOperator Skills (Highest Levels)\n")
+  # does not have a trailing newline cause a newline is inserted before 
+  # every skill title, and I like consistant formatting
+  messages.append("\n\nOperator Skills (Highest Levels)") 
 
   for skill in allSkills:
     # Finding the skill title
+    messages[-1] += '\n' # add an extra newline after every different skill for readability
     title = skill.find('div', 'skill-title-cell')
     messages.append(title.text.strip())
 
-    # Let's be honest, everyone only cares about the top level of this skill...
-    maxUpgradeLevel = 'skill-upgrade-tab-10'
-    maxLevel = skill.find_all('div', maxUpgradeLevel)
-
-    spString = ""
-    # We gotta do this check because some operators can't actually get mastery on their skills
-    if len(maxLevel) == 0:
-      maxUpgradeLevel = 'skill-upgrade-tab-7'
+    for tier in tiersToCheck:
+      maxUpgradeLevel = tier
       maxLevel = skill.find_all('div', maxUpgradeLevel)
-      spString += f"{'Lv7':15}"
-    else:
-      spString += f"{'Lv7 M3':15}"
 
-    for i in range(len(maxLevel)):
+      # Getting the right level for the skill
+      spString = ""
+      if int(tier[-1:]) in [8, 9, 0]:
+        masteryNumber = 3 if int(tier[-1:]) == 0 else int(tier[-1:]) - 7
+        spString += f"{'Lv7 M' + str(masteryNumber):15}"
+      else:
+        spString += f"{'Lv' + tier[-1:]:15}"
 
-      # Since the page uses <br> to split text, we're gonna find the <br>, find the text before and after it,
-      # and use it for ourselves too.
+      for i in range(len(maxLevel)):
+        # Since the page uses <br> to split text, we're gonna find the <br>, find the text before and after it,
+        # and use it for ourselves too.
 
-      # Note: this will work for multiple br tags (hopefully), but as far as I can tell they only use one per in desc
-      # oh well, future proofing!
-      maxLevel[i] = "".join(findSiblingsOfBreakpoint(maxLevel[i]))
+        # Note: this will work for multiple br tags (hopefully), but as far as I can tell they only use one per in desc
+        # oh well, future proofing!
+        maxLevel[i] = "".join(findSiblingsOfBreakpoint(maxLevel[i]))
 
-    # Add some informative text to max level
-    # maxLevel now looks like ['spcost', 'initalsp', 'duration', ...'duration']
-    # We format it accordingly
-    maxLevel[0] = "SP cost: " + maxLevel[0]
-    maxLevel[1] = "Initial SP: " + maxLevel[1]
-    maxLevel[2] = "Duration: " + maxLevel[2]
-    description = maxLevel[3:] # The description will always be whatever is after the first 3 chunks of text
-    
-    # Using f-string width formatting, we can get the width of each text to be the same
-    spString += f"{maxLevel[0]:18}{maxLevel[1]:22}{maxLevel[2]}"
+      # Add some informative text to max level
+      # maxLevel now looks like ['spcost', 'initalsp', 'duration', ...'duration']
+      # We format it accordingly
+      maxLevel[0] = "SP cost: " + maxLevel[0]
+      maxLevel[1] = "Initial SP: " + maxLevel[1]
+      maxLevel[2] = "Duration: " + maxLevel[2]
+      description = maxLevel[3:] # The description will always be whatever is after the first 3 chunks of text
+      
+      # Using f-string width formatting, we can get the width of each text to be the same
+      spString += f"{maxLevel[0]:18}{maxLevel[1]:22}{maxLevel[2]}"
 
-    messages.append(spString)
-    
-    # Filter out any "" that might be appended and any extra \n
-    description[0] = ' ' + description[0] # Adding a space before every description for good readability
-    description = list(map(lambda x: x.rstrip(), description))
-    description = list(filter(lambda x: x != "", description))
+      messages.append(spString)
+      
+      # Filter out any "" that might be appended and any extra \n
+      description[0] = ' ' + description[0] # Adding a space before every description for good readability
+      description = list(map(lambda x: x.rstrip(), description))
+      description = list(filter(lambda x: x != "", description))
 
-    # Add a \n to the last item in description for consistent formatting!!!!!
-    messages += description + ["\n"]
+      # Add a '-' * 25 and/or \n to the last item in description for consistent formatting!!!!!
+      messages = (messages + description + ['-------------------------\n']
+                  if len(tiersToCheck) > 1
+                  else messages + description)
 
-  # Get rid of the last \n in all messages for consistent formatting!!!!!!
-  messages[-1] = messages[-1].rstrip()
+    # Get rid of the last \n in all messages for consistent formatting!!!!!!
+    messages[-1] = messages[-1].rstrip()
+    messages += [''] # Add an empty string in a list to the end for consistent formatting!!!!!!!
   return messages
 
 if __name__ == "__main__":

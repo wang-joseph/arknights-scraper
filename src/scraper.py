@@ -20,14 +20,32 @@ def initializeArguments():
   """Initializes cmd arguments and flags and returns the arguments."""
   # Using the argparse library, initializes cmd arguments
   parser = argparse.ArgumentParser(description="Find information about any operator in Arknights!")
-  parser.add_argument("operator", help="The operator you want information for. For spaces, use a '-' in place of the space. No special characters.")
+  
+  skillsGroup = parser.add_mutually_exclusive_group()
+  skillsGroup.add_argument("-s", "--skills", 
+                          help="Displays the max tier of each of the specified operator's skills.", 
+                          action="store_true")
+  skillsGroup.add_argument("-v", "--vskills", 
+                          help="""Stands for 'verbose skills'. Displays the 1st tier, 7th tier, 
+                                  and M3 (if possible) tier of each of the specified operator's skills.""",
+                          action='store_true')
+
+  parser.add_argument("operator", 
+                      help="""The operator you want information about. 
+                              For spaces, use a '-' in place of the space. No special characters.
+                              """)
+  
   parser.add_argument("-i", "--info", help="Displays the specified operator's stats.", action="store_true")
-  parser.add_argument("-s", "--skills", help="Displays the specified operator's skills.", action="store_true")
   parser.add_argument("-t", "--talent", help="Displays the specified operator's talent.", action="store_true")
   parser.add_argument("-b", "--base", help="Displays the specified operator's base skills.", action="store_true")
-  # parser.add_argument("-u", "--upgrades", help="Displays the specified operator's upgrade stages and what this operator needs. In-dev", action="store_true")
+  # parser.add_argument("-u", "--upgrades", help="Displays the specified operator's upgrade stages and what this operator needs.", action="store_true")
   
-  parser.add_argument("-a", "--all", help="Displays all the information about this specified operator.", action="store_true")
+  parser.add_argument("-a", "--all", 
+                      help="""Displays all the information about this specified operator.
+                              Unless paired with the -v tag, this will only show the max tier of 
+                              each skill this operator has.
+                              """, 
+                      action="store_true")
   args = parser.parse_args()
 
   return args
@@ -68,6 +86,21 @@ def parseOperatorData(src, args):
   # and also to make sure that printing properties doesn't take 50 lines of code.
   # Also, we can reuse the properties this way as it is stored in a compact location.
 
+  # Skills are different; since we have a mutually exclusive group we need to format
+  # input a tiny bit before we continue with skills.
+  skillTiersToCheck = (['skill-upgrade-tab-10']
+                      if not args.vskills
+                      else (['skill-upgrade-tab-1', 'skill-upgrade-tab-7', 'skill-upgrade-tab-10']
+                        if rarity > 3
+                        else ['skill-upgrade-tab-1', 'skill-upgrade-tab-7']))
+  # if args.vskills:
+  #   # We gotta do this check because some operators can't actually get mastery on their skills
+  #   skillTiersToCheck = (['skill-upgrade-tab-1', 'skill-upgrade-tab-7', 'skill-upgrade-tab-10']
+  #                       if rarity > 3
+  #                       else skillTiersToCheck + ['skill-upgrade-tab-1'])
+  
+  checkSkills = args.skills or args.vskills 
+
   # Checking and calling the appropriate functions for optional flags
   # Taking advantage of python's functional programming paradigms to adhere to DRY principles
   #TODO: is this even good practice??? I'm trying to adhere to DRY principles but this makes me start to sweat
@@ -75,9 +108,9 @@ def parseOperatorData(src, args):
   # Also note: we don't actually guarantee each opoerator will have every property for timing sake.
   # We just make sure that the operator object has what it needs
   conditionals = [
-    ['skills'     , args.skills, findSkills     , [soup]]            ,
-    ['talent'     , args.talent, findTalents    , [soup, imagesDict]],
-    ['base skills', args.base  , findBaseSkills , [soup, imagesDict]],
+    ['skills'     , checkSkills, findSkills     , [soup, skillTiersToCheck]],
+    ['talent'     , args.talent, findTalents    , [soup, imagesDict]]       ,
+    ['base skills', args.base  , findBaseSkills , [soup, imagesDict]]       ,
   ]
 
   for prop, flag, findInfoFunction, arguments in conditionals:

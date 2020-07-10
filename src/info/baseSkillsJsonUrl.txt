@@ -1,0 +1,1 @@
+https://raw.githubusercontent.com/Aceship/AN-EN-Tags/master/json/gamedata/zh_CN/gamedata/excel/building_data.json

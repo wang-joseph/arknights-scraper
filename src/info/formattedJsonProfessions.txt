@@ -1,0 +1,12 @@
+Pioneer   Vanguard
+Warrior   Guard
+Medic     Medic
+Special   Specialist
+Caster    Caster
+Support   Supporter
+Sniper    Sniper
+Tank      Defender
+
+format:
+json profession    proper profession name
+Just to keep the json names consistent with the gamepress names.

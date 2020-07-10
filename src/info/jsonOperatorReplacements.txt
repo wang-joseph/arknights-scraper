@@ -1,6 +1,9 @@
-Rosa      Rosa+(Poca)
-Poca      Rosa+(Poca)
-Rosa+Poca Rosa+(Poca)
+Rosa       Rosa+(Poca)
+Poca       Rosa+(Poca)
+Rosa+Poca  Rosa+(Poca)
+Castle+3   Castle-3
+Lancet+2   Lancet-2
+Thermal+EX Thermal-EX
 
 format:
 operator    json equivalent

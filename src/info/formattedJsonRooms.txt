@@ -1,0 +1,13 @@
+Manufacture   Factory
+Hire          Office
+Control       Control+Center
+Power         Power+Plant
+Trading       Trading+Post
+Training      Training+Room
+Dormitory     Dormitory
+Workshop      Workshop
+
+format:
+json name     formatted name
+
+To make the JSON file data consistent with what you can get at gamepress

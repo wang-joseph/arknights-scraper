@@ -1,96 +1,128 @@
+import sys
+
 # created 06/06/2020
-# last edited: 03/07/2020
-# version: 1.1.1
+# last edited: 07/07/2020
+# version: 1.2.0
 # author: Joseph Wang (EmeraldEntities)
-# description: A basic operator object that can be created for parsing/testing
+# description: A basic operator object that can be created
+# for parsing/testing
+
 
 class Operator:
-  """The class for creating Operator objects, which stores information about Operators.
+    """The class for creating Operator objects, which stores information about Operators.
 
-  This solely exists so that operator information can be held in a convienient location,
-  and can be reused for other future features.
+    This solely exists so that operator information can be 
+    held in a convienient location, and can be reused for other 
+    future features.
 
-  Public variables:
-  name -- string
-  rarity -- int
-  profession -- string
-  description -- list
-  tags -- list
+    Public variables:
+    name -- string
+    rarity -- int
+    profession -- string
+    description -- list
+    tags -- list
 
-  Public methods:
-  setProperty(property, value)
+    Public methods:
+    set_property(property, value)
 
-  getProperty(property)
+    get_property(property)
 
-  getAllProperties()
+    get_all_properties()
 
-  hasProperty(property)
+    has_property(property)
 
-  getFormattedTags()
+    get_formatted_tags()
 
-  """
+    get_all_stats()
 
-  def __init__(self, name, rarity, profession, description=["No description available!"], tags=["No tags available!"]):
-    """Initializes an Operator object.
+    set_stats(stats)
 
-    Keyword arguments:
-    name -- string, the name of the operator
-    rarity -- int, the rarity of the operator as a number (5 star = 5, etc.)
-    profession -- string, what class the operator is
-    description -- list, a list containing the description strings of an operator (default ["No description available!"])
-    tags -- list, a list containing the tags of this operator (default: ["No tags available!"])
+    has_stats()
+
     """
-    self.name = name
-    self.rarity = rarity
-    self.profession = profession
-    self.description = description
-    self.tags = tags
 
-    self._stats = {} 
-    self._properties = {}
+    def __init__(
+        self,
+        name,
+        rarity,
+        profession,
+        description=["No description available!"],
+        tags=["No tags available!"]
+    ):
+        """Initializes an Operator object.
 
-  def setProperty(self, prop, value):
-    """Set the specified property of this operator to a value, or appends it to the existing property if present"""
-    if prop in self._properties.keys():
-      #We're assuming all property stuff are in arrays
-      self._properties[prop].append(value)
-    else:
-      self._properties[prop] = value
-    
-  def getProperty(self, prop):
-    """Return the specified property of this operator, which is normally a list, if it has it. Return None otherwise."""
-    if (self.hasProperty(prop)):
-      return self._properties[prop]
-    else:
-      return None
+        Keyword arguments:
+        name -- string, the name of the operator
+        rarity -- int, the rarity of the operator as a number 
+        (5 star = 5, etc.)
+        profession -- string, what class the operator is
+        description -- list, a list containing the description strings 
+        of an operator (default ["No description available!"])
+        tags -- list, a list containing the tags of this operator 
+        (default: ["No tags available!"])
+        """
+        self.name = name
+        self.rarity = rarity
+        self.profession = profession
+        self.description = description
+        self.tags = tags
 
-  def getAllProperties(self):
-    """Return all the stored property names as a list."""
-    return self._properties.keys()
-  
-  def hasProperty(self, prop):
-    """Checks to see if this Operator has a property. True if so, False otherwise."""
-    if prop in self._properties.keys():
-      return True
+        self._stats = {}
+        self._properties = {}
 
-    return False 
+    def set_property(self, prop, value):
+        """Set the specified property of this operator to a value.
 
-  def getFormattedTags(self):
-    """Retrieves all the tags that this Operator has, formatted into a nice string with spacing."""
-    tagString = ""
-    for tag in self.tags:
-      tagString += tag + "     "
+        If the value already exists, this method will assume the
+        value is a list and append the provided value
+        to the existing value.
+        """
+        if prop in self._properties.keys():
+            # We're assuming all property stuff are in arrays
+            self._properties[prop].append(value)
+        else:
+            self._properties[prop] = value
 
-    return tagString
+    def get_property(self, prop):
+        """Return the specified property of this operator, which is normally a list, if it has it. Return None otherwise."""
+        if (self.has_property(prop)):
+            return self._properties[prop]
+        else:
+            return None
 
-  # I don't like this, but this is so that we don't need to load in
-  # stats for the operator every single time we want them...
-  # TODO: Maybe I could merge stats into properties?
-  def getAllStats(self):
-    return self._stats
+    def get_all_properties(self):
+        """Return all the stored property names as a list."""
+        return self._properties.keys()
 
-  def setStats(self, stats):
-    self._stats = stats
+    def has_property(self, prop):
+        """Checks to see if this Operator has a property. True if so, False otherwise."""
+        if prop in self._properties.keys():
+            return True
 
-  def hasStats(self):
-    return (not (self._stats == {}))
+        return False
+
+    def get_formatted_tags(self):
+        """Retrieves all the tags that this Operator has, formatted into a string."""
+        tag_string = ""
+        for tag in self.tags:
+            tag_string += tag + "     "
+
+        return tag_string
+
+    # I don't like this, but this is so that we don't need to load in
+    # stats for the operator every single time we want them...
+    # TODO: Maybe I could merge stats into properties?
+    def get_all_stats(self):
+        return self._stats
+
+    def set_stats(self, stats):
+        self._stats = stats
+
+    def has_stats(self):
+        return (not (self._stats == {}) and not (self._stats == None))
+
+
+if __name__ == "__main__":
+    sys.stdout.write(
+        "Wrong python file to run! The main file to run is `scraper.py`.\n\n"
+    )

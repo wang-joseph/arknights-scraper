@@ -21,19 +21,19 @@ See requirements.txt for the versions of each library.
 
 The only important file (and main file) is `scraper.py`. Everything other file contains functions or classes that are used by this program to format, retrieve data, etc.
 
-Taken from the argparse -h command:
+Taken from the argparse `-h` command:
 
-usage: scraper.py [-h][-s | -v] [-i][-t] [-b][-g] [-a] operator
+`usage: scraper.py [-h][-s | -v] [-i][-t] [-b][-g] [-a] operator`
 
 Find information about any operator in Arknights!
 
-positional arguments:
+**Positional Arguments:**
 
 -   `operator` The operator you want information about. For spaces, use a '-' in place of the space. No special characters.
 
-optional arguments:
+**Optional Arguments:**
 
--   `-h, --help` show this help message and exit
+-   `-h, --help` Show this help message and exit.
 -   `-s, --skills` Displays the max tier of each of the specified operator's skills.
 -   `-v, --vskills` Stands for 'verbose skills'. Displays the 1st tier, 7th tier, and M3 (if possible) tier of each of the specified operator's skills.
 -   `-i, --info` Displays the specified operator's stats.
@@ -51,7 +51,7 @@ optional arguments:
     -   [x] ~~Add support for stats~~
     -   [x] ~~Add support for base skills~~
 -   [ ] Add quality of life updates
-    -   [x] Add different skill levels, not just max?
+    -   [x] ~~Add different skill levels, not just max?~~
     -   [ ] Add support for upgrade information
     -   [ ] Perhaps add support for calculating stages, etc?
 -   [ ] Add a subparser for other commands

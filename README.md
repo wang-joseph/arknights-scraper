@@ -1,10 +1,10 @@
 # arknights-scraper
 
-A small scraper that allows you to find detailed operator information right in your command line for when you're too lazy to spin up your browser to find info on the newest operator.
+A small scraper/parser that allows you to find detailed operator information and other arknights info right in your command line for when you're too lazy to spin up your browser to find info on the newest operator.
 
 Designed to be a pretty small, simple, and non-instrusive project. This program won't save any information fetched. There may be some formatting errors!
 
-In order to fetch the information, this program first checks [Aceship](https://github.com/Aceship)'s AMAZING json file(s) with detailed descriptions of all the operators. If I can't find the operator there, I check [gamepress.gg](https://gamepress.gg/). My thanks to both of them!
+There are multiple subparsers with different commands, but in general, in order to fetch the information, this program uses both [Aceship](https://github.com/Aceship)'s AMAZING json file(s) and/or [gamepress.gg](https://gamepress.gg/). Thanks to both of them!
 
 ## Libraries used
 
@@ -14,16 +14,25 @@ In order to fetch the information, this program first checks [Aceship](https://g
 -   [re](https://docs.python.org/3/library/re.html) (standard lib regex — useful for working with strings)
 -   [json](https://docs.python.org/3/library/json.html) (standard lib — needed for working with JSON)
 -   [halo](http://halo.josealerma.com/index.html) (literally the best and most important library)
+-   [typing](https://docs.python.org/3/library/typing.html) (typehints are nice)
 
 See requirements.txt for the versions of each library.
 
 ## Details
 
-The only important file (and main file) is `scraper.py`. Everything other file contains functions or classes that are used by this program to format, retrieve data, etc.
+The only important file (and main file) is `ark.py`. Everything other file contains functions or classes that are used by this program to implement subcommands, handle format, retrieve data, etc.
 
-Taken from the argparse `-h` command:
+### Commands
 
-`usage: scraper.py [-h][-s | -v] [-i][-t] [-b][-g] [-a] operator`
+All command usage details were taken from the argparse `-h` command.
+
+##### scraper
+
+aliases: `{s,scrap}`
+
+This subcommand will look for and display information about any operator currently in arknights. It'll first look at [Aceship](https://github.com/Aceship)'s JSON files and see if they have the operator. If that fails, it'll look at the [gamepress.gg](https://gamepress.gg/) page. Nothing is stored locally, and it shouldn't take that long to look the operators up!
+
+`usage: ark.py scraper [-h][-s | -v] [-i][-t] [-b][-g] [-a] operator`
 
 Find information about any operator in Arknights!
 
@@ -42,6 +51,26 @@ Find information about any operator in Arknights!
 -   `-g, --gamepress` Forces the parser to only use gamepress.gg. Use this if your internet connection is really slow.
 -   `-a, --all` Displays all the information about this specified operator. Unless paired with the -v tag, this will only show the max tier of each skill this operator has.
 
+##### recruitop
+
+aliases: `{r, recruit, ro}`
+
+This is a smaller subcommand that will accept recruitment tags and show you the best combinations possible, in CLI format. The list will go from bottom-to-top in terms of priority, and any number of tags can be specified.
+
+The list is sorted based on an experimental priority system, so if you _really_ care about getting the best combo for your buck, you can skim through all the tags and see if a certain operator stands out to you. The system should work fine if there are some distinct good combos, though. Please report anything strange!
+
+`usage: ark.py recruitop [-h] tags [tags ...]`
+
+Find all ops that match combinations of tags!
+
+**Positional Arguments:**
+
+-   `tags` A recruitment tag specified. You can specify as many tags as you want here, and this CLI will look for operators that match all these tags. For example: `ark.py recruit defense defender sniper medic starter`. Certain shortcuts exist for these tags as well, and can be seen in `src/info/recruitop/tagConversion.txt`. For spaces, use a '-' in place of the space.
+
+**Optional Arguments:**
+
+-   `-h, --help` show this help message and exit
+
 ## To-Do
 
 -   [x] ~~Add basic operator information~~
@@ -54,9 +83,15 @@ Find information about any operator in Arknights!
     -   [x] ~~Add different skill levels, not just max?~~
     -   [ ] Add support for upgrade information
     -   [ ] Perhaps add support for calculating stages, etc?
--   [ ] Add a subparser for other commands
--   [ ] Add operator comparison?
--   [ ] Add stage functionality?
--   [ ] Add item descriptions?
--   [ ] Add recruitment tag functionality?
+-   [x] ~~Add a subparser for other commands~~
+-   [x] ~~Add recruitment tag functionality~~
+-   [ ] Add recruitment tag quality of life updates
+    -   [ ] Add the ability for people to make their own aliases/shortcuts
+    -   [ ] Make a more consistant priority system
+    -   [ ] More options to control info (eg. contol rarity being displayed, etc)
+    -   [ ] Highlight 'good recruitment combos' (ie. anything with only 4, 5, or 6 stars)
+-   [ ] Restructure the project and make it look neater and ready for more subcommands
 -   [ ] Add idk other functionality when needed
+    -   [ ] Add operator comparison?
+    -   [ ] Add stage functionality?
+    -   [ ] Add item descriptions?

@@ -1,0 +1,31 @@
+Starter 	      新手
+Senior+Operator 资深干员
+Top+Operator 	  高级资深干员
+Melee 		      近战位
+Ranged 		      远程位
+Guard 		      近卫
+Medic 		      医疗
+Vanguard 	      先锋
+Caster 		      术师
+Sniper 		      狙击
+Defender 	      重装
+Supporter 	    辅助
+Specialist 	    特种
+Healing 	      治疗
+Support 	      支援
+DPS 		        输出
+AOE 		        群攻
+Slow 		        减速
+Survival 	      生存
+Defense       	防护
+Debuff 		      削弱
+Shift 		      位移
+Crowd+Control 	控场
+Nuker 		      爆发
+Summon 		      召唤
+Fast-Redeploy 	快速复活
+Dp-Recovery 	  费用回复
+Robot 		      支援机械
+
+format: formatted-input  chinese-equivalent
+just some formatted english tag to chinese name conversion

@@ -124,5 +124,5 @@ class Operator:
 
 if __name__ == "__main__":
     sys.stdout.write(
-        "Wrong python file to run! The main file to run is `scraper.py`.\n\n"
+        "Wrong python file to run! The main file to run is `ark.py`.\n\n"
     )

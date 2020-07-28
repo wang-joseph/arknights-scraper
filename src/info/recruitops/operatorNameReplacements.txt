@@ -1,0 +1,5 @@
+Зима    Zima
+Гум     Gummy
+Истина  Istina
+
+Replacements for the non english names in thejson

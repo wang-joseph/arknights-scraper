@@ -9,7 +9,8 @@ from scraper_functions import scrape_json
 # last edited: 09/07/2020
 # version: 1.0.0
 # author: Joseph Wang (EmeraldEntities)
-# description: These functions are to parse information from Aceship's excellent JSON file.
+# description: These functions are to parse information
+#              from Aceship's excellent JSON file.
 
 
 def filter_description(description):
@@ -356,5 +357,5 @@ def parse_skills(operator_dict, tiers_to_check):
 
 if __name__ == "__main__":
     sys.stdout.write(
-        "Wrong python file to run! The main file to run is `scraper.py`.\n\n"
+        "Wrong python file to run! The main file to run is `ark.py`.\n\n"
     )

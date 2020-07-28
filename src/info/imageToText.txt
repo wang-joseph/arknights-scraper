@@ -22,4 +22,4 @@
 format:
 link-to-image     text-equivalent
 
-This is mainly used because the json file provided by gamepress
+This is mainly used because I want to get the certain level from the images

@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import requests
 import argparse
 import sys
@@ -19,80 +17,13 @@ from scraper_functions import (
 from global_parser_functions import parse_stats
 
 # created 06/06/2020
-# last edited: 09/07/2020
-# version: 2.1.0
+# last edited: 27/07/2020
+# version: 2.2.0
 # author: Joseph Wang (EmeraldEntities)
+# description: a CLI scraper designed to find all information about an
+#              operator on gamepress, etc.
 
 ### FUNCTIONS ########################
-
-
-def initialize_arguments():
-    """Initializes cmd arguments and flags and returns the arguments."""
-    # Using the argparse library, initializes cmd arguments
-    parser = argparse.ArgumentParser(
-        description="Find information about any operator in Arknights!"
-    )
-
-    skillsGroup = parser.add_mutually_exclusive_group()
-    skillsGroup.add_argument(
-        "-s", "--skills",
-        help="""Displays the max tier of each of the
-                specified operator's skills.
-                """,
-        action="store_true"
-    )
-    skillsGroup.add_argument(
-        "-v", "--vskills",
-        help="""Stands for 'verbose skills'. Displays the 1st tier, 
-                7th tier, and M3 (if possible) tier of 
-                each of the specified operator's skills.
-                """,
-        action='store_true'
-    )
-
-    parser.add_argument(
-        "operator",
-        help="""The operator you want information about. 
-                For spaces, use a '-' in place of the space. 
-                No special characters.
-                """
-    )
-
-    parser.add_argument(
-        "-i", "--info",
-        help="Displays the specified operator's stats.",
-        action="store_true"
-    )
-    parser.add_argument(
-        "-t", "--talent",
-        help="Displays the specified operator's talent.",
-        action="store_true"
-    )
-    parser.add_argument(
-        "-b", "--base",
-        help="Displays the specified operator's base skills.",
-        action="store_true"
-    )
-    parser.add_argument(
-        '-g', '--gamepress',
-        help="""Forces the parser to only use gamepress.gg.
-                Use this if your internet connection is really slow.
-                """,
-        action="store_true"
-    )
-
-    parser.add_argument(
-        "-a", "--all",
-        help="""Displays all the information about this 
-                specified operator. Unless paired with the -v tag, 
-                this will only show the max tier of each skill 
-                this operator has.
-                """,
-        action="store_true"
-    )
-    args = parser.parse_args()
-
-    return args
 
 
 def get_operator_dict(operator):
@@ -324,15 +255,17 @@ def parse_info_from_json(args, operator_dict, operator_key):
 
     # This is repeated but I feel that's fine for abstraction
     if args.vskills:
-        skill_tiers_to_check = ([1, 7, 10]
-                                if operator_dict['rarity'] + 1 > 3
-                                else [1, 7]
-                                )
+        skill_tiers_to_check = (
+            [1, 7, 10]
+            if operator_dict['rarity'] + 1 > 3
+            else [1, 7]
+        )
     else:
-        skill_tiers_to_check = ([10]
-                                if operator_dict['rarity'] + 1 > 3
-                                else [7]
-                                )
+        skill_tiers_to_check = (
+            [10]
+            if operator_dict['rarity'] + 1 > 3
+            else [7]
+        )
 
     check_skills = args.skills or args.vskills
 
@@ -372,8 +305,6 @@ def parse_info_from_json(args, operator_dict, operator_key):
 
     return operator
 
-    ######################################
-
 
 def set_operator_properties(args, conds, stats_conds, operator):
     # Checking and calling the appropriate functions
@@ -390,11 +321,12 @@ def set_operator_properties(args, conds, stats_conds, operator):
     if stats_flag or args.all:
         operator.set_stats(stats_func(*stats_args))
 
+######################################
 
-def main():
+
+def main(args: argparse.Namespace) -> None:
     spinner = Halo(text="Fetching...", spinner="dots", color="magenta")
     # Initialize the arguments for cmd purposes
-    args = initialize_arguments()
     spinner.start()
 
     # TODO: reformat this code to make it more logical and stuff
@@ -453,4 +385,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    sys.stdout.write(
+        "Wrong python file to run! The main file to run is `ark.py`.\n\n"
+    )

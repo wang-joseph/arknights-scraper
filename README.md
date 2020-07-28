@@ -26,7 +26,7 @@ The only important file (and main file) is `ark.py`. Everything other file conta
 
 All command usage details were taken from the argparse `-h` command.
 
-##### scraper
+#### scraper
 
 aliases: `{s,scrap}`
 
@@ -51,7 +51,7 @@ Find information about any operator in Arknights!
 -   `-g, --gamepress` Forces the parser to only use gamepress.gg. Use this if your internet connection is really slow.
 -   `-a, --all` Displays all the information about this specified operator. Unless paired with the -v tag, this will only show the max tier of each skill this operator has.
 
-##### recruitop
+#### recruitop
 
 aliases: `{r, recruit, ro}`
 

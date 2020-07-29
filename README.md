@@ -70,6 +70,7 @@ Find all ops that match combinations of tags!
 **Optional Arguments:**
 
 -   `-h, --help` show this help message and exit
+-   `-b, --beneficial` Only displays the combinations that only give you a 4, 5 or 6 star.
 
 ## To-Do
 
@@ -88,8 +89,8 @@ Find all ops that match combinations of tags!
 -   [ ] Add recruitment tag quality of life updates
     -   [ ] Add the ability for people to make their own aliases/shortcuts
     -   [ ] Make a more consistant priority system
-    -   [ ] More options to control info (eg. contol rarity being displayed, etc)
-    -   [ ] Highlight 'good recruitment combos' (ie. anything with only 4, 5, or 6 stars)
+    -   [x] ~~More options to control info (eg. contol rarity being displayed, etc)~~
+    -   [x] ~~Highlight 'good recruitment combos' (ie. anything with only 4, 5, or 6 stars)~~
 -   [ ] Restructure the project and make it look neater and ready for more subcommands
 -   [ ] Add idk other functionality when needed
     -   [ ] Add operator comparison?

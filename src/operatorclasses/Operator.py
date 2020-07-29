@@ -113,12 +113,15 @@ class Operator:
     # stats for the operator every single time we want them...
     # TODO: Maybe I could merge stats into properties?
     def get_all_stats(self):
+        """Retrieves all this operator's stats."""
         return self._stats
 
     def set_stats(self, stats):
+        """Sets this Operator's stats to a provided parameter."""
         self._stats = stats
 
     def has_stats(self):
+        """Checks to see if this Operator has stats set or not."""
         return (not (self._stats == {}) and not (self._stats == None))
 
 

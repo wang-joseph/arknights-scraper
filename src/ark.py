@@ -106,6 +106,14 @@ def initialize_recruit_args(
         type=str
     )
 
+    parser.add_argument(
+        "-b", "--beneficial",
+        help="""Only displays the combinations that only give you a
+                4, 5 or 6 star.
+                """,
+        action="store_true"
+    )
+
     parser.set_defaults(
         func=use_recruitment_parser
     )

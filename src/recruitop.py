@@ -98,17 +98,210 @@ def initialize_tag_dictionary(
 
 
 def is_not_top_op(operator: Type[TaggedOperator]) -> bool:
-    if operator.get_rarity() >= 6:
-        return False
-
-    return True
+    """Determines if an Operator has a rarity of 6 and returns True if not."""
+    return (operator.get_rarity() < 6)
 
 
 def get_formatted_op(operator: Type[TaggedOperator]) -> str:
+    """Returns a formatted string consisting of an Operator's name and rarity."""
     return f"{operator.get_name()}: {operator.get_rarity()}*"
+
+
+def validate_combo(
+    combo: Sequence[str],
+    tag_dict: Dict[str, TaggedOperator],
+    translation_dict: Dict[str, str],
+    reversed_translation_dict: Dict[str, str]
+) -> Optional[MetadataPrioritySet]:
+    priority_values = {
+        '1': 0,
+        '2': -1,
+        '3': 0,
+        '4': 1,
+        '5': 2,
+        '6': 3,
+    }
+
+    # Every combo will always have at least 1 entity, so
+    # we want the starting selection of operators all
+    # from the first tag, which we then splice out and then
+    # loop using the remaining tags.
+    #
+    # note: copy is reallllyyy important
+    # TODO: maybe make this better
+    possible_ops = (
+        tag_dict[combo[0]].copy()
+        if translation_dict['top-operator'] in combo
+        else set(
+            filter(
+                is_not_top_op,
+                tag_dict[combo[0]].copy()
+            )
+        )
+    )
+
+    # This is to let us find out the tags we used to get this combo
+    converted_string = reversed_translation_dict[combo[0]]
+
+    # We have to loop over the rest of the tags and get the
+    # intersection of the current set of operators (from the first tag)
+    # and the rest of the operators from the rest of the tags.
+    for tag in combo[1:]:
+        # To prevent looping over this twice, we just get
+        # the converted chinese-to-english
+        # tag string here, and use if it we need it.
+        converted_string += " + " \
+            + reversed_translation_dict[tag]
+        # TODO: maybe make this better
+        new_ops = (
+            tag_dict[tag].copy()
+            if translation_dict['top-operator'] in combo
+            else set(
+                filter(
+                    is_not_top_op,
+                    tag_dict[tag].copy()
+                )
+            )
+        )
+        possible_ops &= new_ops
+
+        if len(possible_ops) <= 0:
+            break  # oh no its a bad break
+
+    # If there are operators that satisfy all the tags, this
+    # bit of code will run, returning a MetadataPrioritySet.
+    # If no operator satisfies them all, this function will return
+    # None, indicating no tags.
+    if len(possible_ops) > 0:
+        # Sorting all the possible ops in order of rarity
+        possible_ops = sorted(
+            possible_ops,
+            key=lambda o: o.get_rarity(),
+            reverse=True
+        )
+
+        current_match = MetadataPrioritySet(
+            possible_ops,
+            priority_values
+        )
+
+        current_match.add_data(
+            'tags',
+            converted_string
+        )
+
+        return current_match
+
+    return None
+
+
+def get_all_combinations(
+    proper_tags: Sequence[str],
+    tag_dict: Dict[str, TaggedOperator],
+    translation_dict: Dict[str, str],
+    reversed_translation_dict: Dict[str, str]
+) -> List[MetadataPrioritySet]:
+
+    all_matches = []
+    # Since ops only have 3 tags, we get all combinations with 1-3
+    # length
+    for amount_of_tags in range(1, 4):
+        all_combos = itertools.combinations(
+            proper_tags,
+            amount_of_tags
+        )
+        for combo in all_combos:
+            current_match = validate_combo(
+                combo,
+                tag_dict,
+                translation_dict,
+                reversed_translation_dict
+            )
+
+            if current_match != None:
+                all_matches.append(current_match)
+
+    return all_matches
+
+
+def format_selections(
+    args: argparse.Namespace,
+    all_sorted_selection: List[MetadataPrioritySet]
+) -> List[str]:
+    # Depending on whether the beneficial arg is specified,
+    # one of two different functions could be called.
+    if args.beneficial:
+        return format_beneficial_tags(all_sorted_selection)
+    else:
+        return format_normal_tags(all_sorted_selection)
+
+
+def format_beneficial_tags(
+    all_sorted_selection: List[MetadataPrioritySet]
+) -> List[str]:
+    messages = ["Only beneficial tags:\n"]
+
+    for op_set in all_sorted_selection:
+        # We need to make sure this has no 3 or less stars, so we
+        # take the last element of this sorted set and check
+        # its rarity. If it's higher than 3, the rest of the set
+        # should be higher than 3.
+        if list(op_set.get_intrinsic_set())[-1].get_rarity() > 3:
+            messages.append(
+                op_set.get_data('tags')
+            )
+            messages.append(
+                ", \n".join(
+                    list(map(
+                        get_formatted_op,
+                        op_set.get_intrinsic_set_copy()
+                    ))
+                )
+                + "\n"
+            )
+
+    if len(messages) == 1:  # since we initialize it with one element
+        messages.append("No good combinations found...")
+
+    return messages
+
+
+def format_normal_tags(
+    all_sorted_selection: List[MetadataPrioritySet]
+) -> List[str]:
+    messages = []
+
+    for op_set in all_sorted_selection:
+        # Since the set is sorted, we can simply get the rarity
+        # of the last operator in the set and check tot see if
+        # the rarity is greater than 3. If so, we can
+        # assume everything in the set is greater than 3 stars,
+        # making this a good combination, and we mark
+        # it appropriately.
+        messages.append(
+            op_set.get_data('tags')
+            if (
+                list(op_set.get_intrinsic_set())[-1]
+                .get_rarity() <= 3
+            )
+            else f"***Good***\n{op_set.get_data('tags')}"
+        )
+        messages.append(
+            ", \n".join(
+                list(map(
+                    get_formatted_op,
+                    op_set.get_intrinsic_set_copy()
+                ))
+            )
+            + "\n"
+        )
+
+    return messages
+
 ######################################
 
 
+# TODO: this can be multiple functions
 def main(args: argparse.Namespace) -> None:
     spinner = Halo(text="Retrieving...", spinner="dots", color="magenta")
     spinner.start()
@@ -125,17 +318,19 @@ def main(args: argparse.Namespace) -> None:
 
         tag_dict = initialize_tag_dictionary(op_list)
 
+        # Get both a proper translation from en to zh dict
+        # and a reversed dict initialized for proper tag conversion
         translation_dict = read_lines_into_dict(
             './info/recruitops/tagConversions.txt'
         )
-        # TODO: this is probably unnecessary
         reversed_translation_dict = read_lines_into_dict(
             './info/recruitops/formattedTagConversions.txt',
             reversed=True
         )
 
+        # Take in the user tags and find their proper, translated names
+        # so that they can be used with the json.
         proper_tags = []
-
         # TODO: this tag process could probably be more optimized
         for tag in args.tags:
             if tag.lower() in translation_dict.keys():
@@ -146,101 +341,24 @@ def main(args: argparse.Namespace) -> None:
                     'One or more of the tags does not exist.'
                 )
 
-        messages = []
-        all_matches = []
-        priority_values = {
-            '1': 0,
-            '2': -1,
-            '3': 0,
-            '4': 1,
-            '5': 2,
-            '6': 3,
-        }
+        # Find all possible combinations of each tag combo
+        all_matches = get_all_combinations(
+            proper_tags,
+            tag_dict,
+            translation_dict,
+            reversed_translation_dict
+        )
 
-        # Since ops only have 3 tags, we get all combinations with 1-3
-        # length
-        for amount_of_tags in range(1, 4):
-            all_combos = itertools.combinations(
-                proper_tags,
-                amount_of_tags
-            )
-            for combo in all_combos:
-
-                # Every combo will always have at least 1 entity, so
-                # we want the starting selection of operators all
-                # from the first tag, which we then splice out and then
-                # loop using the remaining tags.
-
-                # note: copy is reallllyyy important
-                # TODO: maybe make this better
-                possible_ops = (
-                    tag_dict[combo[0]].copy()
-                    if translation_dict['top-operator'] in combo
-                    else set(
-                        filter(
-                            is_not_top_op,
-                            tag_dict[combo[0]].copy()
-                        )
-                    )
-                )
-
-                converted_string = reversed_translation_dict[combo[0]]
-                for tag in combo[1:]:
-                    # To prevent looping over this twice, we just get
-                    # the converted chinese-to-english
-                    # tag string here, and use if it we need it.
-                    converted_string += " + " \
-                        + reversed_translation_dict[tag]
-                    # TODO: maybe make this better
-                    new_ops = (
-                        tag_dict[tag].copy()
-                        if translation_dict['top-operator'] in combo
-                        else set(
-                            filter(
-                                is_not_top_op,
-                                tag_dict[tag].copy()
-                            )
-                        )
-                    )
-                    possible_ops &= new_ops
-
-                    if len(possible_ops) <= 0:
-                        break  # oh no its a bad break
-
-                if len(possible_ops) > 0:
-                    current_match = MetadataPrioritySet(
-                        possible_ops,
-                        priority_values
-                    )
-
-                    current_match.add_data(
-                        'tags',
-                        converted_string
-                    )
-
-                    all_matches.append(current_match)
-
-        sorted_selection = sorted(
+        # Sort based on priority and format all the possible
+        # combinations.
+        #
+        # Consists of all the tag combinations and results, sorted
+        # by priority.
+        all_sorted_selection = sorted(
             all_matches,
             key=lambda s: s.get_priority()
         )
-
-        for op_set in sorted_selection:
-            sorted_op_set = sorted(
-                op_set.get_intrinsic_set_copy(),
-                key=lambda o: o.get_rarity(),
-                reverse=True
-            )
-            messages.append(op_set.get_data('tags'))
-            messages.append(
-                ", \n".join(
-                    list(map(
-                        get_formatted_op,
-                        sorted_op_set
-                    ))
-                )
-                + "\n"
-            )
+        messages = format_selections(args, all_sorted_selection)
 
         # Print the recruitment results
         spinner.succeed("Success!")

@@ -1,8 +1,11 @@
+"""A module with functions related to retrieving information from
+local files."""
+
 import re
 import sys
 
 # created 01/07/2020
-# last edited: 27/07/2020
+# last edited: 29/07/2020
 # version: 1.2.0
 # author: Joseph Wang (EmeraldEntities)
 # description: These are just basic input functions that I'll use
@@ -17,7 +20,7 @@ def read_line_from_file(file):
     return result
 
 
-def read_lines_into_dict(file, reversed=False):
+def read_lines_into_dict(file, reverse=False):
     """Reads multiple lines from a file and returns it as a dict.
 
     If the reversed flag is specified, the dict will be made with the
@@ -35,7 +38,7 @@ def read_lines_into_dict(file, reversed=False):
             line_info[0] = line_info[0].replace('+', ' ')
             line_info[1] = line_info[1].replace('+', ' ')
 
-            if not reversed:
+            if not reverse:
                 new_dict[line_info[0]] = line_info[1]
             else:
                 new_dict[line_info[1]] = line_info[0]

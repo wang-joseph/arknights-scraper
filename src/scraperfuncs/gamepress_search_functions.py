@@ -1,25 +1,27 @@
-import re
-import json
-import sys
-import requests
-from bs4 import Tag
+"""This module contains all the functions necessary for gathering
+information from Gamepress."""
 
-from scraper_functions import scrape_website
-from input_reader import read_line_from_file
+import re
+import sys
+from bs4 import Tag
+from inputfuncs.input_reader import read_line_from_file
+from inputfuncs.scraper_functions import scrape_website
 
 # created 01/07/2020
-# last edited: 07/07/2020
-# version: 1.3.0
+# last edited: 30/07/2020
+# version: 1.3.2
 # author: Joseph Wang (EmeraldEntities)
 
 
 def find_siblings_of_breakpoint(soupobj):
-    """Gets all the text from the sibling of a breakpoint and return as list of strings.
+    """Gets all the text from the sibling of a breakpoint and return as
+    list of strings.
 
-    Sometimes, a description could be formatted with a br, which 
+    Sometimes, a description could be formatted with a br, which
     bs4 doesn't work well with when doing o.text.strip().
-    To solve that, we find the <br>'s sibling text and format the 
-    text ourselves, adding a `\\n` wherever needed.
+    To solve that, we find the <br>'s sibling text (both previous and
+    next siblings), take the text, and format the text ourselves,
+    adding a `\\n` wherever needed.
 
     If a <br> tag isn't found, just return the object's text, stripped.
     """
@@ -35,26 +37,26 @@ def find_siblings_of_breakpoint(soupobj):
         # in the same block?? execute this man
         for sibling in brkpoint[0].previous_siblings:
             if isinstance(sibling, Tag):
-                if sibling.name == "br":
+                if sibling.name == 'br':
                     break
 
                 prev_brk_text.append(sibling.text.strip())
             else:
                 prev_brk_text.append(str(sibling))
         prev_brk_text.reverse()
-        prev_brk_text[-1] += "\n"
+        prev_brk_text[-1] += '\n'
         description_list += prev_brk_text
 
         # We only need to get the previous siblings for the
         # first <br> tag. Then we can just get the
         # next siblings for every other <br> tag
         # to complete the description.
-        for br in brkpoint:
+        for br_tag in brkpoint:
             next_brk_text = []
 
-            for sibling in br.next_siblings:
+            for sibling in br_tag.next_siblings:
                 if isinstance(sibling, Tag):
-                    if sibling.name == "br":
+                    if sibling.name == 'br':
                         break
 
                     next_brk_text.append(sibling.text.strip())
@@ -70,6 +72,16 @@ def find_siblings_of_breakpoint(soupobj):
 
 # Specific section locators
 def find_talents(soup, images_dict):
+    """Locates the talents section from the specified BeautifulSoup
+    object (which should contain an operator page), formates the text,
+    and returns a list of strings containing the formatted talents.
+
+    The `images_dict` dictionary is needed to convert images into their
+    CLI equivalents.
+
+    The talents are located using the 'talent-cell' class as a
+    startpoint, and formatting the text found in there.
+    """
     all_cells = soup.find_all("div", "talent-cell")
 
     if len(all_cells) == 0:
@@ -117,6 +129,16 @@ def find_talents(soup, images_dict):
 
 
 def find_base_skills(soup, images_dict):
+    """Locates the base skills section in the provided BeautifulSoup
+    object (which should contain an operator page), formats the text,
+    and returns a list of formatted messages.
+
+    The `images_dict` dictionary is required to convert images into
+    their CLI equivalents.
+
+    The 'building-buff-cell' class is used to find where the
+    base skills are.
+    """
     building_cells = soup.find_all("div", "building-buff-cell")
 
     if len(building_cells) == 0:
@@ -157,20 +179,20 @@ def find_base_skills(soup, images_dict):
 def create_stats_json(soup, operator):
     """Creates the JSON file (dictionary) containing all the operator's stats, and returns it.
 
-    This dictionary MUST have the basic operator stats 
-    (ie. atk, def, hp) and will return `None` if these 
-    stats are not found (if the JSON file I use for these stats is 
+    This dictionary MUST have the basic operator stats
+    (ie. atk, def, hp) and will return `None` if these
+    stats are not found (if the JSON file I use for these stats is
     down, or the operator cannot be found.)
 
-    This function will first look and load the basic stats 
+    This function will first look and load the basic stats
     (ATK, DEF, HP) for each stage.
-    Then it will attempt to load (Block, Cost, Res) from the 
+    Then it will attempt to load (Block, Cost, Res) from the
     operator website under the variable myStats.
-    Finally, it will attempt to load (Redeploy Time, Attack Interval) 
+    Finally, it will attempt to load (Redeploy Time, Attack Interval)
     from the operator website from a different section.
     Thus, this function will look 3 times for the specified attributes.
 
-    If any of these searches fails (except for the first one, 
+    If any of these searches fails (except for the first one,
     which is essential), this function will simply set
     that attribute's value as -1, indicating failure to retrieve.
     """
@@ -181,20 +203,24 @@ def create_stats_json(soup, operator):
     # that would be a waste of time
     # for requests that don't need this info.
     stats_url = read_line_from_file(
-        "./info/url.txt") + "/stat-rankings?_format=json"
+        "./info/scraper/url.txt") + "/stat-rankings?_format=json"
     stats_info = scrape_website(stats_url)
 
-    if stats_info == None:
+    if stats_info is None:
+        # print("Could not get the JSON file!")
         return {}  # Request failed
 
     stats_json = None
     for json_file in stats_info.json():
         # for json_file in stats_info: # debugging
-        if json_file["title"] == operator:
+        # Find the title so that names like GreyThroat don't screw
+        # up the parser.
+        if json_file["title"].title() == operator:
             stats_json = json_file
             break  # whoa a bad break
 
-    if stats_json == None:
+    if stats_json is None:
+        # print("No operator found!")
         return {}  # No operator found in the big JSON file
 
     # Find myStats from the operator's site
@@ -202,7 +228,7 @@ def create_stats_json(soup, operator):
     good_scripts = soup.find_all('script', '')
     for script in good_scripts:
         if re.search(r"myStats =", str(script)):
-            myStats_script = script
+            mystats_script = script
             break  # oh no another bad break
 
     levels = ["ne", "e1", "e2"]
@@ -213,7 +239,7 @@ def create_stats_json(soup, operator):
     for attr in wanted_attributes:
         all_stats = (
             re.findall(
-                fr'"{attr}": "(\d+)"', str(myStats_script)
+                fr'"{attr}": "(\d+)"', str(mystats_script)
             )
         )
 
@@ -226,11 +252,11 @@ def create_stats_json(soup, operator):
         # We can't just check for 3 cause some operators don't have E2s
         # or E1s
         if len(all_stats) != 0:
-            for stat in range(len(all_stats)):
+            for stat, lvl in zip(all_stats, levels):
                 # We're gonna manually add the stat to our
                 # stats_json dictionary so we can format it later
-                stats_json[levels[stat] + "_" + attr] = \
-                    int(all_stats[stat])
+                stats_json[lvl + "_" + attr] = \
+                    int(stat)
         else:
             # Just to make sure we don't break the program later
             # if there's a bad parse somewhere
@@ -240,9 +266,9 @@ def create_stats_json(soup, operator):
             # level_atk in stats_dict is empty. If it has something in
             # level_atk but nothing here, it'll break, but if it has
             # nothing in level_atk but something here, nothing happens.
-            for stat in range(len(levels)):
+            for lvl in levels:
                 # -1 to symbolize failure
-                stats_json[levels[stat] + "_" + attr] = -1
+                stats_json[lvl + "_" + attr] = -1
 
     # other_stats will provide us with the atk speed
     # and redeploy time stats.
@@ -250,9 +276,9 @@ def create_stats_json(soup, operator):
 
     if len(other_stats) > 0:
         # Convert every object into their stripped strings counterpart
-        for stat in range(len(other_stats)):
+        for stat in other_stats:
             cur_stats_list = []
-            for string in other_stats[stat].stripped_strings:
+            for string in stat.stripped_strings:
                 cur_stats_list.append(string)
 
             if "Attack Interval" in cur_stats_list:
@@ -277,6 +303,16 @@ def create_stats_json(soup, operator):
 
 
 def find_skills(soup, tiers_to_check):
+    """Locates the skills section in the provided BeautifulSoup
+    object (which should contain an operator page), formats the text,
+    and returns a list of formatted messages.
+
+    The tiers-to-check list is to choose a certain amount of skill
+    tiers to display.
+
+    The 'skill-cell' class is used to find where the skills are
+    stored.
+    """
     # skill-cell is the class name that all skill blocks have,
     # so we need to get them all
     all_skills = soup.find_all('div', 'skill-cell')
@@ -313,14 +349,14 @@ def find_skills(soup, tiers_to_check):
             else:
                 sp_string += f"{'Lv' + tier[-1:]:15}"
 
-            for i in range(len(max_level)):
+            for i, lvl in enumerate(max_level):
                 # Since the page uses <br> to split text,
                 # we're gonna find the <br>, find the text before
                 # and after it, and use it for ourselves too.
                 #
                 # This will work for multiple br tags
                 max_level[i] = "".join(
-                    find_siblings_of_breakpoint(max_level[i])
+                    find_siblings_of_breakpoint(lvl)
                 )
 
             # Add some informative text to max level
@@ -351,9 +387,11 @@ def find_skills(soup, tiers_to_check):
 
             # Add a '-' * 25 and/or \n to the last item in description
             # for consistent formatting!!!!!
-            messages = (messages + description + ['--------------------\n']
-                        if len(tiers_to_check) > 1
-                        else messages + description)
+            messages = (
+                messages + description + ['--------------------\n']
+                if len(tiers_to_check) > 1
+                else messages + description
+            )
 
         # Get rid of the last \n in all messages for
         # consistent formatting!!!!!!

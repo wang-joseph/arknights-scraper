@@ -1,39 +1,47 @@
-import requests
+"""A module that contains functions related to retrieving information
+from a web source, instead of a file."""
+
 import sys
-from input_reader import read_line_from_file, read_lines_into_dict
+import requests
+from inputfuncs.input_reader import (
+    read_line_from_file,
+    read_lines_into_dict
+)
 
 # created 01/07/2020
-# last edited: 07/07/2020
-# version: 1.2.0
+# last edited: 29/07/2020
+# version: 1.2.1
 # author: Joseph Wang (EmeraldEntities)
 # description: A collection of various scraping functions
 # that this program uses
 
 
 def scrape_website(url):
-    """Sends a GET request to a certain url and returns the Response object if status code is 200.
+    """Sends a GET request to a certain url and returns the Response
+    object if status code is 200.
 
     Returns None if the server responds with a different code.
     """
     result = requests.get(url)
 
     # if (True): # debugging
-    if (result.status_code == 200):
+    if result.status_code == 200:
         return result
 
     return None
 
 
 def scrape_for_operator(operator):
-    """Sends a GET request for a certain operator and returns the Response object if status code is 200.
+    """Sends a GET request for a certain operator and returns the
+    Response object if status code is 200.
 
-    Returns None (as per scrape_website() implementation) if server 
+    Returns None (as per scrape_website() implementation) if server
     responds with a different code.
     """
     url_replacement_names = read_lines_into_dict(
-        "./info/urlOperatorReplacements.txt")
+        "./info/scraper/urlOperatorReplacements.txt")
 
-    operator_url = read_line_from_file("./info/url.txt")
+    operator_url = read_line_from_file("./info/scraper/url.txt")
     operator_url = (
         operator_url + "operator/" + operator
         if operator not in url_replacement_names.keys()
@@ -45,9 +53,10 @@ def scrape_for_operator(operator):
 
 
 def scrape_json(json_url):
-    """Sends a GET request to a JSON url for a certain operator and returns the Response object if status code is 200.
+    """Sends a GET request to a JSON url for a certain operator and
+    returns the Response object if status code is 200.
 
-    Returns None (as per scrape_website() implementation) if server 
+    Returns None (as per scrape_website() implementation) if server
     responds with a different code.
     """
 

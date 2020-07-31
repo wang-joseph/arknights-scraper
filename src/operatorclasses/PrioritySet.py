@@ -1,10 +1,15 @@
+"""A module that contains the PrioritySet class
+(that is, a class that holds a set of tagged operators (currently),
+but also an intrinsic 'priority' that can be compared with other
+priority sets)."""
+
 import sys
 from typing import AbstractSet, Dict
 
-from operatorclasses.TaggedOperator import TaggedOperator
+from operatorclasses.tagged_operator import TaggedOperator
 
 # created 28/06/2020
-# last edited: 28/07/2020
+# last edited: 29/07/2020
 # version: 1.0.0
 # author: Joseph Wang (EmeraldEntities)
 # description: A priority set (that is, a class that hols a
@@ -13,7 +18,8 @@ from operatorclasses.TaggedOperator import TaggedOperator
 
 
 class PrioritySet:
-    """This class stores a set of operators and also contains a priority based on a dictionary that is compared against the set.
+    """This class stores a set of operators and also contains a
+    priority based on a dictionary that is compared against the set.
 
     This way, the functionality of a set is preserved, but now
     there is an additional "priority" attribute that can be used
@@ -30,15 +36,15 @@ class PrioritySet:
     """
 
     def __init__(
-        self,
-        intrinsic_set: AbstractSet[TaggedOperator],
-        priority_dict: Dict[str, int]
+            self,
+            intrinsic_set: AbstractSet[TaggedOperator],
+            priority_dict: Dict[str, int]
     ):
         """Initializes a PrioritySet.
 
         Keyword arguments:
         intrinsic_set -- set, the intrinsic set to be stored
-        priority_dict -- dict, a dict with the values of 
+        priority_dict -- dict, a dict with the values of
         attributes in the set
         """
 
@@ -64,7 +70,7 @@ class PrioritySet:
 
         Each attribute of the set will be checked against the dict and
         a priority score will be assigned. Then, the current score
-        will be decreased based on how long the set is 
+        will be decreased based on how long the set is
         (implemented -= len(self._intrinsic_set) * 3)
 
         Keyword arguments:

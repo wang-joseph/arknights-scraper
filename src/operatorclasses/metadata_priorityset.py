@@ -1,11 +1,15 @@
+"""A module that contains the MetadataPrioritySet class, which
+extends from a priorityset class and allows pieces of metadata, like
+tags, to be attached to the priority set."""
+
 import sys
 from typing import AbstractSet, Optional, Dict
 
-from operatorclasses.TaggedOperator import TaggedOperator
-from operatorclasses.PrioritySet import PrioritySet
+from operatorclasses.tagged_operator import TaggedOperator
+from operatorclasses.priorityset import PrioritySet
 
 # created 28/06/2020
-# last edited: 28/07/2020
+# last edited: 29/07/2020
 # version: 1.0.0
 # author: Joseph Wang (EmeraldEntities)
 # description: A priority set, but now it can store various
@@ -34,9 +38,9 @@ class MetadataPrioritySet(PrioritySet):
     """
 
     def __init__(
-        self,
-        intrinsic_set: AbstractSet[TaggedOperator],
-        priority_dict: Dict[str, int]
+            self,
+            intrinsic_set: AbstractSet[TaggedOperator],
+            priority_dict: Dict[str, int]
     ) -> None:
         """Initializes a MetadataPrioritySet
 
@@ -45,7 +49,7 @@ class MetadataPrioritySet(PrioritySet):
 
         Keyword arguments:
         intrinsic_set -- set, the intrinsic set to be stored
-        priority_dict -- dict, a dict with the values of 
+        priority_dict -- dict, a dict with the values of
         attributes in the set
         """
         super().__init__(intrinsic_set, priority_dict)
@@ -69,7 +73,7 @@ class MetadataPrioritySet(PrioritySet):
 
     def has_data(self, key: str) -> bool:
         """Checks to see if a certain key exists in the metadata."""
-        return (key in self._metadata.keys())
+        return key in self._metadata.keys()
 
     def get_data(self, key: str) -> Optional[str]:
         """Retrieves data from the metadata dict using a key."""

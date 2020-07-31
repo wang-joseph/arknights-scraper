@@ -1,7 +1,10 @@
+"""A basic Operator class that can be created for parsing/testing
+that stores some essential information about each Operator."""
+
 import sys
 
 # created 06/06/2020
-# last edited: 07/07/2020
+# last edited: 29/07/2020
 # version: 1.2.0
 # author: Joseph Wang (EmeraldEntities)
 # description: A basic operator object that can be created
@@ -9,17 +12,18 @@ import sys
 
 
 class Operator:
-    """The class for creating Operator objects, which stores information about Operators.
+    """The class for creating Operator objects, which stores information
+    about Operators.
 
-    This solely exists so that operator information can be 
-    held in a convienient location, and can be reused for other 
+    This solely exists so that operator information can be
+    held in a convienient location, and can be reused for other
     future features.
 
     Public variables:
-    name -- string
-    rarity -- int
-    profession -- string
-    description -- list
+    name -- string,
+    rarity -- int,
+    profession -- string,
+    description -- list,
     tags -- list
 
     Public methods:
@@ -42,30 +46,39 @@ class Operator:
     """
 
     def __init__(
-        self,
-        name,
-        rarity,
-        profession,
-        description=["No description available!"],
-        tags=["No tags available!"]
+            self,
+            name,
+            rarity,
+            profession,
+            description=None,
+            tags=None
     ):
         """Initializes an Operator object.
 
         Keyword arguments:
         name -- string, the name of the operator
-        rarity -- int, the rarity of the operator as a number 
+        rarity -- int, the rarity of the operator as a number
         (5 star = 5, etc.)
         profession -- string, what class the operator is
-        description -- list, a list containing the description strings 
-        of an operator (default ["No description available!"])
-        tags -- list, a list containing the tags of this operator 
-        (default: ["No tags available!"])
+        description -- list, a list containing the description strings
+        of an operator (default: None)
+        tags -- list, a list containing the tags of this operator
+        (default: None)
         """
+
         self.name = name
         self.rarity = rarity
         self.profession = profession
-        self.description = description
-        self.tags = tags
+        self.description = (
+            description
+            if description is not None
+            else ["No description available!"]
+        )
+        self.tags = (
+            tags
+            if tags is not None
+            else ["No tags available!"]
+        )
 
         self._stats = {}
         self._properties = {}
@@ -84,8 +97,9 @@ class Operator:
             self._properties[prop] = value
 
     def get_property(self, prop):
-        """Return the specified property of this operator, which is normally a list, if it has it. Return None otherwise."""
-        if (self.has_property(prop)):
+        """Return the specified property of this operator, which is
+        normally a list, if it has it. Return None otherwise."""
+        if self.has_property(prop):
             return self._properties[prop]
         else:
             return None
@@ -111,9 +125,8 @@ class Operator:
 
     # I don't like this, but this is so that we don't need to load in
     # stats for the operator every single time we want them...
-    # TODO: Maybe I could merge stats into properties?
     def get_all_stats(self):
-        """Retrieves all this operator's stats."""
+        """Retrieves all this Operator's stats."""
         return self._stats
 
     def set_stats(self, stats):
@@ -122,7 +135,7 @@ class Operator:
 
     def has_stats(self):
         """Checks to see if this Operator has stats set or not."""
-        return (not (self._stats == {}) and not (self._stats == None))
+        return self._stats != {} and not self._stats is None
 
 
 if __name__ == "__main__":

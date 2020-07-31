@@ -1,18 +1,25 @@
+"""This module controls everything to do with recruitment and
+recruitment tags by taking in inputs, generating all possible
+1-3 tag combinations, and finding operators that match those combos."""
+
 import sys
-import json
 import argparse
 import itertools
-from halo import Halo  # extremely important
 from typing import Optional, List, Type, Dict, AbstractSet, Sequence
 
-from operatorclasses.TaggedOperator import TaggedOperator
-from operatorclasses.MetadataPrioritySet import MetadataPrioritySet
+from halo import Halo  # extremely important
 
-from input_reader import read_line_from_file, read_lines_into_dict
-from scraper_functions import scrape_json
+from operatorclasses.tagged_operator import TaggedOperator
+from operatorclasses.metadata_priorityset import MetadataPrioritySet
+
+from inputfuncs.input_reader import (
+    read_line_from_file,
+    read_lines_into_dict
+)
+from inputfuncs.scraper_functions import scrape_json
 
 # created 27/06/2020
-# last edited: 28/07/2020
+# last edited: 29/07/2020
 # version: 1.1.0
 # author: Joseph Wang (EmeraldEntities)
 # description: a CLI for matching recruitment tags to ops
@@ -21,13 +28,26 @@ from scraper_functions import scrape_json
 
 
 def initialize_operator_list() -> Optional[List[Type[TaggedOperator]]]:
+    """Initializes a list of TaggedOperators with names and tags and
+    returns said list.
+
+    This function uses a recruitment json created by Aceship to find
+    each operator's tags, so if this function is unable to find the
+    json, it will return None which should be caught.
+
+    Otherwise, it will generate a list of TaggedOperator objects, each
+    with a name, rarity, and recruitment tags.
+
+    Note that hidden operators (globalHidden or hidden) will not be
+    included in this list.
+    """
     operatortags_rawjson = scrape_json(read_line_from_file(
         "./info/recruitops/recruitTagJsonUrl.txt"
     ))
     # with open('tags_zh.json', 'r', encoding="utf8") as f:
     #     operatortags_rawjson = json.load(f)  # debug
 
-    if operatortags_rawjson == None:
+    if operatortags_rawjson is None:
         return None
 
     # Getting the json content returns a list, so we call it a
@@ -46,11 +66,11 @@ def initialize_operator_list() -> Optional[List[Type[TaggedOperator]]]:
     # as 'hidden' or 'globalHidden' in the json.
     for operator in operatortags_list:
         if (
-            operator['hidden'] == True
-            or (
-                'globalHidden' in operator.keys()
-                and operator['globalHidden'] == True
-            )
+                operator['hidden']
+                or (
+                    'globalHidden' in operator.keys()
+                    and operator['globalHidden']
+                )
         ):
             continue
 
@@ -72,14 +92,25 @@ def initialize_operator_list() -> Optional[List[Type[TaggedOperator]]]:
 
 
 def initialize_tag_dictionary(
-    operator_list: Sequence[Type[TaggedOperator]]
+        operator_list: Sequence[Type[TaggedOperator]]
 ) -> Dict[str, AbstractSet[str]]:
+    """Using a list of operators, initializes a dictionary matching
+    tags to operators that have those tags, and then returns it.
+
+    The keys are in Chinese because of the json, making it a bit
+    harder to work with. Otherwise, it simply matches a tag with each
+    of the operators that has it.
+
+    Keyword arguments:
+    operator_list -- list, a list of TaggedOperator that is used to
+    build the dictionary
+    """
     tag_dict = {}
 
     with open(
-        './info/recruitops/alltags.txt',
-        'r',
-        encoding='utf8'
+            './info/recruitops/alltags.txt',
+            'r',
+            encoding='utf8'
     ) as f:
         current_line = f.readline()
         while current_line != '' and current_line != '\n':
@@ -98,24 +129,43 @@ def initialize_tag_dictionary(
 
 
 def is_not_top_op(operator: Type[TaggedOperator]) -> bool:
-    """Determines if an Operator has a rarity of 6 and returns True if not."""
-    return (operator.get_rarity() < 6)
+    """Determines if an Operator has a rarity of 6
+    and returns True if not."""
+    return operator.get_rarity() < 6
 
 
 def get_formatted_op(operator: Type[TaggedOperator]) -> str:
-    """Returns a formatted string consisting of an Operator's name and rarity."""
+    """Returns a formatted string consisting of an Operator's name
+    and rarity."""
     return f"{operator.get_name()}: {operator.get_rarity()}*"
 
 
-def validate_combo(
-    combo: Sequence[str],
-    tag_dict: Dict[str, TaggedOperator],
-    translation_dict: Dict[str, str],
-    reversed_translation_dict: Dict[str, str]
+def generate_operator_set(
+        combo: Sequence[str],
+        tag_dict: Dict[str, TaggedOperator],
+        translation_dict: Dict[str, str],
+        reversed_translation_dict: Dict[str, str]
 ) -> Optional[MetadataPrioritySet]:
+    """Using a provided combination of tags, checks if there are
+    operators that possess all those tags.
+
+    Returns a MetadataPrioritySet with the combination of tags, a
+    calculated priority based on the operators, and the operators
+    that match all those tags if operators are found.
+
+    Returns None otherwise.
+
+    Keyword arguments:
+    combo -- list, a combination of tags
+    tag_dict -- dict, a dict matching tags with operators
+    translation_dict -- dict, a dict translating english tags to
+    chinese tags
+    reversed_translation_dict -- dict, a dict translating chinese tags
+    to formatted english tags
+    """
     priority_values = {
         '1': 0,
-        '2': -1,
+        '2': -2,
         '3': 0,
         '4': 1,
         '5': 2,
@@ -196,11 +246,23 @@ def validate_combo(
 
 
 def get_all_combinations(
-    proper_tags: Sequence[str],
-    tag_dict: Dict[str, TaggedOperator],
-    translation_dict: Dict[str, str],
-    reversed_translation_dict: Dict[str, str]
+        proper_tags: Sequence[str],
+        tag_dict: Dict[str, TaggedOperator],
+        translation_dict: Dict[str, str],
+        reversed_translation_dict: Dict[str, str]
 ) -> List[MetadataPrioritySet]:
+    """Generates all the combinations of tags possible, gets the
+    operators for each combination, and returns a list of
+    MetadataPrioritySet with operators that match each tag.
+
+    Keyword arguments:
+    proper_tags -- list, the tags provided
+    tag_dict -- dict, a dict matching tags with operators
+    translation_dict -- dict, a dict translating english tags to
+    chinese tags
+    reversed_translation_dict -- dict, a dict translating chinese tags
+    to formatted english tags
+    """
 
     all_matches = []
     # Since ops only have 3 tags, we get all combinations with 1-3
@@ -211,23 +273,25 @@ def get_all_combinations(
             amount_of_tags
         )
         for combo in all_combos:
-            current_match = validate_combo(
+            current_match = generate_operator_set(
                 combo,
                 tag_dict,
                 translation_dict,
                 reversed_translation_dict
             )
 
-            if current_match != None:
+            if current_match is not None:
                 all_matches.append(current_match)
 
     return all_matches
 
 
 def format_selections(
-    args: argparse.Namespace,
-    all_sorted_selection: List[MetadataPrioritySet]
+        args: argparse.Namespace,
+        all_sorted_selection: List[MetadataPrioritySet]
 ) -> List[str]:
+    """Determines how to format a selection of operators,
+    and returns a nicely formatted list of messages in strings."""
     # Depending on whether the beneficial arg is specified,
     # one of two different functions could be called.
     if args.beneficial:
@@ -237,8 +301,11 @@ def format_selections(
 
 
 def format_beneficial_tags(
-    all_sorted_selection: List[MetadataPrioritySet]
+        all_sorted_selection: List[MetadataPrioritySet]
 ) -> List[str]:
+    """Formats the operators so that only combinations of tags that
+    have 'beneficial' results (ie. operators with only rarity 4, 5, 6)
+    are formatted into the returned list of messages."""
     messages = ["Only beneficial tags:\n"]
 
     for op_set in all_sorted_selection:
@@ -267,8 +334,11 @@ def format_beneficial_tags(
 
 
 def format_normal_tags(
-    all_sorted_selection: List[MetadataPrioritySet]
+        all_sorted_selection: List[MetadataPrioritySet]
 ) -> List[str]:
+    """Formats the operators so that all working combinations of
+    operators are put into the returned list of messages, sorted
+    by value of the combinations."""
     messages = []
 
     for op_set in all_sorted_selection:
@@ -302,12 +372,16 @@ def format_normal_tags(
 
 
 # TODO: this can be multiple functions
-def main(args: argparse.Namespace) -> None:
-    spinner = Halo(text="Retrieving...", spinner="dots", color="magenta")
+def find_recruitment_combos(args: argparse.Namespace) -> None:
+    """Taking the specified namespace of arguments, this function will
+    determine combinations of tags, find operators that match those
+    combinations, and print to the screen a formatted list of
+    combinations and operators, sorted by value bottom-to-top."""
+    spinner = Halo(text="Fetching...", spinner="dots", color="magenta")
     spinner.start()
 
     op_list = initialize_operator_list()
-    if op_list == None:
+    if op_list is None:
         spinner.fail("Failed.")
         sys.stdout.write(
             "\n\nThe tag JSON could not be fetched! Try again later."
@@ -325,7 +399,7 @@ def main(args: argparse.Namespace) -> None:
         )
         reversed_translation_dict = read_lines_into_dict(
             './info/recruitops/formattedTagConversions.txt',
-            reversed=True
+            reverse=True
         )
 
         # Take in the user tags and find their proper, translated names
@@ -338,7 +412,7 @@ def main(args: argparse.Namespace) -> None:
             else:
                 # TODO: exit nicer
                 raise Exception(
-                    'One or more of the tags does not exist.'
+                    f"The tag '{tag.lower()}' does not exist."
                 )
 
         # Find all possible combinations of each tag combo

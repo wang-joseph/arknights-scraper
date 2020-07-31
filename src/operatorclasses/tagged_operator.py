@@ -1,8 +1,13 @@
+"""This module contains the TaggedOperator class that holds
+recruitment tag information aboutan operator as well as their name
+and rarity, so that the information can be easily-accessable in
+one place."""
+
 import sys
-from typing import Sequence, Any
+from typing import Sequence
 
 # created 27/07/2020
-# last edited: 28/07/2020
+# last edited: 29/07/2020
 # version: 1.0.0
 # author: Joseph Wang (EmeraldEntities)
 # description: Just a class to hold relevant information about an
@@ -10,11 +15,12 @@ from typing import Sequence, Any
 
 
 class TaggedOperator:
-    """The class for storing simplistic recruitment information about Operators.
+    """The class for storing simplistic recruitment
+    information about Operators.
 
     Each operator is assigned tags that people use to recruit them.
-    This object stores those tags, an associated name, and a rarity and 
-    bundles them up together so that all these attributes are 
+    This object stores those tags, an associated name, and a rarity and
+    bundles them up together so that all these attributes are
     easily-accessable and reusable.
 
     Public variables:
@@ -56,7 +62,7 @@ class TaggedOperator:
         """Calcuates and returns the hash value of this object.
 
         This method will use the name of this operator as the hash
-        for it, meaning that you should avoid giving two 
+        for it, meaning that you should avoid giving two
         TaggedOperator objects the same name if they are not meant to
         be the same thing.
         """
@@ -79,7 +85,8 @@ class TaggedOperator:
         return self._name
 
     def get_tags(self) -> Sequence[str]:
-        """Retrieves all the tags of this operator, as a list of strings."""
+        """Retrieves all the tags of this operator, as
+        a list of strings."""
         return self._tags
 
     def get_rarity(self) -> int:

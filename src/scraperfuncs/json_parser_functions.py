@@ -1,19 +1,30 @@
+"""This module contains all the functions needed for parsing
+through Aceship's JSONs and finding information from them."""
+
 import sys
 import re
-import json
 
-from input_reader import read_line_from_file, read_lines_into_dict
-from scraper_functions import scrape_json
+from inputfuncs.input_reader import (
+    read_line_from_file,
+    read_lines_into_dict
+)
+from inputfuncs.scraper_functions import scrape_json
 
 # created 05/07/2020
-# last edited: 09/07/2020
-# version: 1.0.0
+# last edited: 30/07/2020
+# version: 1.0.2
 # author: Joseph Wang (EmeraldEntities)
 # description: These functions are to parse information
 #              from Aceship's excellent JSON file.
 
 
 def filter_description(description):
+    """Takes a desription string, filters out any `<>` tags, and
+    removes any unnecessary tags not relevant to the information.
+
+    Returns the new string without any unnecessary tags (ie. <>,
+    @ba.smth, etc).
+    """
     description_text = (
         description
         .replace('</>', '')
@@ -21,6 +32,9 @@ def filter_description(description):
         .replace('>', ' ')
     )
 
+    # Filtering out the @ba.smth tags that exist which I'm assuming is
+    # for the web app, since it's not really useful for the info.
+    # We sub it out for a simple space.
     description_text = re.sub(
         r' *(@[a-zA-Z]+\.[a-zA-Z]+) *',
         " ",
@@ -32,6 +46,13 @@ def filter_description(description):
 
 # Specific section locators
 def create_stats_dict(operator_dict):
+    """Creates a dictionary of operator stats using the JSON entry
+    of the operator, and returns the operator stats dictionary.
+
+    All the stats are in the operator dictionary provided, meaning
+    that all this function needs to do is parse and format the
+    data into a easier to access stats dictionary.
+    """
     stats = {}
 
     # The JSON is greater than 80k lines long, I'm just gonna throw
@@ -90,6 +111,8 @@ def create_stats_dict(operator_dict):
 
 
 def parse_talents(operator_dict):
+    """Using the provided operator dictionary from JSON, parses and
+    formats the talents and returns them as a list of strings."""
     messages = []
     messages.append("\n\nTalents\n")
 
@@ -125,19 +148,27 @@ def parse_talents(operator_dict):
 
 
 def get_base_jsons():
+    """Loads all the JSONs needed for parsing base skills,
+    and returns both of them.
+
+    If a JSON fails to load, this function will return an empty
+    dictionary in place of the JSON file.
+    """
     # with open('building_data_zh.json', 'r', encoding="utf8") as f:
     #     base_skills_json = json.load(f)  # debug
+    # Fetch the jsons
     base_skills_req = scrape_json(read_line_from_file(
-        "./info/baseSkillsJsonUrl.txt"
+        "./info/scraper/baseSkillsJsonUrl.txt"
     ))
     riic_req = scrape_json(read_line_from_file(
-        "./info/riicJsonUrl.txt"
+        "./info/scraper/riicJsonUrl.txt"
     ))
     base_skills_json, riic_json = {}, {}
 
-    if base_skills_req != None:
+    # Make sure we retrieve the JSONs correctly
+    if base_skills_req is not None:
         base_skills_json = base_skills_req.json()
-    if riic_req != None:
+    if riic_req is not None:
         riic_json = riic_req.json()
 
     # with open('riic.json', 'r', encoding='utf8') as f:
@@ -147,6 +178,19 @@ def get_base_jsons():
 
 
 def parse_base_skills(operator_key):
+    """Using an operator's key in the info JSON, finds and assembles
+    a list of strings that contain a formatted description of
+    the operator's base skills, and returns them.
+
+    Since the base skills info is split across three JSON files,
+    we use the key of each operator to find all the base skills of said
+    operator using one JSON. Then, we find the details of each of
+    the base skills using another JSON, and format those details to
+    form the final message list.
+
+    This function will make 2 other requests to other JSON files
+    in order to properly fetch base skills.
+    """
     # We'll have to load in two seperate jsons...
     base_skills_json, riic_json = get_base_jsons()
 
@@ -157,7 +201,7 @@ def parse_base_skills(operator_key):
         return ["\n\nBase Skills\nBase skill JSONs failed to load!"]
 
     if operator_key not in base_skills_json['chars'].keys():
-        return ["\n\nBase Skills\nCould not find matching base skill!"]
+        return ["\n\nBase Skills\nCould not find matching base skill(s)!"]
 
     messages = []
     messages.append("\n\nBase Skills\n")
@@ -165,8 +209,8 @@ def parse_base_skills(operator_key):
     # Since we want to remain consistent with gamepress description,
     # we have a file that converts the shorter room names to the proper
     # room names that we'll be displaying.
-    formatted_JSON_rooms = read_lines_into_dict(
-        './info/formattedJsonRooms.txt'
+    formatted_json_rooms = read_lines_into_dict(
+        './info/scraper/formattedJsonRooms.txt'
     )
 
     char = base_skills_json['chars'][operator_key]
@@ -190,7 +234,7 @@ def parse_base_skills(operator_key):
                     + "(" + zh_bskill_info['buffName'] + ")"
                     + "  "
                     + "Room Type:  "
-                    + formatted_JSON_rooms[
+                    + formatted_json_rooms[
                         zh_bskill_info['roomType'].title()
                     ]
                     + "  "
@@ -205,20 +249,37 @@ def parse_base_skills(operator_key):
 
 
 def get_skill_jsons():
+    """Loads the skill JSON needed to properly parse operator skills,
+    and returns it.
+
+    If the JSON fails to load, this function will return an empty
+    dictionary in place of the JSON file.
+    """
     # with open('skill_table.json', 'r', encoding="utf8") as f:
     #     skills_json = json.load(f)  # debug
     skills_req = scrape_json(read_line_from_file(
-        "./info/skillsJsonUrl.txt"
+        "./info/scraper/skillsJsonUrl.txt"
     ))
     skills_json = {}
 
-    if skills_req != None:
+    # Make sure the request didn't fail, cause if it did, we can simply
+    # provide an empty dict and have them catch it.
+    if skills_req is not None:
         skills_json = skills_req.json()
 
     return skills_json
 
 
 def parse_skills(operator_dict, tiers_to_check):
+    """Using an operator info dictionary and specified tiers to
+    check, parses and assembles a list of messages containing formatted
+    information about each tier of skill to check.
+
+    Returns a list of messages.
+
+    Since the skills info are stored in a seperate JSON file, we
+    need to load that first in order to properly parse skills.
+    """
     skills_json = get_skill_jsons()
     # If failed to load skills_json
     if skills_json == {}:
@@ -287,7 +348,8 @@ def parse_skills(operator_dict, tiers_to_check):
 
                 # Unfortunately, the JSON description was meant to
                 # work with the web app, so we have to filter it and
-                # replace certain attributes with provided values
+                # replace certain attributes with provided values in
+                # the 'blackboard' property.
                 properties = re.findall(
                     r" *.*(\{.+\}).* *", description.replace(" ", "\n"))
 
@@ -298,11 +360,13 @@ def parse_skills(operator_dict, tiers_to_check):
                     # From what I can find, each key only has alphabet
                     # letters, numbers, [], _, ., and @.
                     # At the front of the key, there will sometimes be
-                    # a '-', which we don't want. After the key,
-                    # if there is an ':#%;, we know it's supposed to
-                    # be a percentage.
+                    # a '-', which we don't want.
+                    #
+                    # After the key,
+                    # if there is an ':#.#%;' or  ':#%', we know it's
+                    # supposed to be a percentage.
                     prop_re = re.search(
-                        r"\{-*([a-zA-Z0-9_.@[\]]+)(:\d+%)*\}",
+                        r"\{-*([a-zA-Z0-9_.@[\]]+)(:\d?\.?\d?%)*\}",
                         prop
                     )
 
@@ -314,9 +378,12 @@ def parse_skills(operator_dict, tiers_to_check):
 
                     is_percent = prop_re.group(2) is not None
 
-                    # TODO: show other skill tiers?
                     for replacement in skill_tier['blackboard']:
-                        if replacement['key'] == attr:
+                        # None of the blackboard keys will be uppercase,
+                        # but some of the replacements are uppercase...
+                        # We convert to lower to correctly find the
+                        # attribute.
+                        if replacement['key'].lower() == attr.lower():
                             # Make the property friendly towards regex
                             prop = (
                                 prop.replace("[", r"\[")
@@ -345,7 +412,7 @@ def parse_skills(operator_dict, tiers_to_check):
             # consistent formatting!!!!!!!
             messages += ['']
         else:
-            # If, for some reason, you can't find the skill in the
+            # If, for some reason, we can't find the skill in the
             # skill database, we do this.
             messages.append(
                 "Skill " + str(skillnum) + ": "

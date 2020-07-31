@@ -28,7 +28,7 @@ All command usage details were taken from the argparse `-h` command.
 
 #### scraper
 
-aliases: `{s,scrap}`
+aliases: `{s, scrap, scrape}`
 
 This subcommand will look for and display information about any operator currently in arknights. It'll first look at [Aceship](https://github.com/Aceship)'s JSON files and see if they have the operator. If that fails, it'll look at the [gamepress.gg](https://gamepress.gg/) page. Nothing is stored locally, and it shouldn't take that long to look the operators up!
 
@@ -59,7 +59,7 @@ This is a smaller subcommand that will accept recruitment tags and show you the 
 
 The list is sorted based on an experimental priority system, so if you _really_ care about getting the best combo for your buck, you can skim through all the tags and see if a certain operator stands out to you. The system should work fine if there are some distinct good combos, though. Please report anything strange!
 
-`usage: ark.py recruitop [-h] tags [tags ...]`
+`ark.py recruitop [-h] [-b] tags [tags ...]`
 
 Find all ops that match combinations of tags!
 
@@ -91,7 +91,7 @@ Find all ops that match combinations of tags!
     -   [ ] Make a more consistant priority system
     -   [x] ~~More options to control info (eg. contol rarity being displayed, etc)~~
     -   [x] ~~Highlight 'good recruitment combos' (ie. anything with only 4, 5, or 6 stars)~~
--   [ ] Restructure the project and make it look neater and ready for more subcommands
+-   [x] Restructure the project and make it look neater and ready for more subcommands
 -   [ ] Add idk other functionality when needed
     -   [ ] Add operator comparison?
     -   [ ] Add stage functionality?

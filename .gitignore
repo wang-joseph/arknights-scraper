@@ -134,3 +134,8 @@ output/
 # debugging files
 src/*.html
 src/*.json
+
+# pylint control
+pylintrc/
+.pylintrc
+pylintrc

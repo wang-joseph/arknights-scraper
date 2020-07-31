@@ -62,10 +62,10 @@ def parse_stats(stats_dict):
     # By adding an empty space at the end, we fool the parser
     # into inserting only 1 newline
     messages += [
-        "Attack Interval: " + str(stats_dict['atk_int']) + " s"
+        "Attack Interval: " + str(stats_dict["atk_int"]) + " s"
     ]
     messages += [
-        "Deployment Time: " + str(stats_dict['deploy_time']) + " s"
+        "Deployment Time: " + str(stats_dict["deploy_time"]) + " s"
     ] + [""]
 
     return messages

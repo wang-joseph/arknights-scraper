@@ -25,7 +25,7 @@ def find_siblings_of_breakpoint(soupobj):
 
     If a <br> tag isn't found, just return the object's text, stripped.
     """
-    brkpoint = soupobj.find_all('br')
+    brkpoint = soupobj.find_all("br")
 
     # TODO: those two for loops are so similar omg
     if brkpoint != []:
@@ -37,14 +37,14 @@ def find_siblings_of_breakpoint(soupobj):
         # in the same block?? execute this man
         for sibling in brkpoint[0].previous_siblings:
             if isinstance(sibling, Tag):
-                if sibling.name == 'br':
+                if sibling.name == "br":
                     break
 
                 prev_brk_text.append(sibling.text.strip())
             else:
                 prev_brk_text.append(str(sibling))
         prev_brk_text.reverse()
-        prev_brk_text[-1] += '\n'
+        prev_brk_text[-1] += "\n"
         description_list += prev_brk_text
 
         # We only need to get the previous siblings for the
@@ -56,13 +56,13 @@ def find_siblings_of_breakpoint(soupobj):
 
             for sibling in br_tag.next_siblings:
                 if isinstance(sibling, Tag):
-                    if sibling.name == 'br':
+                    if sibling.name == "br":
                         break
 
                     next_brk_text.append(sibling.text.strip())
                 else:
                     next_brk_text.append(str(sibling))
-            next_brk_text[-1] += '\n'
+            next_brk_text[-1] += "\n"
             description_list += next_brk_text
 
         return description_list
@@ -225,7 +225,7 @@ def create_stats_json(soup, operator):
 
     # Find myStats from the operator's site
     # This is so we can find res, cost, and block
-    good_scripts = soup.find_all('script', '')
+    good_scripts = soup.find_all("script", "")
     for script in good_scripts:
         if re.search(r"myStats =", str(script)):
             mystats_script = script
@@ -245,7 +245,7 @@ def create_stats_json(soup, operator):
 
         # Since 'block' has both a base and max (which doesn't matter),
         # we're gonna only take every other index.
-        if attr == 'block':
+        if attr == "block":
             all_stats = all_stats[::2]
 
         # Make sure that all_stats has SOMETHING in it.
@@ -272,7 +272,7 @@ def create_stats_json(soup, operator):
 
     # other_stats will provide us with the atk speed
     # and redeploy time stats.
-    other_stats = soup.find_all('div', 'other-stat-value-cell')
+    other_stats = soup.find_all("div", "other-stat-value-cell")
 
     if len(other_stats) > 0:
         # Convert every object into their stripped strings counterpart
@@ -282,21 +282,21 @@ def create_stats_json(soup, operator):
                 cur_stats_list.append(string)
 
             if "Attack Interval" in cur_stats_list:
-                stats_json['atk_int'] = float(cur_stats_list[-1])
+                stats_json["atk_int"] = float(cur_stats_list[-1])
 
             elif "Redeploy Time" in cur_stats_list:
-                stats_json['deploy_time'] = int(cur_stats_list[-1])
+                stats_json["deploy_time"] = int(cur_stats_list[-1])
 
     # Failsafes, in case
-    stats_json['atk_int'] = (
+    stats_json["atk_int"] = (
         -1
-        if 'atk_int' not in stats_json.keys()
-        else stats_json['atk_int']
+        if "atk_int" not in stats_json.keys()
+        else stats_json["atk_int"]
     )
-    stats_json['deploy_time'] = (
+    stats_json["deploy_time"] = (
         -1
-        if 'deploy_time' not in stats_json.keys()
-        else stats_json['deploy_time']
+        if "deploy_time" not in stats_json.keys()
+        else stats_json["deploy_time"]
     )
 
     return stats_json
@@ -315,7 +315,7 @@ def find_skills(soup, tiers_to_check):
     """
     # skill-cell is the class name that all skill blocks have,
     # so we need to get them all
-    all_skills = soup.find_all('div', 'skill-cell')
+    all_skills = soup.find_all("div", "skill-cell")
 
     # If the operator doesn't have any skill blocks,
     # they don't have any skills we can parse
@@ -332,13 +332,13 @@ def find_skills(soup, tiers_to_check):
         # Finding the skill title
         # add an extra newline after every different
         # skill for readability
-        messages[-1] += '\n'
-        title = skill.find('div', 'skill-title-cell')
+        messages[-1] += "\n"
+        title = skill.find("div", "skill-title-cell")
         messages.append(title.text.strip())
 
         for tier in tiers_to_check:
             max_upgrade_level = tier
-            max_level = skill.find_all('div', max_upgrade_level)
+            max_level = skill.find_all("div", max_upgrade_level)
 
             # Getting the right level for the skill
             sp_string = ""
@@ -381,14 +381,14 @@ def find_skills(soup, tiers_to_check):
             # Filter out any "" that might be appended and any extra \n
             # Adding a space before every description
             # for good readability
-            description[0] = ' ' + description[0]
+            description[0] = " " + description[0]
             description = list(map(lambda x: x.rstrip(), description))
             description = list(filter(lambda x: x != "", description))
 
             # Add a '-' * 25 and/or \n to the last item in description
             # for consistent formatting!!!!!
             messages = (
-                messages + description + ['--------------------\n']
+                messages + description + ["--------------------\n"]
                 if len(tiers_to_check) > 1
                 else messages + description
             )
@@ -398,7 +398,7 @@ def find_skills(soup, tiers_to_check):
         messages[-1] = messages[-1].rstrip()
         # Add an empty string in a list to the end for
         # consistent formatting!!!!!!!
-        messages += ['']
+        messages += [""]
     return messages
 
 

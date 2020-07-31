@@ -23,6 +23,7 @@ from inputfuncs.scraper_functions import scrape_json
 # version: 1.1.0
 # author: Joseph Wang (EmeraldEntities)
 # description: a CLI for matching recruitment tags to ops
+# TODO: move some of the functions into a recruitfuncs module?
 
 ### FUNCTIONS ########################
 
@@ -44,7 +45,7 @@ def initialize_operator_list() -> Optional[List[Type[TaggedOperator]]]:
     operatortags_rawjson = scrape_json(read_line_from_file(
         "./info/recruitops/recruitTagJsonUrl.txt"
     ))
-    # with open('tags_zh.json', 'r', encoding="utf8") as f:
+    # with open("tags_zh.json", "r", encoding="utf8") as f:
     #     operatortags_rawjson = json.load(f)  # debug
 
     if operatortags_rawjson is None:
@@ -57,7 +58,7 @@ def initialize_operator_list() -> Optional[List[Type[TaggedOperator]]]:
     operator_list = []
 
     name_replacements = read_lines_into_dict(
-        './info/recruitops/operatorNameReplacements.txt'
+        "./info/recruitops/operatorNameReplacements.txt"
     )
 
     # initialize an easy to access list of operators and their tags
@@ -66,25 +67,25 @@ def initialize_operator_list() -> Optional[List[Type[TaggedOperator]]]:
     # as 'hidden' or 'globalHidden' in the json.
     for operator in operatortags_list:
         if (
-                operator['hidden']
+                operator["hidden"]
                 or (
-                    'globalHidden' in operator.keys()
-                    and operator['globalHidden']
+                    "globalHidden" in operator.keys()
+                    and operator["globalHidden"]
                 )
         ):
             continue
 
         operator_list.append(
             TaggedOperator(
-                operator['name_en'],
-                operator['level'],
-                operator['tags'] + [operator['type'].rstrip()]
+                operator["name_en"],
+                operator["level"],
+                operator["tags"] + [operator["type"].rstrip()]
             )
-            if operator['name_en'] not in name_replacements
+            if operator["name_en"] not in name_replacements
             else TaggedOperator(
-                name_replacements[operator['name_en']],
-                operator['level'],
-                operator['tags'] + [operator['type'].rstrip()]
+                name_replacements[operator["name_en"]],
+                operator["level"],
+                operator["tags"] + [operator["type"].rstrip()]
             )
         )
 
@@ -108,12 +109,12 @@ def initialize_tag_dictionary(
     tag_dict = {}
 
     with open(
-            './info/recruitops/alltags.txt',
-            'r',
-            encoding='utf8'
+            "./info/recruitops/alltags.txt",
+            "r",
+            encoding="utf8"
     ) as f:
         current_line = f.readline()
-        while current_line != '' and current_line != '\n':
+        while current_line != "" and current_line != "\n":
             # By using sets to compare, we can
             # easily combine results of searches later
             tag_dict[current_line.rstrip()] = set([])
@@ -164,12 +165,12 @@ def generate_operator_set(
     to formatted english tags
     """
     priority_values = {
-        '1': 0,
-        '2': -2,
-        '3': 0,
-        '4': 1,
-        '5': 2,
-        '6': 3,
+        "1": 0,
+        "2": -2,
+        "3": 0,
+        "4": 1,
+        "5": 2,
+        "6": 3,
     }
 
     # Every combo will always have at least 1 entity, so
@@ -181,7 +182,7 @@ def generate_operator_set(
     # TODO: maybe make this better
     possible_ops = (
         tag_dict[combo[0]].copy()
-        if translation_dict['top-operator'] in combo
+        if translation_dict["top-operator"] in combo
         else set(
             filter(
                 is_not_top_op,
@@ -205,7 +206,7 @@ def generate_operator_set(
         # TODO: maybe make this better
         new_ops = (
             tag_dict[tag].copy()
-            if translation_dict['top-operator'] in combo
+            if translation_dict["top-operator"] in combo
             else set(
                 filter(
                     is_not_top_op,
@@ -236,7 +237,7 @@ def generate_operator_set(
         )
 
         current_match.add_data(
-            'tags',
+            "tags",
             converted_string
         )
 
@@ -315,7 +316,7 @@ def format_beneficial_tags(
         # should be higher than 3.
         if list(op_set.get_intrinsic_set())[-1].get_rarity() > 3:
             messages.append(
-                op_set.get_data('tags')
+                op_set.get_data("tags")
             )
             messages.append(
                 ", \n".join(
@@ -349,7 +350,7 @@ def format_normal_tags(
         # making this a good combination, and we mark
         # it appropriately.
         messages.append(
-            op_set.get_data('tags')
+            op_set.get_data("tags")
             if (
                 list(op_set.get_intrinsic_set())[-1]
                 .get_rarity() <= 3
@@ -395,10 +396,10 @@ def find_recruitment_combos(args: argparse.Namespace) -> None:
         # Get both a proper translation from en to zh dict
         # and a reversed dict initialized for proper tag conversion
         translation_dict = read_lines_into_dict(
-            './info/recruitops/tagConversions.txt'
+            "./info/recruitops/tagConversions.txt"
         )
         reversed_translation_dict = read_lines_into_dict(
-            './info/recruitops/formattedTagConversions.txt',
+            "./info/recruitops/formattedTagConversions.txt",
             reverse=True
         )
 

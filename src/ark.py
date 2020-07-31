@@ -37,7 +37,7 @@ def initialize_scraper_args(
                 7th tier, and M3 (if possible) tier of
                 each of the specified operator's skills.
                 """,
-        action='store_true'
+        action="store_true"
     )
 
     parser.add_argument(
@@ -47,7 +47,7 @@ def initialize_scraper_args(
                 No special characters.
                 """,
         type=str,
-        # nargs='+'  # TODO: multiple operator support??
+        # nargs="+"  # TODO: multiple operator support??
     )
 
     parser.add_argument(
@@ -66,7 +66,7 @@ def initialize_scraper_args(
         action="store_true"
     )
     parser.add_argument(
-        '-g', '--gamepress',
+        "-g", "--gamepress",
         help="""Forces the parser to only use gamepress.gg.
                 Use this if your internet connection is really slow.
                 """,
@@ -142,25 +142,25 @@ def initialize_parsers() -> argparse.ArgumentParser:
         description="Various information parsers about info in Arknights!"
     )
     parser.add_argument(
-        '--version',
-        action='version',
-        version='ark v2.2.0'
+        "--version",
+        action="version",
+        version="ark v2.2.1"
     )
-    subparsers = parser.add_subparsers(help='check sub-command help')
+    subparsers = parser.add_subparsers(help="check sub-command help")
 
     # Initialize scraper functionality
     scraper_parser = subparsers.add_parser(
-        'scraper',
+        "scraper",
         description="Find information about any operator in Arknights!",
-        aliases=['s', 'scrap', 'scrape'],
+        aliases=["s", "scrap", "scrape"],
         # prog=sys.argv[0] + " " + sys.argv[1]
     )
     initialize_scraper_args(scraper_parser)
 
     recruitment_parser = subparsers.add_parser(
-        'recruitop',
+        "recruitop",
         description="Find all ops that match combinations of recruitment tags!",
-        aliases=['r', 'recruit', 'ro'],
+        aliases=["r", "recruit", "ro"],
         # prog=sys.argv[0] + " " + sys.argv[1]
     )
     initialize_recruit_args(recruitment_parser)

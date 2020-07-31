@@ -29,14 +29,14 @@ def read_lines_into_dict(file, reverse=False):
     """
     new_dict = {}
 
-    with open(file, "r", encoding='utf8') as f:
+    with open(file, "r", encoding="utf8") as f:
         current_line = f.readline()
 
         while current_line != "\n" and current_line != "":
-            line_info = re.split(r'\s+', current_line.rstrip())
+            line_info = re.split(r"\s+", current_line.rstrip())
 
-            line_info[0] = line_info[0].replace('+', ' ')
-            line_info[1] = line_info[1].replace('+', ' ')
+            line_info[0] = line_info[0].replace("+", " ")
+            line_info[1] = line_info[1].replace("+", " ")
 
             if not reverse:
                 new_dict[line_info[0]] = line_info[1]

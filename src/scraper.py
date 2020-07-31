@@ -74,7 +74,7 @@ def get_operator_dict(operator):
         else replacement_names[formatted_name]
     )
 
-    # with open('character_table.json', 'r', encoding="utf8") as f:
+    # with open("character_table.json", "r", encoding="utf8") as f:
     #     operator_raw_json = json.load(f)  # debug
     operator_raw_json = scrape_json(read_line_from_file(
         "./info/scraper/operatorJsonUrl.txt"
@@ -89,7 +89,7 @@ def get_operator_dict(operator):
     for operator in operator_json.keys():
         # So that names like "SilverAsh" don't screw up the parser,
         # we take the key and convert it to the title form (Silverash)
-        if operator_json[operator]['name'].title() == proper_name:
+        if operator_json[operator]["name"].title() == proper_name:
             operator_key = operator
             operator_dict = operator_json[operator]
             break
@@ -173,7 +173,7 @@ def get_info_from_gamepress(args):
             if (len(desc) < 3)
             else [
                 "".join(
-                    find_siblings_of_breakpoint(desc[item])).strip() + '\n'
+                    find_siblings_of_breakpoint(desc[item])).strip() + "\n"
                 for item in range(3)
             ]
         )
@@ -209,21 +209,21 @@ def get_info_from_gamepress(args):
         if args.vskills:
             skill_tiers_to_check = (
                 [
-                    'skill-upgrade-tab-1',
-                    'skill-upgrade-tab-7',
-                    'skill-upgrade-tab-10'
+                    "skill-upgrade-tab-1",
+                    "skill-upgrade-tab-7",
+                    "skill-upgrade-tab-10"
                 ]
                 if rarity > 3
                 else [
-                    'skill-upgrade-tab-1',
-                    'skill-upgrade-tab-7'
+                    "skill-upgrade-tab-1",
+                    "skill-upgrade-tab-7"
                 ]
             )
         else:
             skill_tiers_to_check = (
-                ['skill-upgrade-tab-10']
+                ["skill-upgrade-tab-10"]
                 if rarity > 3
-                else ['skill-upgrade-tab-7']
+                else ["skill-upgrade-tab-7"]
             )
 
         check_skills = args.skills or args.vskills
@@ -236,19 +236,19 @@ def get_info_from_gamepress(args):
         # start to sweat and foam at the mouth
         conditionals = [
             [
-                'skills',
+                "skills",
                 check_skills,
                 find_skills,
                 [soup, skill_tiers_to_check]
             ],
             [
-                'talent',
+                "talent",
                 args.talent,
                 find_talents,
                 [soup, images_dict]
             ],
             [
-                'base skills',
+                "base skills",
                 args.base,
                 find_base_skills,
                 [soup, images_dict]
@@ -294,35 +294,35 @@ def parse_info_from_json(args, operator_dict, operator_key):
     return information, which is then assigned to the Operator object
     that is to be returned.
     """
-    description_text = filter_description(operator_dict['description'])
+    description_text = filter_description(operator_dict["description"])
 
     formatted_json_prof = read_lines_into_dict(
-        './info/scraper/formattedJsonProfessions.txt'
+        "./info/scraper/formattedJsonProfessions.txt"
     )
     # Set up the operator object with the good fetches
     operator = Operator(
-        operator_dict['name'],
-        operator_dict['rarity'] + 1,
-        formatted_json_prof[operator_dict['profession'].title()],
+        operator_dict["name"],
+        operator_dict["rarity"] + 1,
+        formatted_json_prof[operator_dict["profession"].title()],
         [
-            description_text + '\n',
-            operator_dict['itemUsage'] + '\n',
-            operator_dict['itemDesc'] + '\n\n'
+            description_text + "\n",
+            operator_dict["itemUsage"] + "\n",
+            operator_dict["itemDesc"] + "\n\n"
         ],
-        operator_dict['tagList'],
+        operator_dict["tagList"],
     )
 
     # This is repeated but I feel that's fine for abstraction
     if args.vskills:
         skill_tiers_to_check = (
             [1, 7, 10]
-            if operator_dict['rarity'] + 1 > 3
+            if operator_dict["rarity"] + 1 > 3
             else [1, 7]
         )
     else:
         skill_tiers_to_check = (
             [10]
-            if operator_dict['rarity'] + 1 > 3
+            if operator_dict["rarity"] + 1 > 3
             else [7]
         )
 
@@ -330,19 +330,19 @@ def parse_info_from_json(args, operator_dict, operator_key):
 
     conditionals = [
         [
-            'skills',
+            "skills",
             check_skills,
             parse_skills,
             [operator_dict, skill_tiers_to_check]
         ],
         [
-            'talent',
+            "talent",
             args.talent,
             parse_talents,
             [operator_dict]
         ],
         [
-            'base skills',
+            "base skills",
             args.base,
             parse_base_skills,
             [operator_key]
@@ -449,7 +449,7 @@ def find_operator_info(args: argparse.Namespace) -> None:
 
         for prop in all_messages:
             for text in prop:
-                sys.stdout.write(text + '\n')
+                sys.stdout.write(text + "\n")
 
     else:
         spinner.fail("Failed.")

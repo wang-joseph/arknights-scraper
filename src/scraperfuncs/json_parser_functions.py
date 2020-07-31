@@ -408,9 +408,10 @@ def parse_skills(operator_dict, tiers_to_check):
                 messages.append(" " + description)
                 if len(tiers_to_check) > 1:
                     messages.append("--------------------\n")
-            # Add an empty string in a list to the end for
-            # consistent formatting!!!!!!!
-            messages += [""]
+                else:
+                    # Add an empty string in a list to the end for
+                    # consistent formatting!!!!!!!
+                    messages += [""]
         else:
             # If, for some reason, we can't find the skill in the
             # skill database, we do this.

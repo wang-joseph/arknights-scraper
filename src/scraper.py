@@ -97,14 +97,20 @@ def get_operator_dict(operator):
     return operator_dict, operator_key
 
 
-def parse_operator_data(args, operator_dict, operator_key):
+def parse_operator_data(
+        args,
+        operator_dict,
+        operator_key,
+        operator
+):
     """ Depending on whether operator_dict is empty or not, get
     operator information from either Gamepress or the JSON files,
     and return an Operator object with all the needed information.
     """
     if operator_dict == {} or args.gamepress:
         operator = get_info_from_gamepress(
-            args
+            args,
+            operator
         )
     else:
         operator = parse_info_from_json(
@@ -116,7 +122,7 @@ def parse_operator_data(args, operator_dict, operator_key):
     return operator
 
 
-def get_info_from_gamepress(args):
+def get_info_from_gamepress(args, operator_name):
     """Gets information for a certain operator from a Gamepress
     page, and return an Operator object with the necessary information
     based on the flags in args.
@@ -133,7 +139,7 @@ def get_info_from_gamepress(args):
     which is then assigned to the Operator object that is
     to be returned.
     """
-    response = scrape_for_operator(args.operator)
+    response = scrape_for_operator(operator_name)
     if response is not None:  # response succeeds
         src = response.content
 
@@ -181,7 +187,7 @@ def get_info_from_gamepress(args):
         # Since the alternative JSON I use to find stats may have
         # another name for an operator, I have to convert any name
         # to a proper one recognized by that specific json
-        formatted_name = args.operator.replace("-", " ").title()
+        formatted_name = operator_name.replace("-", " ").title()
         proper_name = (
             formatted_name
             if formatted_name not in replacement_names.keys()
@@ -397,7 +403,10 @@ def set_operator_properties(args, conds, stats_conds, operator):
 ######################################
 
 
-def find_operator_info(args: argparse.Namespace) -> None:
+def find_operator_info(
+        args: argparse.Namespace,
+        operator_name: str
+) -> None:
     """With the specified arguments, calls all the functions
     needed to find information and print all information
     out to the screen.
@@ -413,12 +422,16 @@ def find_operator_info(args: argparse.Namespace) -> None:
     # Initialize the arguments for cmd purposes
     spinner.start()
 
-    operator_dict, operator_key = get_operator_dict(args.operator)
+    operator_dict, operator_key = get_operator_dict(operator_name)
 
     spinner.text = "Parsing..."
     spinner.color = "yellow"
 
-    operator = parse_operator_data(args, operator_dict, operator_key)
+    operator = parse_operator_data(
+        args,
+        operator_dict,
+        operator_key,
+        operator_name)
     # ----------------------------------------
 
     if operator is not None:
@@ -455,7 +468,7 @@ def find_operator_info(args: argparse.Namespace) -> None:
         spinner.fail("Failed.")
         sys.stdout.write(
             "\n\n"
-            + args.operator.replace("-", " ").title()
+            + operator_name.replace("-", " ").title()
             + "\n"
         )
         sys.stdout.write(
@@ -465,6 +478,20 @@ def find_operator_info(args: argparse.Namespace) -> None:
         )
 
     sys.stdout.write("\n\n")
+
+
+def find_all_operator_info(
+        args: argparse.Namespace
+) -> None:
+    """Finds each operator's info as specified in args.operator and
+    prints the info the the screen."""
+    for index, operator in enumerate(args.operator):
+        find_operator_info(args, operator)
+        sys.stdout.write(
+            ""
+            if index + 1 == len(args.operator)
+            else "------------------------------------\n\n"
+        )
 
 
 if __name__ == "__main__":

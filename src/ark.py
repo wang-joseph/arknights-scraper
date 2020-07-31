@@ -6,7 +6,7 @@ information."""
 
 import argparse
 
-from scraper import find_operator_info
+from scraper import find_all_operator_info
 from recruitop import find_recruitment_combos
 
 # created 27/07/2020
@@ -44,10 +44,13 @@ def initialize_scraper_args(
         "operator",
         help="""The operator you want information about.
                 For spaces, use a '-' in place of the space.
-                No special characters.
+                No special characters. If you want info about
+                multiple operators, put a space between each operator
+                you want information about.
                 """,
-        type=str,
-        # nargs="+"  # TODO: multiple operator support??
+        action="extend",
+        nargs="+",
+        type=str
     )
 
     parser.add_argument(
@@ -78,7 +81,9 @@ def initialize_scraper_args(
         help="""Displays all the information about this
                 specified operator. Unless paired with the -v tag,
                 this will only show the max tier of each skill
-                this operator has.
+                this operator has. If you want to force gamepress.gg,
+                pair this with the -g tag. Otherwise, it'll use the
+                default JSON-first approach.
                 """,
         action="store_true"
     )
@@ -91,7 +96,7 @@ def initialize_scraper_args(
 def use_scraper(args: argparse.Namespace) -> None:
     """Starts the `scraper` subcommand by calling the appropriate
     function from the scraper module."""
-    find_operator_info(args)
+    find_all_operator_info(args)
 
 
 def initialize_recruit_args(
@@ -144,14 +149,16 @@ def initialize_parsers() -> argparse.ArgumentParser:
     parser.add_argument(
         "--version",
         action="version",
-        version="ark v2.2.1"
+        version="ark v2.3.0"
     )
     subparsers = parser.add_subparsers(help="check sub-command help")
 
     # Initialize scraper functionality
     scraper_parser = subparsers.add_parser(
         "scraper",
-        description="Find information about any operator in Arknights!",
+        description="""Find information about any operator
+                    (or operators) in Arknights!
+                    """,
         aliases=["s", "scrap", "scrape"],
         # prog=sys.argv[0] + " " + sys.argv[1]
     )
@@ -159,7 +166,9 @@ def initialize_parsers() -> argparse.ArgumentParser:
 
     recruitment_parser = subparsers.add_parser(
         "recruitop",
-        description="Find all ops that match combinations of recruitment tags!",
+        description="""Find all operators that match combinations of
+                    recruitment tags!
+                    """,
         aliases=["r", "recruit", "ro"],
         # prog=sys.argv[0] + " " + sys.argv[1]
     )

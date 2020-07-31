@@ -32,13 +32,13 @@ aliases: `{s, scrap, scrape}`
 
 This subcommand will look for and display information about any operator currently in arknights. It'll first look at [Aceship](https://github.com/Aceship)'s JSON files and see if they have the operator. If that fails, it'll look at the [gamepress.gg](https://gamepress.gg/) page. Nothing is stored locally, and it shouldn't take that long to look the operators up!
 
-`usage: ark.py scraper [-h][-s | -v] [-i][-t] [-b][-g] [-a] operator`
+`usage: ark.py scraper [-h] [-s | -v] [-i] [-t] [-b] [-g] [-a] operator [operator ...]`
 
-Find information about any operator in Arknights!
+Find information about any operator (or operators) in Arknights!
 
 **Positional Arguments:**
 
--   `operator` The operator you want information about. For spaces, use a '-' in place of the space. No special characters.
+-   `operator` The operator you want information about. For spaces, use a '-' in place of the space. No special characters. If you want info about multiple operators, put a space between each operator you want information about.
 
 **Optional Arguments:**
 
@@ -49,7 +49,7 @@ Find information about any operator in Arknights!
 -   `-t, --talent` Displays the specified operator's talent.
 -   `-b, --base` Displays the specified operator's base skills.
 -   `-g, --gamepress` Forces the parser to only use gamepress.gg. Use this if your internet connection is really slow.
--   `-a, --all` Displays all the information about this specified operator. Unless paired with the -v tag, this will only show the max tier of each skill this operator has.
+-   `-a, --all` Displays all the information about this specified operator. Unless paired with the -v tag, this will only show the max tier of each skill this operator has. If you want to force gamepress.gg, pair this with the -g tag. Otherwise, it'll use the default JSON-first approach.
 
 #### recruitop
 
@@ -82,8 +82,8 @@ Find all ops that match combinations of tags!
     -   [x] ~~Add support for base skills~~
 -   [ ] Add quality of life updates
     -   [x] ~~Add different skill levels, not just max?~~
+    -   [x] ~~Add multiple operator searching support~~
     -   [ ] Add support for upgrade information
-    -   [ ] Perhaps add support for calculating stages, etc?
 -   [x] ~~Add a subparser for other commands~~
 -   [x] ~~Add recruitment tag functionality~~
 -   [ ] Add recruitment tag quality of life updates
@@ -91,7 +91,7 @@ Find all ops that match combinations of tags!
     -   [ ] Make a more consistant priority system
     -   [x] ~~More options to control info (eg. contol rarity being displayed, etc)~~
     -   [x] ~~Highlight 'good recruitment combos' (ie. anything with only 4, 5, or 6 stars)~~
--   [x] Restructure the project and make it look neater and ready for more subcommands
+-   [x] ~~Restructure the project and make it look neater and ready for more subcommands~~
 -   [ ] Add idk other functionality when needed
     -   [ ] Add operator comparison?
     -   [ ] Add stage functionality?

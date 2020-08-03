@@ -19,8 +19,8 @@ from inputfuncs.input_reader import (
 from inputfuncs.scraper_functions import scrape_json
 
 # created 27/06/2020
-# last edited: 29/07/2020
-# version: 1.1.0
+# last edited: 31/07/2020
+# version: 1.2.0
 # author: Joseph Wang (EmeraldEntities)
 # description: a CLI for matching recruitment tags to ops
 # TODO: move some of the functions into a recruitfuncs module?
@@ -393,11 +393,17 @@ def find_recruitment_combos(args: argparse.Namespace) -> None:
 
         tag_dict = initialize_tag_dictionary(op_list)
 
-        # Get both a proper translation from en to zh dict
+        # Get both a proper translation from en to zh dict with the
+        # new tag shortcuts and the premade tags
         # and a reversed dict initialized for proper tag conversion
-        translation_dict = read_lines_into_dict(
-            "./info/recruitops/tagConversions.txt"
-        )
+        translation_dict = {
+            **read_lines_into_dict(
+                "./info/recruitops/tagConversions.txt"
+            ),
+            **read_lines_into_dict(
+                "./info/recruitops/tagShortcuts.txt"
+            )
+        }
         reversed_translation_dict = read_lines_into_dict(
             "./info/recruitops/formattedTagConversions.txt",
             reverse=True
@@ -444,7 +450,7 @@ def find_recruitment_combos(args: argparse.Namespace) -> None:
         )  # padding
 
         if len(messages) <= 0:
-            sys.stdout.write("Could not find any recruitment results.")
+            sys.stdout.write("Could not find any recruitment results.\n")
         else:
             for msg in messages:
                 sys.stdout.write(msg + "\n")

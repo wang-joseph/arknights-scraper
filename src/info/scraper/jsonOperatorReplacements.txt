@@ -4,6 +4,7 @@ Rosa+Poca  Rosa+(Poca)
 Castle+3   Castle-3
 Lancet+2   Lancet-2
 Thermal+EX Thermal-EX
+Chen       Ch'en
 
 format:
 operator    json equivalent

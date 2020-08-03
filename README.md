@@ -14,7 +14,7 @@ There are multiple subparsers with different commands, but in general, in order 
 -   [re](https://docs.python.org/3/library/re.html) (standard lib regex — useful for working with strings)
 -   [json](https://docs.python.org/3/library/json.html) (standard lib — needed for working with JSON)
 -   [halo](http://halo.josealerma.com/index.html) (literally the best and most important library)
--   [typing](https://docs.python.org/3/library/typing.html) (typehints are nice)
+-   [typing](https://docs.python.org/3/library/typing.html) (typehints classes are nice)
 
 See requirements.txt for the versions of each library.
 
@@ -32,7 +32,7 @@ aliases: `{s, scrap, scrape}`
 
 This subcommand will look for and display information about any operator currently in arknights. It'll first look at [Aceship](https://github.com/Aceship)'s JSON files and see if they have the operator. If that fails, it'll look at the [gamepress.gg](https://gamepress.gg/) page. Nothing is stored locally, and it shouldn't take that long to look the operators up!
 
-`usage: ark.py scraper [-h] [-s | -v] [-i] [-t] [-b] [-g] [-a] operator [operator ...]`
+usage: `ark.py scraper [-h] [-s | -v] [-i] [-t] [-b] [-g] [-a] operator [operator ...]`
 
 Find information about any operator (or operators) in Arknights!
 
@@ -55,11 +55,13 @@ Find information about any operator (or operators) in Arknights!
 
 aliases: `{r, recruit, ro}`
 
-This is a smaller subcommand that will accept recruitment tags and show you the best combinations possible, in CLI format. The list will go from bottom-to-top in terms of priority, and any number of tags can be specified.
+This is a smaller subcommand that consists of 4 different subparsers, but the main purpose of this subcommand is to accept recruitment tags and show you the best combinations possible, in CLI format. The list will go from bottom-to-top in terms of priority, and any number of tags can be specified.
 
 The list is sorted based on an experimental priority system, so if you _really_ care about getting the best combo for your buck, you can skim through all the tags and see if a certain operator stands out to you. The system should work fine if there are some distinct good combos, though. Please report anything strange!
 
-`ark.py recruitop [-h] [-b] tags [tags ...]`
+The four subparsers that exist are `recruit`, which handles the actual recruitment search and is what is focused on here. However, the `create`, `delete`, and `list` subparsers also exist, and are there so that you can create your own custom shortcuts to tags (like how 'to' becomes 'top operator') for your convenience! If you're curious about how those work, check out the argparse `-h` command for those subparsers!
+
+usage: `ark.py recruitop recruit [-h] [-b] tags [tags ...]`
 
 Find all ops that match combinations of tags!
 
@@ -87,7 +89,7 @@ Find all ops that match combinations of tags!
 -   [x] ~~Add a subparser for other commands~~
 -   [x] ~~Add recruitment tag functionality~~
 -   [ ] Add recruitment tag quality of life updates
-    -   [ ] Add the ability for people to make their own aliases/shortcuts
+    -   [x] ~~Add the ability for people to make their own aliases/shortcuts~~
     -   [ ] Make a more consistant priority system
     -   [x] ~~More options to control info (eg. contol rarity being displayed, etc)~~
     -   [x] ~~Highlight 'good recruitment combos' (ie. anything with only 4, 5, or 6 stars)~~

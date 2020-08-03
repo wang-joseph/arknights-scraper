@@ -15,10 +15,8 @@ caster 		          术师
 sniper 		          狙击
 defender 	          重装
 defndr		          重装
-defr                重装
 supporter 	        辅助
 supptr		          辅助
-supr                辅助
 specialist 	        特种
 spec	          	  特种
 healing 	          治疗

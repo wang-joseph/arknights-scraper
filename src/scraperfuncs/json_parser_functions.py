@@ -10,13 +10,6 @@ from inputfuncs.input_reader import (
 )
 from inputfuncs.scraper_functions import scrape_json
 
-# created 05/07/2020
-# last edited: 30/07/2020
-# version: 1.0.2
-# author: Joseph Wang (EmeraldEntities)
-# description: These functions are to parse information
-#              from Aceship's excellent JSON file.
-
 
 def filter_description(description):
     """Takes a desription string, filters out any `<>` tags, and

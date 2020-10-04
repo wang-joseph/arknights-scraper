@@ -3,13 +3,6 @@ that stores some essential information about each Operator."""
 
 import sys
 
-# created 06/06/2020
-# last edited: 29/07/2020
-# version: 1.2.0
-# author: Joseph Wang (EmeraldEntities)
-# description: A basic operator object that can be created
-# for parsing/testing
-
 
 class Operator:
     """The class for creating Operator objects, which stores information
@@ -20,13 +13,21 @@ class Operator:
     future features.
 
     Public variables:
+
     name -- string,
+
     rarity -- int,
+
     profession -- string,
+
     description -- list,
-    tags -- list
+
+    tags -- list,
+
+    stats -- dict
 
     Public methods:
+
     set_property(property, value)
 
     get_property(property)
@@ -36,10 +37,6 @@ class Operator:
     has_property(property)
 
     get_formatted_tags()
-
-    get_all_stats()
-
-    set_stats(stats)
 
     has_stats()
 
@@ -56,12 +53,17 @@ class Operator:
         """Initializes an Operator object.
 
         Keyword arguments:
+
         name -- string, the name of the operator
+
         rarity -- int, the rarity of the operator as a number
         (5 star = 5, etc.)
+
         profession -- string, what class the operator is
+
         description -- list, a list containing the description strings
         of an operator (default: None)
+
         tags -- list, a list containing the tags of this operator
         (default: None)
         """
@@ -80,7 +82,7 @@ class Operator:
             else ["No tags available!"]
         )
 
-        self._stats = {}
+        self.stats = {}
         self._properties = {}
 
     def set_property(self, prop, value):
@@ -125,17 +127,19 @@ class Operator:
 
     # I don't like this, but this is so that we don't need to load in
     # stats for the operator every single time we want them...
-    def get_all_stats(self):
+    @property
+    def stats(self):
         """Retrieves all this Operator's stats."""
         return self._stats
 
-    def set_stats(self, stats):
+    @stats.setter
+    def stats(self, other_stats):
         """Sets this Operator's stats to a provided parameter."""
-        self._stats = stats
+        self._stats = other_stats
 
     def has_stats(self):
         """Checks to see if this Operator has stats set or not."""
-        return self._stats != {} and not self._stats is None
+        return self.stats != {} and not self.stats is None
 
 
 if __name__ == "__main__":

@@ -8,14 +8,6 @@ from typing import AbstractSet, Optional, Dict
 from operatorclasses.tagged_operator import TaggedOperator
 from operatorclasses.priorityset import PrioritySet
 
-# created 28/06/2020
-# last edited: 29/07/2020
-# version: 1.0.0
-# author: Joseph Wang (EmeraldEntities)
-# description: A priority set, but now it can store various
-#             pieces of information ("metadata") by using a
-#              dictionary.
-
 
 class MetadataPrioritySet(PrioritySet):
     """A class that has a priority set, but also some metadata attached.
@@ -27,6 +19,7 @@ class MetadataPrioritySet(PrioritySet):
     Public variables:
 
     Public methods:
+
     add_data(key, data)
 
     has_metadata()
@@ -48,7 +41,9 @@ class MetadataPrioritySet(PrioritySet):
         the creation of this object, for simplicity's sake.
 
         Keyword arguments:
+
         intrinsic_set -- set, the intrinsic set to be stored
+        
         priority_dict -- dict, a dict with the values of
         attributes in the set
         """

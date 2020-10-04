@@ -7,11 +7,6 @@ from bs4 import Tag
 from inputfuncs.input_reader import read_line_from_file
 from inputfuncs.scraper_functions import scrape_website
 
-# created 01/07/2020
-# last edited: 30/07/2020
-# version: 1.3.2
-# author: Joseph Wang (EmeraldEntities)
-
 
 def find_siblings_of_breakpoint(soupobj):
     """Gets all the text from the sibling of a breakpoint and return as

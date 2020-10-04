@@ -4,13 +4,6 @@ local files."""
 import re
 import sys
 
-# created 01/07/2020
-# last edited: 29/07/2020
-# version: 1.2.0
-# author: Joseph Wang (EmeraldEntities)
-# description: These are just basic input functions that I'll use
-# in various different functions.
-
 
 def read_line_from_file(file):
     """Reads one line from a file and returns it as string."""

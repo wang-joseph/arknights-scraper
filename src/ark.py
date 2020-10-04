@@ -15,14 +15,8 @@ from recruitfuncs.tag_shortcut_editor import (
     delete_tag_shortcut
 )
 
-# created 27/07/2020
-# last edited: 15/09/2020
-# version: 2.3.1
-# author: Joseph Wang (EmeraldEntities)
-# description: The parent argparser for everything in this scraper's
-#              suite
 
-VERSION = "ark v2.3.1"
+VERSION = "ark v2.4.0"
 ### FUNCTIONS ########################
 
 

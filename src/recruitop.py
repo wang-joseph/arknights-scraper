@@ -122,7 +122,7 @@ def initialize_tag_dictionary(
             current_line = f.readline()
 
     for operator in operator_list:
-        for tag in operator.get_tags():
+        for tag in operator.tags:
             if tag in tag_dict.keys():
                 tag_dict[tag].add(operator)
 
@@ -132,13 +132,13 @@ def initialize_tag_dictionary(
 def is_not_top_op(operator: Type[TaggedOperator]) -> bool:
     """Determines if an Operator has a rarity of 6
     and returns True if not."""
-    return operator.get_rarity() < 6
+    return operator.rarity < 6
 
 
 def get_formatted_op(operator: Type[TaggedOperator]) -> str:
     """Returns a formatted string consisting of an Operator's name
     and rarity."""
-    return f"{operator.get_name()}: {operator.get_rarity()}*"
+    return f"{operator.name}: {operator.rarity}*"
 
 
 def generate_operator_set(
@@ -227,7 +227,7 @@ def generate_operator_set(
         # Sorting all the possible ops in order of rarity
         possible_ops = sorted(
             possible_ops,
-            key=lambda o: o.get_rarity(),
+            key=lambda o: o.rarity,
             reverse=True
         )
 
@@ -314,7 +314,7 @@ def format_beneficial_tags(
         # take the last element of this sorted set and check
         # its rarity. If it's higher than 3, the rest of the set
         # should be higher than 3.
-        if list(op_set.get_intrinsic_set())[-1].get_rarity() > 3:
+        if list(op_set.intrinsic_set)[-1].rarity > 3:
             messages.append(
                 op_set.get_data("tags")
             )
@@ -352,8 +352,7 @@ def format_normal_tags(
         messages.append(
             op_set.get_data("tags")
             if (
-                list(op_set.get_intrinsic_set())[-1]
-                .get_rarity() <= 3
+                list(op_set.intrinsic_set)[-1].rarity <= 3
             )
             else f"***Good***\n{op_set.get_data('tags')}"
         )
@@ -436,7 +435,7 @@ def find_recruitment_combos(args: argparse.Namespace) -> None:
         # by priority.
         all_sorted_selection = sorted(
             all_matches,
-            key=lambda s: s.get_priority()
+            key=lambda s: s.priority
         )
         messages = format_selections(args, all_sorted_selection)
 

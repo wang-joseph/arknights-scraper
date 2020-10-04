@@ -398,7 +398,7 @@ def set_operator_properties(args, conds, stats_conds, operator):
 
     stats_flag, stats_func, stats_args = stats_conds
     if stats_flag or args.all:
-        operator.set_stats(stats_func(*stats_args))
+        operator.stats = stats_func(*stats_args)
 
 ######################################
 
@@ -455,7 +455,7 @@ def find_operator_info(
         ]
         # Fetch the stats
         all_messages = (
-            [parse_stats(operator.get_all_stats())] + all_properties
+            [parse_stats(operator.stats)] + all_properties
             if (operator.has_stats())
             else all_properties
         )

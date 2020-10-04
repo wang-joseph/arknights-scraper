@@ -6,13 +6,6 @@ one place."""
 import sys
 from typing import Sequence
 
-# created 27/07/2020
-# last edited: 29/07/2020
-# version: 1.0.0
-# author: Joseph Wang (EmeraldEntities)
-# description: Just a class to hold relevant information about an
-#              operator while tag searching
-
 
 class TaggedOperator:
     """The class for storing simplistic recruitment
@@ -25,14 +18,15 @@ class TaggedOperator:
 
     Public variables:
 
+    name
+
+    tags
+
+    rarity
+
     Public methods:
+
     get_tags_length()
-
-    get_name()
-
-    get_tags()
-
-    get_rarity()
 
     """
 
@@ -45,8 +39,11 @@ class TaggedOperator:
         """Initializes a TaggedOperator object.
 
         Keyword arguments:
+
         name -- string, the name of the operator
+
         rarity -- int, the rarity of the operator as an integer
+
         tags -- list, a list of strings containing the recruitment tags
         associated with this operator
         """
@@ -56,7 +53,7 @@ class TaggedOperator:
 
     def __repr__(self) -> str:
         """Returns a representation of this object in string format."""
-        return self._name
+        return self.name
 
     def __hash__(self) -> int:
         """Calcuates and returns the hash value of this object.
@@ -72,7 +69,7 @@ class TaggedOperator:
         """Determines if this is equal to something else."""
         return (
             self.__class__ == other.__class__
-            and self._name == other.get_name()
+            and self.name == other.name
             # and self._tags == other.get_tags() # not necessary for now
         )
 
@@ -80,16 +77,19 @@ class TaggedOperator:
         """Retrieves how many tags are stored in this object."""
         return len(self._tags)
 
-    def get_name(self) -> str:
+    @property
+    def name(self) -> str:
         """Retrieves the name of this operator."""
         return self._name
 
-    def get_tags(self) -> Sequence[str]:
+    @property
+    def tags(self) -> Sequence[str]:
         """Retrieves all the tags of this operator, as
         a list of strings."""
         return self._tags
 
-    def get_rarity(self) -> int:
+    @property
+    def rarity(self) -> int:
         """Retrieves the rarity of this operator, as an integer."""
         return self._rarity
 

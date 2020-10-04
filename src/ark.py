@@ -5,6 +5,7 @@ call related functions based on what is specified to retrieve
 information."""
 
 import argparse
+import sys
 
 from scraper import find_all_operator_info
 from recruitop import find_recruitment_combos
@@ -15,12 +16,13 @@ from recruitfuncs.tag_shortcut_editor import (
 )
 
 # created 27/07/2020
-# last edited: 31/07/2020
-# version: 1.1.0
+# last edited: 15/09/2020
+# version: 2.3.1
 # author: Joseph Wang (EmeraldEntities)
 # description: The parent argparser for everything in this scraper's
 #              suite
 
+VERSION = "ark v2.3.1"
 ### FUNCTIONS ########################
 
 
@@ -108,7 +110,7 @@ def initialize_recruit_args(
         parser: argparse.ArgumentParser
 ) -> None:
     """Set up the `recruitop` subparser's the flags and arguments."""
-    #TODO: make this its own folder? maybe?
+    # TODO: make this its own folder? maybe?
     # For setting up shortcut parsers for easy shortcut binding to
     # tags (eg. defr = defender), and other parsers
     subparsers = parser.add_subparsers(
@@ -239,24 +241,19 @@ def initialize_recruit_args(
         func=find_recruitment_combos
     )
 
-
-# def use_recruitment_parser(args: argparse.Namespace) -> None:
-#     """Starts the `recruitop` subcommand by calling the appropriate
-#     function from the recruitop module."""
-#     find_recruitment_combos(args)
-
-
-# def use_create_tag_shortcut(args: argparse.Namespace) -> None:
-#     """Calls a create tag function to create a new shortcut for a
-#     certain recruitment tag."""
-#     create_tag_shortcut(args)
-
 ######################################
+
+
+def handle_no_func(args: argparse.Namespace) -> None:
+    """Handles a lack of parser specified by exiting gracefully."""
+    sys.stdout.write(f"Currently using {args.version}\n\n")
+    sys.stdout.write("No parser specified!\n")
 
 
 def initialize_parsers() -> argparse.ArgumentParser:
     """Initialize the parent `ark` parser, as well as the various
     subparsers available."""
+
     # Initialize the parser
     parser = argparse.ArgumentParser(
         description="Various information parsers about info in Arknights!"
@@ -264,8 +261,13 @@ def initialize_parsers() -> argparse.ArgumentParser:
     parser.add_argument(
         "--version",
         action="version",
-        version="ark v2.3.0"
+        version=VERSION
     )
+    parser.set_defaults(
+        version=VERSION,
+        func=handle_no_func
+    )
+
     subparsers = parser.add_subparsers(help="check sub-command help")
 
     # Initialize scraper functionality

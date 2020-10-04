@@ -372,7 +372,6 @@ def format_normal_tags(
 ######################################
 
 
-# TODO: this can be multiple functions
 def find_recruitment_combos(args: argparse.Namespace) -> None:
     """Taking the specified namespace of arguments, this function will
     determine combinations of tags, find operators that match those

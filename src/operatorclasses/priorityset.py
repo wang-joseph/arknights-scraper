@@ -55,7 +55,7 @@ class PrioritySet:
         """Returns a formatted representation of this priority set."""
         return (
             f"{str(self._priority)} : "
-            + f"{self._intrinsic_set.__repr__()}"
+            + f"{repr(self._intrinsic_set)}"
         )
 
     def __eq__(self, other: object) -> bool:

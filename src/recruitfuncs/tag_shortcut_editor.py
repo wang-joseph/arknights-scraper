@@ -11,13 +11,6 @@ from inputfuncs.input_reader import (
     read_lines_into_dict
 )
 
-# created 31/06/2020
-# last edited: 31/07/2020
-# version: 1.0.0
-# author: Joseph Wang (EmeraldEntities)
-# description: an editor containing functions for manipulating
-#             tag shortcuts
-
 
 def create_tag_shortcut(args: argparse.Namespace) -> None:
     """Creates a new shortcut for a tag for later use.

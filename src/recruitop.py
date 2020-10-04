@@ -18,13 +18,7 @@ from inputfuncs.input_reader import (
 )
 from inputfuncs.scraper_functions import scrape_json
 
-# created 27/06/2020
-# last edited: 31/07/2020
-# version: 1.2.0
-# author: Joseph Wang (EmeraldEntities)
-# description: a CLI for matching recruitment tags to ops
 # TODO: move some of the functions into a recruitfuncs module?
-
 ### FUNCTIONS ########################
 
 

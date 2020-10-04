@@ -8,13 +8,6 @@ from inputfuncs.input_reader import (
     read_lines_into_dict
 )
 
-# created 01/07/2020
-# last edited: 29/07/2020
-# version: 1.2.1
-# author: Joseph Wang (EmeraldEntities)
-# description: A collection of various scraping functions
-# that this program uses
-
 
 def scrape_website(url):
     """Sends a GET request to a certain url and returns the Response

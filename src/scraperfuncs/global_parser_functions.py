@@ -4,13 +4,6 @@ results."""
 
 import sys
 
-# created 05/07/2020
-# last edited: 29/07/2020
-# version: 1.0.0
-# author: Joseph Wang (EmeraldEntities)
-# description: This holds any parser/formatter functions that should be
-# used by both Aceship JSON parsing and Gamepress parsing
-
 
 def parse_stats(stats_dict):
     """Parses through the information in the provided stats dictionary

@@ -1,6 +1,6 @@
 """This module contains all the implementation for the 'scraper'
 function in the 'ark' library, with both JSON parsing and Gamepress
-implementation implemented"""
+implementation implemented."""
 
 import argparse
 import sys
@@ -38,12 +38,6 @@ from scraperfuncs.json_parser_functions import (
     parse_base_skills
 )
 
-# created 06/06/2020
-# last edited: 29/07/2020
-# version: 2.2.1
-# author: Joseph Wang (EmeraldEntities)
-# description: a CLI scraper designed to find all information about an
-#              operator on gamepress, etc.
 
 ### FUNCTIONS ########################
 

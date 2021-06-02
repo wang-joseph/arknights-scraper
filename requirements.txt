@@ -22,5 +22,5 @@ soupsieve==2.0.1
 spinners==0.0.24
 termcolor==1.1.0
 toml==0.10.1
-urllib3==1.25.9
+urllib3==1.26.5
 wrapt==1.12.1

@@ -1,5 +1,10 @@
 # arknights-scraper
 
+## Deprecation
+Arknights has changed a lot since I used to play it. This scraper may or may not work anymore and is definitely not maintained anymore.
+
+## Overview
+
 A small scraper/parser that allows you to find detailed operator information and other arknights info right in your command line for when you're too lazy to spin up your browser to find info on the newest operator.
 
 Designed to be a pretty small, simple, and non-instrusive project. This program won't save any information fetched. There may be some formatting errors!
